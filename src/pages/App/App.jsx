@@ -5,6 +5,9 @@ import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import authService from "../../services/authService";
 import Users from "../Users/Users";
+import LandingPage from '../../pages/LandingPage/LandingPage'
+// import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
+// import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import "./App.css";
 
 class App extends Component {
@@ -32,6 +35,7 @@ class App extends Component {
           render={() => (
             <main>
               <h1>Welcome. This is an authorization template.</h1>
+              <LandingPage /> 
             </main>
           )}
         />
