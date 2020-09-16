@@ -16,7 +16,8 @@ const userSchema = new Schema({
   avatar: {type: String, default: `https://picsum.photos/200`},
   friends: { type: Schema.Types.ObjectId, ref: 'User'},
   messages: [messageSchema],
-  bio: String
+  bio: String,
+  projects: [{type: Schema.Types.ObjectId, ref:'Project'}]
 
 }, {
   timestamps: true

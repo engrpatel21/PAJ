@@ -8,12 +8,26 @@ const taskSchema = new Schema({
     taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog']}
 })
 
+const featureSchema = new Schema({
+    feature: String,
+    featureStatus: { type: Schema.Types.ObjectId, ref: 'User'},
+    tasks: [taskSchema]
+})
+
+const commentSchema = new Schema({
+    conent: String,
+    createdBy: {type: Schema.Types.ObjectId, ref: 'User'}
+})
+
 const projectSchema = new Schema({
     owner:  { type: Schema.Types.ObjectId, ref: 'User'},
     features: [featureSchema],
     status:{type: Boolean, default: false},
     description: String,
-    contributors: [{ type: Schema.Types.ObjectId, ref: 'User'}]
+    contributors: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    comments: [commentSchema]
 
 })
 
+
+module.exports = mongoose.model('Project', projectSchema)
