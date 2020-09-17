@@ -27,7 +27,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter)
 app.use('/api/projects/comments', commentRouter)
-app.use('/api/projects/feature', featureRouter)
+app.use('/api/projects/features', featureRouter)
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
