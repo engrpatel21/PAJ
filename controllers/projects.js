@@ -1,4 +1,5 @@
 const Project = require('../models/project')
+const User = require('../models/project')
 
 module.exports = {
     index,
@@ -43,7 +44,15 @@ function index(req,res){
 
 function createProject(req,res){
     Project.create(req.body)
-    .then(project => res.json(project))
+    .then(project => {
+        User.findById(req.user._id)
+        .then(user =>{
+            user.projects.push(project._id)
+            user.save().then(project =>
+                res.json(project)
+                )
+        })
+    })
     .catch(err => res.json(err))
 }
 

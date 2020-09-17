@@ -13,6 +13,7 @@ function updateUser(req, res){
 }
 
 function index(req, res) {
-  console.log("req.user", req.user);
-  User.find({}).then((users) => res.json(users));
+  User.find({})
+  .populate('projects')
+  .then((users) => res.json(users));
 }
