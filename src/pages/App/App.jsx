@@ -4,7 +4,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import authService from "../../services/authService";
-import Users from "../Users/Users";
+import UsersList from "../UsersList/UsersList";
 import LandingPage from '../../pages/LandingPage/LandingPage'
 import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
@@ -62,7 +62,7 @@ class App extends Component {
         <Route
           exact
           path="/users"
-          render={() => (user ? <Users /> : <Redirect to="/login" />)}
+          render={() => (user ? <UsersList /> : <Redirect to="/login" />)}
         />
         {/* Route to Project Details Page */}
         <Route 
