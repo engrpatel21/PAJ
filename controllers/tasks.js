@@ -7,15 +7,19 @@ module.exports ={
 }
 
 function showTask(req, res){
-
+    Project.findById(req.params.projectId)
+    .then(project =>{
+        const featureIdx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
+        console.log(featureIdx)
+        const taskIdx = project.features[featureIdx].tasks.findIndex(task => task._id.equals(req.params.taskId))
+        res.json(project.features[featureIdx].tasks[taskIdx])
+    })
 }
 
 function index(req, res){
     Project.findById(req.params.projectId)
     .then(project =>{
-        console.log(project.features)
-        console.log(req.params.featuresId)
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featuresId))
+        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
         project.save().then(project =>
             res.json(project.features[idx].tasks)
             )
