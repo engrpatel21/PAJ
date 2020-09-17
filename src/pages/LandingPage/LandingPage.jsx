@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Segment, Image } from 'semantic-ui-react'
+import { Message, Icon, Divider, Segment, Image } from 'semantic-ui-react'
 import logo from './logo.png';
 import "./LandingPage.css"
 
@@ -12,9 +12,12 @@ const LandingPage = () => (
         <Divider horizontal>
             About PAJ
         </Divider>
+        <Message icon>
+        <Icon name='crosshairs' loading />
         <p className="about">
-        Welcome to PA-J (Pronounced page), a practical and feature-rich project management platform.
+        PA-J (Pronounced page), is a practical and feature-rich project management platform. If you are tired of complex and costly project management solutions, PA-J is the platform for that you need.
         </p>
+        </Message>
     </Segment>
     )
 
