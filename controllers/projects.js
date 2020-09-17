@@ -3,7 +3,23 @@ const Project = require('../models/project')
 module.exports = {
     index,
     createProject,
-    showProject
+    showProject,
+    deleteProject,
+    updateProject
+}
+
+function updateProject(req, res){
+    Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
+    .then(project => 
+        res.json(project)
+        )
+}
+
+function deleteProject(req,res){
+    Project.findByIdAndDelete(req.params.projectId)
+    .then(project =>
+        res.json(project)
+        )
 }
 
 function showProject(req, res){
@@ -31,3 +47,4 @@ function createProject(req,res){
     .then(project => res.json(project))
     .catch(err => res.json(err))
 }
+
