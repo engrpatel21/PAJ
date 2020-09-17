@@ -42,7 +42,6 @@ function index(req,res){
 }
 
 function createProject(req,res){
-    console.log(req.body)
     Project.create(req.body)
     .then(project => res.json(project))
     .catch(err => res.json(err))

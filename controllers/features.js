@@ -4,7 +4,19 @@ module.exports = {
     index,
     createFeature,
     showFeature,
-    deleteFeature
+    deleteFeature,
+    updateFeature
+}
+
+function updateFeature(req, res){
+    Project.findById(req.params.projectId)
+    .then(project =>{
+        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
+        project.features.splice(idx,1,req.body)
+        project.save().then(project => 
+            res.json(project.features)
+            )
+    })
 }
 
 function deleteFeature(req, res){
@@ -39,7 +51,7 @@ function createFeature(req, res){
         console.log(project)
         project.features.push(req.body)
         project.save().then(project => 
-            res.json(project)
+            res.json(project.features)
         )
     })
 }
