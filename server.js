@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter)
-app.use('/api/projects/comments', commentRouter)
+app.use('/api/projects', commentRouter)
 app.use('/api/projects', featureRouter)
 app.use('/api/projects', taskRouter)
 app.use('/api/users/', messageRouter)
