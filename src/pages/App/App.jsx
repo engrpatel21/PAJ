@@ -6,8 +6,8 @@ import Login from "../Login/Login";
 import authService from "../../services/authService";
 import Users from "../Users/Users";
 import LandingPage from '../../pages/LandingPage/LandingPage'
-// import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
-// import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
+import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
+import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import "./App.css";
 
 class App extends Component {
@@ -64,6 +64,22 @@ class App extends Component {
           path="/users"
           render={() => (user ? <Users /> : <Redirect to="/login" />)}
         />
+        {/* Route to Project Details Page */}
+        <Route 
+          exact path='/projectdetails/'
+          render={( {location} ) => 
+          <ProjectDetails
+          location={location}
+        />
+        }/>
+        {/* Route to Project Board Page */}
+        <Route 
+          exact path='/projectboard/'
+          render={( {location} ) => 
+          <ProjectBoard
+          location={location}
+        />
+        }/>
       </>
     );
   }
