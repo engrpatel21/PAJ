@@ -10,7 +10,7 @@ const taskSchema = new Schema({
 
 const featureSchema = new Schema({
     feature: String,
-    featureStatus: { type: Schema.Types.ObjectId, ref: 'User'},
+    featureStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
     tasks: [taskSchema]
 })
 
