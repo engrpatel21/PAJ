@@ -5,14 +5,15 @@ module.exports = {
     createProject
 }
 
-function index(res,req){
+function index(req,res){
     Project.find({})
     .then(projects => res.json(projects))
     .catch(err => res.json(err))
 }
 
-function createProject(res,req){
+function createProject(req,res){
+    console.log(req.body)
     Project.create(req.body)
     .then(project => res.json(project))
-    .then(err => res.status(500).json(err))
+    .catch(err => res.json(err))
 }
