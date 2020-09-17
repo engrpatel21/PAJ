@@ -1,3 +1,8 @@
-# react-jwt-template
+# Project PAJ
 
-This is a template for a full-stack MERN application with built in user authentication utilizing JWT.
+## Welcome to PA-J (Pronounced page), a practical and feature-rich project management platform.
+
+## References:
+// https://react.semantic-ui.com/
+// https://create-react-app.dev/docs/adding-images-fonts-and-files/
+//
