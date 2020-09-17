@@ -4,6 +4,18 @@ module.exports = {
     index,
     createFeature,
     showFeature,
+    deleteFeature
+}
+
+function deleteFeature(req, res){
+    Project.findById(req.params.projectId)
+    .then(project => {
+        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
+        project.features.splice(idx,1)
+        project.save().then(project =>
+            res.json(project.features)
+            )
+    })
 }
 
 function showFeature(req, res){
