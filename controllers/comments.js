@@ -1,7 +1,16 @@
 const Project = require('../models/project')
 
 module.exports = {
-    createComment    
+    createComment,    
+    showComment,
+}
+
+function showComment(req,res){
+    Project.findById(req.params.projectId)
+    .populate('comments.createdBy')
+    .then(project =>
+        res.json(project.comments)
+        )
 }
 
 function createComment(req, res){
