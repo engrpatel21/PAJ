@@ -21,6 +21,14 @@ class NavBar extends Component {
         />
 
         {this.props.user ? <>
+
+          <Menu.Item
+          as={Link}
+          to='/users'
+          name='users page'
+          active={activeItem === 'users page'}
+          onClick={this.handleItemClick}
+        />
           <Menu.Item
           as={Link}
           to='/projectboard'
