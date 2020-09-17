@@ -1,7 +1,15 @@
 const Project = require('../models/project')
 
 module.exports = {
-    createFeature
+    createFeature,
+    showFeature
+}
+
+function showFeature(req,res){
+    Project.findById(req.params.projectId)
+    .then(project =>
+        res.json(project.features)
+        )
 }
 
 function createFeature(req, res){
