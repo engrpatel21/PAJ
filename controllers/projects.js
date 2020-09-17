@@ -7,6 +7,9 @@ module.exports = {
 
 function index(req,res){
     Project.find({})
+    .populate('owner')
+    .populate('comments.createdby')
+    .populate('features.tasks.user')
     .then(projects => res.json(projects))
     .catch(err => res.json(err))
 }

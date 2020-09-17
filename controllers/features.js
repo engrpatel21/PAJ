@@ -1,4 +1,3 @@
-const project = require('../models/project')
 const Project = require('../models/project')
 
 module.exports = {
