@@ -5,12 +5,14 @@ import logo from './logo.png';
 const LandingPage = (props) => {
     return (
         <>
+        <h1>Landing Page</h1>
+        <div class="logo">
         <Grid verticalAlign='middle' columns={2} centered>
             <Grid.Column>
                 <Image src = {logo} />
             </Grid.Column>
         </Grid>
-        <h1>Landing Page</h1>
+        </div>
         <div>
             Welcome to PA-J (Pronounced page), a practical and feature-rich project management platform.
         </div>

@@ -1,3 +1,7 @@
 .ui small image {
     align-content: center;
 }
+
+.logo {
+    position: relative;
+}

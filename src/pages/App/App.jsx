@@ -34,7 +34,7 @@ class App extends Component {
           path="/"
           render={() => (
             <main>
-              <h1>Welcome. This is an authorization template.</h1>
+              {/* <h1>Welcome. This is an authorization template.</h1> */}
               <LandingPage /> 
             </main>
           )}
