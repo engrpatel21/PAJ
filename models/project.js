@@ -15,7 +15,7 @@ const featureSchema = new Schema({
 })
 
 const commentSchema = new Schema({
-    conent: String,
+    content: String,
     createdBy: {type: Schema.Types.ObjectId, ref: 'User'}
 })
 
