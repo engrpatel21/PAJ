@@ -1,9 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Grid, Image } from 'semantic-ui-react'
+import logo from './logo.png';
 
 const LandingPage = (props) => {
     return (
         <>
+        <Grid verticalAlign='middle' columns={2} centered>
+            <Grid.Column>
+                <Image src = {logo} />
+            </Grid.Column>
+        </Grid>
         <h1>Landing Page</h1>
         <div>
             Welcome to PA-J (Pronounced page), a practical and feature-rich project management platform.

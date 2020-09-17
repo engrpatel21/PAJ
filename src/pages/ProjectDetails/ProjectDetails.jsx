@@ -14,7 +14,7 @@ const ProjectDetails = (props) => {
             </div>
             <br></br>
             <div>
-                <h2>Links to Feature-sets</h2>
+                <h2>Links to Feature Sets</h2>
             </div>
             <div>
                 Semantic UI grid for project trackins columns.
