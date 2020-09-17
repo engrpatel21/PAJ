@@ -3,7 +3,7 @@ const featureCtrl = require('../controllers/features')
 
 
 
-router.post('/:projectId', featureCtrl.createFeature)
+router.post('/:projectId/features', featureCtrl.createFeature)
 
 
 module.exports = router

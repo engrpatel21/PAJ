@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth');
 const projectRouter = require('./routes/projects')
 const commentRouter = require('./routes/comments')
 const featureRouter = require('./routes/features')
+const taskRouter = require('./routes/tasks')
 
 const cors = require('cors')
 
@@ -27,7 +28,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter)
 app.use('/api/projects/comments', commentRouter)
-app.use('/api/projects/features', featureRouter)
+app.use('/api/projects', featureRouter)
+app.use('/api/projects', taskRouter)
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
