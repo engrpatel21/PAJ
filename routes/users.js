@@ -8,6 +8,7 @@ const usersCtrl = require('../controllers/users');
 /*---------- Protected Routes ----------*/
 router.use(require("../config/auth"));
 router.get("/",  usersCtrl.index);
+router.put('/:userId', userCtrl.updateUser)
 
 
 /*---------- Auth Checker ----------*/
