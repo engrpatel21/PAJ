@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Message, Form, Button, Divider, Segment, TextArea } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
+import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
+
 //adding something 
+
 class ProjectDetails extends Component {
     state = {
         project: {},
@@ -73,6 +76,9 @@ class ProjectDetails extends Component {
             </Form.Field>
             <Button type='submit'>Submit</Button>
             <Divider horizontal>Project Information</Divider>
+            <FeatureDetails 
+            features={this.state.project.features}
+            />
         </Form>
     </Message>
     <Segment  textAlign='left' className='AddProject'>
