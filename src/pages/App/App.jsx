@@ -38,7 +38,7 @@ class App extends Component {
     console.log(projectData)
     const newProject = await projectApi.createProject(projectData)
     this.setState({projects: [...this.state.projects, newProject]},
-      this.props.history.push(`/projectdetails/${newProject._id}`)
+     ()=> this.props.history.push(`/projectdetails/${newProject._id}`)
       )
 }
 

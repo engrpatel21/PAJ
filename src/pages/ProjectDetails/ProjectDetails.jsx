@@ -15,7 +15,7 @@ class ProjectDetails extends Component {
     }
 
     async componentDidMount(){
-        const project = await projectApi.getOneProject(this.props.match.projectId)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project})
     }
 
@@ -33,6 +33,7 @@ class ProjectDetails extends Component {
     }
 
     formRef = React.createRef()
+    
     render() { 
         return ( 
     <>

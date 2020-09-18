@@ -20,8 +20,9 @@ export function createProject(project){
 }
 
 export function getOneProject(project_id){
+    console.log(project_id)
     return fetch(`${BASE_URL}/${project_id}`,{
         headers: { Authorization: "Bearer " + tokenService.getToken() },
-    })
+    },{mode: 'cors'})
     .then(res => res.json())
 }
