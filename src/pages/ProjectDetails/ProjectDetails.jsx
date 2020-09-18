@@ -57,11 +57,16 @@ class ProjectDetails extends Component {
     formRef = React.createRef()
     
     render() { 
+        const {features} = this.state.project
         return ( 
     <>
+    {features ? features.map(feature => <div>
+        {feature.featureStatus}
+    </div>) : 'not loading'}
     <h1>Project Details Page</h1>
     <Divider>
     </Divider>
+  
     <Message>
         <Form>
         {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
@@ -76,11 +81,17 @@ class ProjectDetails extends Component {
             </Form.Field>
             <Button type='submit'>Submit</Button>
             <Divider horizontal>Project Information</Divider>
-            <FeatureDetails 
-            features={this.state.project.features}
-            />
+            
+           
+           
         </Form>
     </Message>
+        {features ? 
+        <>
+            <FeatureDetails features ={features}/> 
+        </> 
+        : ''}
+
     <Segment  textAlign='left' className='AddProject'>
             <h1>Add Features:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmit}>
