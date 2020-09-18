@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom"
-import { Message, Form, Button, Divider } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 
@@ -10,7 +10,13 @@ class ProjectDetails extends Component {
         projectInfo: {
             pSummary: '',
             featureSets: 'Links will populate in this area',
-            comments: ''
+            comments: '',
+            
+        },
+
+        featureFormData: {
+            feature: '',
+            description: '',
         }
     }
 
@@ -19,19 +25,24 @@ class ProjectDetails extends Component {
         this.setState({project})
     }
 
+
     handleAddFeature = async (project_id, feature) => {
         const project = await projectApi.addProjectFeature(project_id, feature)
         this.setState({project})
     }
-    // handleSubmit = e =>{
-    //     e.preventDefault();
-    //     this.props.handleAddSummary(this.state.projectInfo)
-    // }
+    
+
+
+    handleSubmit = e =>{
+        e.preventDefault();
+        this.props.handleAddFeature(this.state.formData)
+    }
+
 
     handleChange = e => {
-       const projectInfo = {...this.state.projectInfo, [e.target.name]: e.target.value};
+       const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
        this.setState({
-        projectInfo
+        featureFormData
        });
     }
 
@@ -59,23 +70,34 @@ class ProjectDetails extends Component {
             <Divider horizontal>Project Information</Divider>
         </Form>
     </Message>
-    <Message>
-        <Form>
-            <Form.Field>
-                <label>Links to Feature Sets:</label>
-                <Divider horizontal>Links</Divider>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-            </Form.Field>
+    <Segment  textAlign='left' className='AddProject'>
+            <h1>Add Features:</h1>
+        <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+          <Form.Group>
+            <Form.Input
+              placeholder='Feature Name'
+              name='feature'
+              value={this.state.featureFormData.feature}
+              onChange={this.handleChange}
+            />
+            </Form.Group>
+            <Form.Group> 
+            <Form.Input
+              id='form-textarea-control-opinion'
+              placeholder='Add a description'
+              control={TextArea}
+              label='Description'
+              name='description'
+              value={this.state.featureFormData.description}
+              onChange={this.handleChange}
+            />
+            </Form.Group>
+            <Form.Group>
+            <Form.Button content='Submit' 
+            />
+          </Form.Group>
         </Form>
-    </Message>
+      </Segment>
     <Message>
         <Form>
         {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
