@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom"
 import { Message, Form, Button, Divider } from 'semantic-ui-react'
+import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 
 class ProjectDetails extends Component {
     state = {
+        project: {},
         projectInfo: {
             pSummary: '',
             featureSets: 'Links will populate in this area',
             comments: ''
         }
     }
+
+    async componentDidMount(){
+        const project = await projectApi.getOneProject(this.props.match.projectId)
+        this.setState({project})
+    }
+
 
     // handleSubmit = e =>{
     //     e.preventDefault();

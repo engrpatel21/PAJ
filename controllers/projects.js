@@ -50,7 +50,7 @@ function createProject(req,res){
         User.findById(req.user._id)
         .then(user =>{
             user.projects.push(project._id)
-            user.save().then(project =>
+            user.save().then(() =>
                 res.json(project)
                 )
         })
