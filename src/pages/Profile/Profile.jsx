@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Divider, Card } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
@@ -22,45 +22,61 @@ class Profile extends Component {
 
   render() {
     return (
-      <Grid celled>
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <MessagesAndFriends />
-      </Grid.Column>
-      <Grid.Column width={13}>
-        <Button>
-          <Link
-          to='/createproject'
-          >
-          <Icon name='add'/>
-          </Link>
-        </Button>
-      </Grid.Column>
-    </Grid.Row>
+      <>
+        <h1>Profile Page</h1>
+        <Divider>
+        </Divider>
+        <Grid celled>
+          <Grid.Row>
+          <Grid.Column width={3}>
+            <MessagesAndFriends />
+            <br></br>
+            <br></br>
+            <Button>
+            <Link to='/createproject'>
+              <Icon name='add'/>
+            </Link>
+            </Button>
+          </Grid.Column>
+          </Grid.Row>
 
-    <Grid.Row>
-      <Grid.Column width={3}>
-        <Image src='https://picsum.photos/200/300' />
-      </Grid.Column>
-      <Grid.Column width={10}>
-        <Image src='https://picsum.photos/200/300' />
-      </Grid.Column>
-      <Grid.Column width={3}>
-      {this.state.userProjects.map((project)=>
-      <div key={project._id}>
-        <Link
-          to={{
-            pathname: `/projectdetails/${project._id}`
-          }}
-        >
-          {project.name ? project.name : 'Link to Project'}
-        </Link>
-
-      </div>
-        )}
-      </Grid.Column>
-    </Grid.Row>
-  </Grid>
+          <Grid.Row>
+            <Grid.Column width={5}>
+            <Card>
+              <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+              <Card.Content>
+                <Card.Header>Mr. PAJ</Card.Header>
+                <Card.Meta>
+                  <span className='date'>Joined in 2035</span>
+                </Card.Meta>
+                <Card.Description>
+                  PAJ is a software engineer living on Mars.
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <a>
+                  <Icon name='user' />
+                  22 Friends
+                </a>
+              </Card.Content>
+            </Card>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              {this.state.userProjects.map((project)=>
+                <div key={project._id}>
+              <Link
+                to={{
+                  pathname: `/projectdetails/${project._id}`
+                }}
+              >
+                {project.name ? project.name : 'Link to Project'}
+              </Link>
+                </div>
+              )}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </>
     );
   }
 }
