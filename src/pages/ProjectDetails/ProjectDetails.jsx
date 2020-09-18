@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom"
 import { Message, Form, Button, Divider, Segment, TextArea } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
@@ -35,7 +34,7 @@ class ProjectDetails extends Component {
 
     handleSubmit = e =>{
         e.preventDefault();
-        this.props.handleAddFeature(this.state.formData)
+        this.handleAddFeature(this.state.project._id, this.state.featureFormData)
     }
 
 

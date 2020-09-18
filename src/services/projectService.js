@@ -26,7 +26,7 @@ export function getOneProject(project_id){
 }
 
 export function addProjectFeature(project_id, feature){
-    return fetch(`${BASE_URL}/${project_id}/feature`,{
+    return fetch(`${BASE_URL}/${project_id}/features`,{
         method: 'POST',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(feature)
