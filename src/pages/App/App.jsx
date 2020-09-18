@@ -103,7 +103,6 @@ class App extends Component {
           )}/>
         <Route 
         exact path='/createproject'
-
         render={() => (
         user ? <ProjectCreation 
         handleAddProject={this.handleAddProject}
@@ -115,11 +114,13 @@ class App extends Component {
         
         <Route 
         exact path='/profile'
-        render={() =>
-        <Profile 
-          user={this.state.user}
+        render={() => (
+        user ? <Profile 
+        user={this.state.user}
         />
-        }
+        : 
+        <Redirect to="/login" />
+        )}
         
         />
 
