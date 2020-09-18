@@ -85,16 +85,17 @@ class App extends Component {
         {/* Route to Project Details Page */}
         <Route 
           exact path='/projectdetails/:projectId'
-          render={( {match} ) => (
+          render={( {match, history} ) => (
           user ? <ProjectDetails
           match={match}
+          history={history}
         />
         : 
         <Redirect to="/login" />
         )}/>
         {/* Route to Project Board Page */}
         <Route 
-          exact path='/projectboard/'
+          exact path='/projectboard'
           render={( {location} ) => (
           user ? <ProjectBoard
           location={location}
