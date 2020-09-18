@@ -24,3 +24,4 @@ export function getUserMessages(user){
   })
   .then(res => res.json())
 }
+

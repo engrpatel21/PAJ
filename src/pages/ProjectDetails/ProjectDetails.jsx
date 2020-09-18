@@ -19,7 +19,10 @@ class ProjectDetails extends Component {
         this.setState({project})
     }
 
-
+    handleAddFeature = async (project_id, feature) => {
+        const project = await projectApi.addProjectFeature(project_id, feature)
+        this.setState({project})
+    }
     // handleSubmit = e =>{
     //     e.preventDefault();
     //     this.props.handleAddSummary(this.state.projectInfo)
