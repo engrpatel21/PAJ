@@ -1,35 +1,77 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from "react-router-dom"
+import { Message, Form, Button, Divider } from 'semantic-ui-react'
 import "./ProjectDetails.css";
 
-const ProjectDetails = (props) => {
-    return (
-        <div class="textDiv">
-            <h1>Project Details Page</h1>
-            <div>
-                <h2>Project Information</h2>
-            </div>
-            <div>
-                Semantic UI grid for project trackins columns.
-            </div>
-            <br></br>
-            <div>
-                <h2>Links to Feature Sets</h2>
-            </div>
-            <div>
-                Semantic UI grid for project trackins columns.
-            </div>
-            <br></br>
-            <div>
-                <h2>Add Comments Here</h2>
-            </div>
-            <div>
-                Semantic UI grid for project trackins columns.
-            </div>
-            <br></br>
-            <a href="/">RETURN</a>
-        </div>
-    )
+class ProjectDetails extends Component {
+    state = {
+        projectInfo: {
+            pSummary: '',
+            featureSets: '',
+            comments: ''
+        }
+    }
+
+    // handleSubmit = e =>{
+    //     e.preventDefault();
+    //     this.props.handleAddSummary(this.state.projectInfo)
+    // }
+
+    handleChange = e => {
+       const projectInfo = {...this.state.projectInfo, [e.target.name]: e.target.value};
+       this.setState({
+        projectInfo
+       });
+    }
+
+    formRef = React.createRef()
+    render() { 
+        return ( 
+    <>
+    <h1>Project Details Page</h1>
+    <Message>
+        <Form>
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+            <Form.Field>
+                <label>Project Information:</label>
+                <Form.Input
+                    placeholder='Add Info about the project here.'
+                    name='pSummary'
+                    value={this.state.projectInfo.pSummary}
+                    onChange={this.handleChange}
+                />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Divider horizontal>Project Information</Divider>
+        </Form>
+    </Message>
+    <Message>
+        <Form>
+            <Form.Field>
+                <label>Links to Feature Sets:</label>
+                <Divider horizontal>LInks</Divider>
+            </Form.Field>
+        </Form>
+    </Message>
+    <Message>
+        <Form>
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+            <Form.Field>
+                <label>Comments:</label>
+                <Form.Input
+                    placeholder='Add Info about the project here.'
+                    name='pSummary'
+                    value={this.state.projectInfo.comments}
+                    onChange={this.handleChange}
+                />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Divider horizontal>Comments</Divider>
+        </Form>
+    </Message>
+    </>
+        );
+    }
 }
 
 export default ProjectDetails;
