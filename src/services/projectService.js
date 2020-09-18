@@ -13,7 +13,7 @@ export function createProject(project){
     console.log(project)
     return fetch(BASE_URL, {
         method: "POST",
-        headers: {'content-type': 'appliceation/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(project)
     }, {mode: "cors"})
     .then(res => res.json())

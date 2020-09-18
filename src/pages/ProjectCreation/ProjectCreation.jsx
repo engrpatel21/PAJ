@@ -25,6 +25,7 @@ class ProjectCreation extends Component {
 
    formRef = React.createRef()
     render() { 
+        console.log(this.state.formData)
         return (  
             <>
         <Segment inverted textAlign='center' className='AddProject'>

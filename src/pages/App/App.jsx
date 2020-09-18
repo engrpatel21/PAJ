@@ -31,13 +31,15 @@ class App extends Component {
 
   async componentDidMount(){
     const projects = await projectApi.getAllProjects()
-
     this.setState({projects})
 }
 
   handleAddProject = async projectData =>{
+    console.log(projectData)
     const newProject = await projectApi.createProject(projectData)
-    this.setState({projects: [...this.state.projects, newProject]})
+    this.setState({projects: [...this.state.projects, newProject]},
+      this.props.history.push(`/projectdetials/${newProject._id}`)
+      )
 }
 
   render() {
