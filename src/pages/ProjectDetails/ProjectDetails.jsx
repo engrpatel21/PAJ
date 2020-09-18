@@ -26,10 +26,18 @@ class ProjectDetails extends Component {
     }
 
 
+    handleAddFeature = async (project_id, feature) => {
+        const project = await projectApi.addProjectFeature(project_id, feature)
+        this.setState({project})
+    }
+    
+
+
     handleSubmit = e =>{
         e.preventDefault();
         this.props.handleAddFeature(this.state.formData)
     }
+
 
     handleChange = e => {
        const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
