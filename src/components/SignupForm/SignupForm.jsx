@@ -44,7 +44,7 @@ class SignupForm extends Component {
         <Divider>
         </Divider>
         <Segment inverted>
-          <Form inverted>
+          <Form inverted autoComplete="off" onSubmit={this.handleSubmit}>
             <Form.Group widths='equal'>
               <Form.Input 
               fluid label='User Name' 
@@ -87,14 +87,10 @@ class SignupForm extends Component {
               onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Checkbox label='I agree to the Terms and Conditions' />
-            <Button type='submit'>Sign Up</Button>
-
-            <label htmlFor="confirm">Confirm Password</label>
-          <button disabled={this.isFormInvalid()}>Sign Up</button>
-          &nbsp;&nbsp;
-          <Link to="/">Cancel</Link>
-
+            <Button type='submit' disabled={this.isFormInvalid()}>Sign Up</Button>
+            <br></br>
+            <br></br>
+            <Link to="/">Cancel</Link>
           </Form>
         </Segment>
         

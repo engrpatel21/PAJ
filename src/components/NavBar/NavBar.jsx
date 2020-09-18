@@ -79,7 +79,7 @@ class NavBar extends Component {
           as={Link}
           to='/signup'
           name='signup'
-          active={activeItem === 'signin'}
+          active={activeItem === 'signup'}
           onClick={this.handleItemClick}
         />
         
