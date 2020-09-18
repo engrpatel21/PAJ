@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+
 // import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import FeatureCard from '../../components/FeatureCard/FeatureCard'
-import { Grid, Card, Button, Divider } from 'semantic-ui-react'
+import { Grid, Divider } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 
 const ProjectBoard = () => (
