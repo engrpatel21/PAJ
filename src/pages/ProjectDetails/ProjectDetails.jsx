@@ -19,6 +19,10 @@ class ProjectDetails extends Component {
         featureFormData: {
             feature: '',
             description: '',
+        },
+
+        contributorFormData:{
+            contributor:[]
         }
     }
 
@@ -100,6 +104,23 @@ class ProjectDetails extends Component {
               label='Description'
               name='description'
               value={this.state.featureFormData.description}
+              onChange={this.handleChange}
+            />
+            </Form.Group>
+            <Form.Group>
+            <Form.Button content='Submit' 
+            />
+          </Form.Group>
+        </Form>
+      </Segment>
+      <Segment  textAlign='left' className='AddProject'>
+            <h1>Add Contributers:</h1>
+        <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+          <Form.Group>
+            <Form.Input
+              placeholder='enter email address'
+              name='contributorFormData'
+              value={this.state.contributorFormData.contributor}
               onChange={this.handleChange}
             />
             </Form.Group>
