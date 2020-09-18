@@ -5,6 +5,7 @@ import { Button, Card, Image } from 'semantic-ui-react'
 const UserCard = ({ user }) => { 
     return ( 
       <div> 
+        <h1>Gondor</h1>
         <Card style={{marginBottom: '2rem'}}
           image={user.avatar? user.avatar : 'https://picsum.photos/200/300'}
           header={user.name}
