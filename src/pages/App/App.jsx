@@ -8,11 +8,14 @@ import UsersList from "../UsersList/UsersList";
 import LandingPage from '../../pages/LandingPage/LandingPage'
 import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
+import ProjectCreation from '../ProjectCreation/ProjectCreation'
+import * as projectApi from '../../services/projectService'
 import "./App.css";
 
 class App extends Component {
   state = {
     user: authService.getUser(),
+    projects: []
   };
 
   handleLogout = () => {
@@ -23,6 +26,16 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({ user: authService.getUser() });
   };
+
+  async componentDidMount(){
+    const projects = await projectApi.getAllProjects()
+    this.setState({projects})
+}
+
+  handleAddProject = async projectData =>{
+    const newProject = await projectApi.createProject(projectData)
+    this.setState({projects: [...this.state.projects, newProject]})
+}
 
   render() {
     const {user} = this.state
@@ -80,6 +93,13 @@ class App extends Component {
           location={location}
         />
         }/>
+        <Route 
+        exact path='/createproject'
+        render={() =>
+        <ProjectCreation />
+        }
+        
+        />
       </>
     );
   }
