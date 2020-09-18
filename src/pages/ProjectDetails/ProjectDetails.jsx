@@ -1,34 +1,77 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from "react-router-dom"
-import { Message, Icon, Divider, Segment, Image } from 'semantic-ui-react'
+import { Message, Form, Button, Divider } from 'semantic-ui-react'
 import "./ProjectDetails.css";
 
-const ProjectDetails = () => (
+class ProjectDetails extends Component {
+    state = {
+        projectInfo: {
+            pSummary: '',
+            featureSets: '',
+            comments: ''
+        }
+    }
+
+    // handleSubmit = e =>{
+    //     e.preventDefault();
+    //     this.props.handleAddSummary(this.state.projectInfo)
+    // }
+
+    handleChange = e => {
+       const projectInfo = {...this.state.projectInfo, [e.target.name]: e.target.value};
+       this.setState({
+        projectInfo
+       });
+    }
+
+    formRef = React.createRef()
+    render() { 
+        return ( 
     <>
     <h1>Project Details Page</h1>
     <Message>
-        
-        <Message.Header>Project Information</Message.Header>
-        <p>
-            We updated our privacy policy here to better service our customers. We
-            recommend reviewing the changes.
-        </p>
+        <Form>
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+            <Form.Field>
+                <label>Project Information:</label>
+                <Form.Input
+                    placeholder='Add Info about the project here.'
+                    name='pSummary'
+                    value={this.state.projectInfo.pSummary}
+                    onChange={this.handleChange}
+                />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Divider horizontal>Project Information</Divider>
+        </Form>
     </Message>
     <Message>
-    <Message.Header>Links to Feature Sets</Message.Header>
-    <p>
-        We updated our privacy policy here to better service our customers. We
-        recommend reviewing the changes.
-    </p>
+        <Form>
+            <Form.Field>
+                <label>Links to Feature Sets:</label>
+                <Divider horizontal>LInks</Divider>
+            </Form.Field>
+        </Form>
     </Message>
     <Message>
-    <Message.Header>Links to Feature Sets</Message.Header>
-    <p>
-        We updated our privacy policy here to better service our customers. We
-        recommend reviewing the changes.
-    </p>
+        <Form>
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+            <Form.Field>
+                <label>Comments:</label>
+                <Form.Input
+                    placeholder='Add Info about the project here.'
+                    name='pSummary'
+                    value={this.state.projectInfo.comments}
+                    onChange={this.handleChange}
+                />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Divider horizontal>Comments</Divider>
+        </Form>
     </Message>
     </>
-)
+        );
+    }
+}
 
 export default ProjectDetails;
