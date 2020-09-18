@@ -91,6 +91,7 @@ class App extends Component {
           render={( {location} ) => 
           <ProjectBoard
           location={location}
+          projects={this.state.projects}
         />
         }/>
         <Route 

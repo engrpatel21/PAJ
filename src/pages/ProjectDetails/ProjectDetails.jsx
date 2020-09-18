@@ -7,7 +7,7 @@ class ProjectDetails extends Component {
     state = {
         projectInfo: {
             pSummary: '',
-            featureSets: '',
+            featureSets: 'Links will populate in this area',
             comments: ''
         }
     }
@@ -29,6 +29,8 @@ class ProjectDetails extends Component {
         return ( 
     <>
     <h1>Project Details Page</h1>
+    <Divider>
+    </Divider>
     <Message>
         <Form>
         {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
@@ -49,7 +51,16 @@ class ProjectDetails extends Component {
         <Form>
             <Form.Field>
                 <label>Links to Feature Sets:</label>
-                <Divider horizontal>LInks</Divider>
+                <Divider horizontal>Links</Divider>
+                {this.state.projectInfo.featureSets}
+                <br></br>
+                {this.state.projectInfo.featureSets}
+                <br></br>
+                {this.state.projectInfo.featureSets}
+                <br></br>
+                {this.state.projectInfo.featureSets}
+                <br></br>
+                {this.state.projectInfo.featureSets}
             </Form.Field>
         </Form>
     </Message>
