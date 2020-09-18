@@ -8,6 +8,7 @@ import * as userApi from "../../services/userService";
 
 
 
+
 class Profile extends Component {
   state = {
     userProjects: []
@@ -16,7 +17,6 @@ class Profile extends Component {
   async componentDidMount(){
     const userProjects = await userApi.getUserProjects(this.props.user)
     this.setState({userProjects})
-    
 }
   
 
@@ -46,13 +46,18 @@ class Profile extends Component {
         <Image src='https://picsum.photos/200/300' />
       </Grid.Column>
       <Grid.Column width={3}>
-      {/* {this.state.users.map((project) => (
-          <UserCard 
-          key={user._id}
-              user={user}
-              project={project._id}
-          />
-        ))} */}
+      {this.state.userProjects.map((project)=>
+      <div key={project._id}>
+        <Link
+          to={{
+            pathname: `/projectdetails/${project._id}`
+          }}
+        >
+          {project.name ? project.name : 'Link to Project'}
+        </Link>
+
+      </div>
+        )}
       </Grid.Column>
     </Grid.Row>
   </Grid>
