@@ -34,7 +34,7 @@ class ProjectCreation extends Component {
             <Form.Input
               placeholder='Add Name'
               name='name'
-              value={this.state.formData.owner}
+              value={this.state.formData.name}
               onChange={this.handleChange}
             />
             </Form.Group>

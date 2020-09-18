@@ -1,5 +1,5 @@
 const Project = require('../models/project')
-const User = require('../models/project')
+const User = require('../models/user')
 
 module.exports = {
     index,
@@ -43,6 +43,7 @@ function index(req,res){
 }
 
 function createProject(req,res){
+    console.log(req.body)
     req.body.owner = req.user._id
     Project.create(req.body)
     .then(project => {

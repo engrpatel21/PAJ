@@ -10,6 +10,7 @@ export function getAllProjects(){
 }
 
 export function createProject(project){
+    console.log(project)
     return fetch(BASE_URL, {
         method: "POST",
         headers: {'content-type': 'appliceation/json','Authorization': 'Bearer ' + tokenService.getToken()},
