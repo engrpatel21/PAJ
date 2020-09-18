@@ -3,7 +3,7 @@ import { Grid, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
-
+import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
 
 
@@ -25,7 +25,7 @@ class Profile extends Component {
       <Grid celled>
     <Grid.Row>
       <Grid.Column width={3}>
-        <Image src='https://picsum.photos/200/300' />
+        <MessagesAndFriends />
       </Grid.Column>
       <Grid.Column width={13}>
         <Button>
