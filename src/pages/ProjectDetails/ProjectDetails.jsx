@@ -4,6 +4,8 @@ import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 
+//adding something 
+
 class ProjectDetails extends Component {
     state = {
         project: {},
@@ -25,10 +27,16 @@ class ProjectDetails extends Component {
         this.setState({project})
     }
 
+    handelAddContributor = async (project_id, contributor) => {
+        const project = await projectApi.addProjectContributors(project_id, contributor)
+        this.setState({project},
+            ()=> this.props.history.push(`/projectdetails/${this.state.project._id}`))
+    }
 
     handleAddFeature = async (project_id, feature) => {
         const project = await projectApi.addProjectFeature(project_id, feature)
-        this.setState({project})
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
     
 
