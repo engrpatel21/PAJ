@@ -43,6 +43,7 @@ function index(req,res){
 }
 
 function createProject(req,res){
+    req.body.owner = req.user._id
     Project.create(req.body)
     .then(project => {
         User.findById(req.user._id)
