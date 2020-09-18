@@ -83,27 +83,31 @@ class App extends Component {
         {/* Route to Project Details Page */}
         <Route 
           exact path='/projectdetails/'
-          render={( {location} ) => 
-          <ProjectDetails
+          render={( {location} ) => (
+          user ? <ProjectDetails
           location={location}
         />
-        }/>
+        : 
+        <Redirect to="/login" />
+        )}/>
         {/* Route to Project Board Page */}
         <Route 
           exact path='/projectboard/'
-          render={( {location} ) => 
-          <ProjectBoard
+          render={( {location} ) => (
+          user ? <ProjectBoard
           location={location}
           projects={this.state.projects}
         />
-        }/>
+        : 
+        <Redirect to="/login" />
+          )}/>
         <Route 
         exact path='/createproject'
-        render={() =>
-        <ProjectCreation />
-        }
-        
-        />
+        render={() => (
+        user ? <ProjectCreation />
+        : 
+        <Redirect to="/login" />
+        )}/>
       </>
     );
   }
