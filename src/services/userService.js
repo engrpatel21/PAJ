@@ -10,3 +10,10 @@ export function getAllUsers() {
     { mode: "cors" }
   ).then((res) => res.json());
 }
+
+export function getUserProject(user){
+  return fetch(`${BASE_URL}/${user._id}`,{
+    headers: { Authorization: "Bearer " + tokenService.getToken() },
+  })
+  .then(res => res.json())
+}
