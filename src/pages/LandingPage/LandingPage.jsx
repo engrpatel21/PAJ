@@ -8,7 +8,7 @@ const LandingPage = () => (
         <h1>Welcome to PA-J</h1>
         <Divider>
         </Divider>
-        <Image src={logo} size='xxlarge' centered />
+        <Image src={logo} size='large' centered />
         <Divider horizontal>
             About PAJ
         </Divider>

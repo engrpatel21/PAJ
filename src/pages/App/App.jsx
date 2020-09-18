@@ -10,12 +10,14 @@ import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
+import * as userApi from '../../services/userService'
 import "./App.css";
 
 class App extends Component {
   state = {
     user: authService.getUser(),
-    projects: []
+    projects: [],
+    users: []
   };
 
   handleLogout = () => {
@@ -29,7 +31,8 @@ class App extends Component {
 
   async componentDidMount(){
     const projects = await projectApi.getAllProjects()
-    this.setState({projects})
+    const users = await userApi.getAllUsers()
+    this.setState({projects, users})
 }
 
   handleAddProject = async projectData =>{
@@ -75,7 +78,7 @@ class App extends Component {
         <Route
           exact
           path="/users"
-          render={() => (user ? <UsersList /> : <Redirect to="/login" />)}
+          render={() => (user ? <UsersList/> : <Redirect to="/login" />)}
         />
         {/* Route to Project Details Page */}
         <Route 
