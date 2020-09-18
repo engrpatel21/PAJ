@@ -1,15 +1,17 @@
 import React from 'react'
-import { List } from 'semantic-ui-react'
+import { List} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
+
 
 
 const FeatureDetails = ({features}) => {
     console.log(features)
     return ( 
     <List>
-        {/* {features.map((feature) =>
-        <List.Item>{feature.feature}</List.Item>
+        {features.map((feature, idx) =>
+        <List.Item as={Link} to={{pathname: '/projectboard', state: {feature}}} key={feature._id}>{feature.feature ? feature.feature : `Feature ${idx}`}</List.Item>
        
-        )} */}
+        )}
         </List>
      );
 }

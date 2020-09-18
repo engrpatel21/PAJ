@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import { Input, Menu } from 'semantic-ui-react'
+import {  Menu } from 'semantic-ui-react'
 
 class NavBar extends Component {
   state = { activeItem: 'home' }
