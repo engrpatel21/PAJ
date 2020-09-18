@@ -17,3 +17,10 @@ export function getUserProjects(user){
   })
   .then(res => res.json())
 }
+
+export function getUserMessages(user){
+  return fetch(`${BASE_URL}/${user._id}/messages`,{
+    headers: { Authorization: "Bearer " + tokenService.getToken() },
+  })
+  .then(res => res.json())
+}
