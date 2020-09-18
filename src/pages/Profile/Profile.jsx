@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { Icon, Divider, Card } from 'semantic-ui-react'
+import { Icon, Divider, Card, Message } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
@@ -33,6 +33,7 @@ class Profile extends Component {
             <br></br>
             <br></br>
             <Button>
+              <label>Add Project</label>
             <Link to='/createproject'>
               <Icon name='add'/>
             </Link>
@@ -62,6 +63,7 @@ class Profile extends Component {
             </Card>
             </Grid.Column>
             <Grid.Column width={3}>
+              <Message floating>
               {this.state.userProjects.map((project)=>
                 <div key={project._id}>
               <Link
@@ -73,6 +75,7 @@ class Profile extends Component {
               </Link>
                 </div>
               )}
+              </Message>
             </Grid.Column>
           </Grid.Row>
         </Grid>
