@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Button} from 'semantic-ui-react'
 
-const FeatureCard = () => {
+const TaskCard = () => {
     return ( 
         <>
             <Card.Group centered items>
@@ -30,4 +30,4 @@ const FeatureCard = () => {
      );
 }
  
-export default FeatureCard;
+export default TaskCard;
