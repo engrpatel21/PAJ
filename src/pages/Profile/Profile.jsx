@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Grid, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { Icon, Divider, Card, Message } from 'semantic-ui-react'
+import { Grid, Image, Button, Icon, Divider, Card, Message } from 'semantic-ui-react'
 import profile from './profile.jpg';
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
