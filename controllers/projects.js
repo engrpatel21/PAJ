@@ -9,11 +9,22 @@ module.exports = {
     updateProject
 }
 
-function updateProject(req, res){
-    Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
-    .then(project => 
-        res.json(project)
+async function updateProject(req, res){
+    const contributor = await User.findOne({ email: req.body.contributor });
+    if(contributor){
+        Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
+        .then(project =>{
+        contributor.projects.push(project._id)
+        contributor.save().then(()=>
+            res.json(project)
         )
+    })
+    }else{
+        Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
+        .then(project =>
+            res.json(project)
+            )
+    }
 }
 
 function deleteProject(req,res){

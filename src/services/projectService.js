@@ -42,3 +42,4 @@ export function addProjectContributors(project_id, contributor){
     })
     .then(res => res.json())
 }
+

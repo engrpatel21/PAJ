@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
-import FeatureCard from '../../components/FeatureCard/FeatureCard'
+import TaskCard from '../../components/TaskCard/TaskCard'
 import { Grid, Divider } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 
@@ -14,16 +14,16 @@ const ProjectBoard = () => (
         <Grid.Row>
             <Grid.Column>
                 <h1>To-Do:</h1>
-                    <FeatureCard/>
+                    <TaskCard/>
                     </Grid.Column>
                     <Grid.Column>
                 <h1>Completed:</h1>
-                <FeatureCard />
+                <TaskCard />
             </Grid.Column>
             <Grid.Column>
                 <h1>Backlog:</h1>
-                <FeatureCard />
-                <FeatureCard/>
+                <TaskCard />
+                <TaskCard/>
             </Grid.Column>
         </Grid.Row>
     </Grid>
