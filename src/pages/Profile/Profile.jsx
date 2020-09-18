@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { Icon, Divider, Card, Message } from 'semantic-ui-react'
+import { Grid, Image, Button, Icon, Divider, Card, Message } from 'semantic-ui-react'
+import profile from './profile.jpg';
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
@@ -44,7 +44,7 @@ class Profile extends Component {
           <Grid.Row>
             <Grid.Column width={5}>
             <Card>
-              <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+              <Image src={profile} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>Mr. PAJ</Card.Header>
                 <Card.Meta>
