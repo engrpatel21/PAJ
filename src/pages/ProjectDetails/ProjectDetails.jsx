@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Message, Form, Button, Divider, Segment, TextArea } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
-
+//adding something 
 class ProjectDetails extends Component {
     state = {
         project: {},
