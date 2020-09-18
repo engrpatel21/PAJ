@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
-import { getAllUsers } from "../../services/userService";
+import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
 
 
-class UsersList extends Component {
+
+class UserList extends Component {
     state = { 
-        users: [],
+        users: []
      }
 
-     async componentDidMount(){
-        const users = await getAllUsers();
-        this.setState({ users });
-     }
+    async componentDidMount(){
+        const users = await userApi.getAllUsers()
+        this.setState({users})
+    }
 
     render() { 
-        return (  
+        const {users} = this.state
+        return ( 
             <>
-        <h1>Hi, This is a list of all the users.</h1>
-        {this.state.users.map((user) => (
-          <UserCard 
-          key={user._id}
-          user={user}
-          />
-        ))}
+                {users.map(user => 
+                    <UserCard  key={user._id} user={user}/>
+                    )}
             </>
-        );
+         );
     }
 }
  
-export default UsersList;
+export default UserList;
+
+
+// const UserList = ({users}) => {
+//     return ( 
+//         <>
+//          {users.map(user =>
+//             <div>{user.name}</div>
+//             )}
+//         </>
+//      );
+// }
+ 
+// export default UserList;
