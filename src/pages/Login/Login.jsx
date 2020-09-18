@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import authService from "../../services/authService"
+import { Button, Form, Segment, Divider } from 'semantic-ui-react'
 
 class LoginPage extends Component {
   state = {
@@ -34,30 +35,38 @@ class LoginPage extends Component {
     return (
       <main className="Login">
         <h3>Log In</h3>
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            autoComplete="off"
-            id="email"
-            value={email}
-            name="email"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            type="password"
-            autoComplete="off"
-            id="password"
-            value={pw}
-            name="pw"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <button className="btn green">Log In</button>&nbsp;&nbsp;&nbsp;
-          <Link className="btn red" to="/">
-            Cancel
-          </Link>
-        </form>
+        <Divider>
+        </Divider>
+          <Segment inverted>
+            <Form inverted autoComplete="off" onSubmit={this.handleSubmit}>
+              <Form.Group widths='equal'>
+                <Form.Input 
+                  fluid label='User Email' 
+                  placeholder='Email' 
+                  type="text"
+                  autoComplete="off"
+                  id="email"
+                  value={email}
+                  name="email"
+                  onChange={this.handleChange}
+                />
+                <Form.Input 
+                  fluid label='Password' 
+                  placeholder='Password' 
+                  type="password"
+                  autoComplete="off"
+                  id="password"
+                  value={pw}
+                  name="pw"
+                  onChange={this.handleChange}
+                /> 
+              </Form.Group>
+                <Button type='submit'>Log In</Button>
+                <br></br>
+                <br></br>
+                <Link to="/">Cancel</Link>
+            </Form>
+          </Segment>
       </main>
     );
   }
