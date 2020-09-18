@@ -57,35 +57,7 @@ class ProjectCreation extends Component {
           </Form.Group>
         </Form>
       </Segment>
-      <Segment inverted textAlign='center' className='AddProject'>
-            <h1>Add Features:</h1>
-        <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              placeholder='Feature Name'
-              name='feature'
-              value={this.state.formData.feature}
-              onChange={this.handleChange}
-            />
-            </Form.Group>
-            <Form.Group> 
-            <Form.Input
-              id='form-textarea-control-opinion'
-              placeholder='Add a description'
-              control={TextArea}
-              label='Description'
-              name='description'
-              value={this.state.formData.description}
-              onChange={this.handleChange}
-            />
-            </Form.Group>
-            <Form.Group>
-            <Form.Button content='Submit' 
-            />
-          </Form.Group>
-        </Form>
-      </Segment>
-            </>
+        </>
         );
     }
 }
