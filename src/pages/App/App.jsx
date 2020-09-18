@@ -10,14 +10,14 @@ import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
-import * as userApi from '../../services/userService'
+import Profile from '../Profile/Profile'
 import "./App.css";
 
 class App extends Component {
   state = {
     user: authService.getUser(),
     projects: [],
-    users: []
+
   };
 
   handleLogout = () => {
@@ -31,8 +31,8 @@ class App extends Component {
 
   async componentDidMount(){
     const projects = await projectApi.getAllProjects()
-    const users = await userApi.getAllUsers()
-    this.setState({projects, users})
+
+    this.setState({projects})
 }
 
   handleAddProject = async projectData =>{
@@ -103,11 +103,25 @@ class App extends Component {
           )}/>
         <Route 
         exact path='/createproject'
+
         render={() => (
         user ? <ProjectCreation />
         : 
         <Redirect to="/login" />
         )}/>
+
+        
+        <Route 
+        exact path='/profile'
+        render={() =>
+        <Profile 
+          user={this.state.user}
+
+        />
+        }
+        
+        />
+
       </>
     );
   }

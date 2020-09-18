@@ -52,25 +52,6 @@ class ProjectCreation extends Component {
             />
             </Form.Group>
             <Form.Group>
-            <Form.Input
-              placeholder='Add Contributers'
-              name='contributors'
-              value={this.state.formData.contributors}
-              onChange={this.handleChange}
-            />
-            </Form.Group>
-            <Form.Group> 
-            <Form.Input
-              id='form-textarea-control-opinion'
-              placeholder='Add a comments'
-              control={TextArea}
-              label='Comments'
-              name='comments'
-              value={this.state.formData.comments}
-              onChange={this.handleChange}
-            />
-            </Form.Group>
-            <Form.Group>
             <Form.Button content='Submit' 
             />
           </Form.Group>
