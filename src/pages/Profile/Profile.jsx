@@ -16,6 +16,7 @@ class Profile extends Component {
   async componentDidMount(){
     const userProjects = await userApi.getUserProjects(this.props.user)
     this.setState({userProjects})
+    
 }
   
 

@@ -104,7 +104,9 @@ class App extends Component {
         <Route 
         exact path='/createproject'
         render={() => (
-        user ? <ProjectCreation />
+        user ? <ProjectCreation 
+        handleAddProject={this.handleAddProject}
+        />
         : 
         <Redirect to="/login" />
         )}/>

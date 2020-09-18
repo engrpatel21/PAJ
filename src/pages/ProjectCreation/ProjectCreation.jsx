@@ -5,10 +5,8 @@ import { Form, Segment, TextArea } from 'semantic-ui-react'
 class ProjectCreation extends Component {
     state = { 
         formData: {
-            owner: '',
+            name: '',
             description: '',
-            contributors: [],
-            comments: '',
 
         }
      }
@@ -35,8 +33,8 @@ class ProjectCreation extends Component {
           <Form.Group>
             <Form.Input
               placeholder='Add Name'
-              name='owner'
-              value={this.state.formData.owner}
+              name='name'
+              value={this.state.formData.name}
               onChange={this.handleChange}
             />
             </Form.Group>
