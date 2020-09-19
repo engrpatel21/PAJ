@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
+import ContributorsList from '../../components/ContributorsList/ContributorsList'
 
-//adding something 
+
 
 class ProjectDetails extends Component {
     state = {
@@ -37,6 +38,21 @@ class ProjectDetails extends Component {
             ()=> this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
 
+    contributerHandleSubmit = e =>{
+        e.preventDefault();
+        this.handelAddContributor(this.state.project._id, this.state.contributorFormData)
+    
+    }
+
+
+    contributerHandleChange = e => {
+       const contributorFormData = {...this.state.contributorFormData, [e.target.name]: e.target.value};
+       this.setState({
+        contributorFormData
+       });
+    }
+
+
     handleAddFeature = async (project_id, feature) => {
         const project = await projectApi.addProjectFeature(project_id, feature)
         this.setState({project},
@@ -48,6 +64,7 @@ class ProjectDetails extends Component {
     handleSubmit = e =>{
         e.preventDefault();
         this.handleAddFeature(this.state.project._id, this.state.featureFormData)
+    
     }
 
 
@@ -90,11 +107,15 @@ class ProjectDetails extends Component {
            
         </Form>
     </Message>
+    <Segment>
+        <h2>Feature List:</h2>
         {features ? 
         <>
             <FeatureDetails features ={features}/> 
         </> 
         : ''}
+
+    </Segment>
 
     <Segment  textAlign='left' className='AddProject'>
             <h1>Add Features:</h1>
@@ -124,15 +145,24 @@ class ProjectDetails extends Component {
           </Form.Group>
         </Form>
       </Segment>
+      <Segment>   
+          <h2> Contributors:</h2>
+      {this.contributor ? 
+        <>
+            <ContributorsList contributor ={this.contributor}/> 
+        </> 
+        : ''}
+
+      </Segment>
       <Segment  textAlign='left' className='AddProject'>
-            <h1>Add Contributers:</h1>
-        <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+            <h1>Add Contributors:</h1>
+        <Form ref={this.formRef} onSubmit={this.contributorHandleSubmit}>
           <Form.Group>
             <Form.Input
               placeholder='enter email address'
-              name='contributorFormData'
+              name='contributor'
               value={this.state.contributorFormData.contributor}
-              onChange={this.handleChange}
+              onChange={this.contributorHandleChange}
             />
             </Form.Group>
             <Form.Group>
