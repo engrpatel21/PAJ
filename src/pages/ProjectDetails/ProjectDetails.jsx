@@ -33,13 +33,22 @@ class ProjectDetails extends Component {
     }
 
     handelAddContributor = async (project_id, contributor) => {
-        const project = await projectApi.addProjectContributors(project_id, contributor)
+        await projectApi.addProjectContributors(project_id, contributor)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             ()=> this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
 
+    handleAddComment = async (project_id, comment) => {
+        await projectApi.addProjectComments(project_id, comment)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.hisotry.push(`/projectdetails/${this.state.project._id}`))
+    }
+
     handleAddFeature = async (project_id, feature) => {
-        const project = await projectApi.addProjectFeature(project_id, feature)
+        await projectApi.addProjectFeature(project_id, feature)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
@@ -151,6 +160,17 @@ class ProjectDetails extends Component {
 
       </Segment>
       <Segment  textAlign='left' className='AddProject'>
+        {this.state.project.contributors ? 
+            <>
+                {this.state.project.contributors.map(contributor =>
+                    <ContributorsList key={contributor._id} contributor={contributor}/>
+                    )}
+            </>
+            :
+            <>
+                <div>Not loaded</div>
+            </>
+        }
             <h1>Add Contributors:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
