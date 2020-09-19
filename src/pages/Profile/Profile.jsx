@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { Grid, Image, Button, Icon, Divider, Card, Message } from 'semantic-ui-react'
-import profile from './profile.jpg';
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
@@ -12,7 +11,15 @@ import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndF
 class Profile extends Component {
   state = {
     userProjects: [],
-    name: "Mr. PAJ"
+    user: {
+      name: '',
+      email: '',
+      avatar: '',
+      friends: '',
+      messages: [],
+      bio: '',
+    }
+
   };
 
   async componentDidMount(){
@@ -22,7 +29,7 @@ class Profile extends Component {
   
 
   render() {
-    const {name} = this.state
+    const {user} = this.state
     return (
       <>
         <h1>Profile Page</h1>
@@ -46,11 +53,11 @@ class Profile extends Component {
           <Grid.Row>
             <Grid.Column width={5}>
             <Card>
-              <Image src={profile} wrapped ui={false} />
+              <Image src={user.avatar} wrapped ui={false} />
               <Card.Content>
-                <Card.Header>{name}</Card.Header>
+                <Card.Header>{user.name}</Card.Header>
                 <Card.Meta>
-                  <span className='date'>Joined in 2035</span>
+                  <span className='date'>{user.bio}</span>
                 </Card.Meta>
                 <Card.Description>
                   PAJ is a software engineer living on Mars.

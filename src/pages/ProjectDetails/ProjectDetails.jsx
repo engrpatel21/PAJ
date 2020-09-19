@@ -96,14 +96,14 @@ class ProjectDetails extends Component {
     formRef = React.createRef()
     
     render() { 
-        const {features} = this.state.project
+        const {features} = this.state.project ? this.state.project : ['not loading']
         return ( 
     <>
   
     <h1>Project Details Page</h1>
     <Segment textAlign='center'>
             <h1>
-                {this.state.project.name}
+                {this.state.project.name ? this.state.project.name : 'no project'}
                 </h1>
     </Segment>
     
