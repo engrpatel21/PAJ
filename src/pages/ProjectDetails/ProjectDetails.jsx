@@ -111,7 +111,7 @@ class ProjectDetails extends Component {
         <h2>Feature List:</h2>
         {features ? 
         <>
-            <FeatureDetails features ={features}/> 
+            <FeatureDetails features ={features} projectId={this.state.project._id}/> 
         </> 
         : ''}
 

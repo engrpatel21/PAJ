@@ -4,7 +4,7 @@ import {Card, Button, Icon, Grid} from 'semantic-ui-react'
 const TaskCard = () => {
     return ( 
         <>
-            <Card.Group centered items>
+            <Card.Group centered >
             <Card>
                 <Card.Content>
                     <Card.Header>Placeholder Project

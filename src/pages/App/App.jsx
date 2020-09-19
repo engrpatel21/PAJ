@@ -99,7 +99,6 @@ class App extends Component {
           render={( {location} ) => (
           user ? <ProjectBoard
           location={location}
-          projects={this.state.projects}
         />
         : 
         <Redirect to="/login" />
