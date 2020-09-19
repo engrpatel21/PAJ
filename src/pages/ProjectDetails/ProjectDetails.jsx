@@ -10,10 +10,8 @@ import ContributorsList from '../../components/ContributorsList/ContributorsList
 class ProjectDetails extends Component {
     state = {
         project: {},
-        projectInfo: {
-            pSummary: '',
-            featureSets: 'Links will populate in this area',
-            comments: '',
+        commentsFormData: {
+            comments: ''
             
         },
 
@@ -67,6 +65,13 @@ class ProjectDetails extends Component {
          featureFormData
         });
      }
+
+     handleChangeComment = e => {
+        const commentsFormData = {...this.state.commentsFormData, [e.target.name]: e.target.value};
+        this.setState({
+         commentsFormData
+        });
+     }
     
 
     handleSubmitFeatures = e =>{
@@ -80,6 +85,11 @@ class ProjectDetails extends Component {
         this.handelAddContributor(this.props.match.params.projectId, this.state.contributorFormData)
     }
 
+    handleSubmitComment = e => {
+        e.preventDefault()
+        this.handleAddComment(this.props.match.params.projectId, this.state.commentsFormData)
+    }
+
 
 
     formRef = React.createRef()
@@ -90,28 +100,12 @@ class ProjectDetails extends Component {
     <>
   
     <h1>Project Details Page</h1>
-    <Divider>
-    </Divider>
-            {this.state.project.name}
-    <Message>
-        <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmitFeatures}> */}
-            <Form.Field>
-                <label>Project Information:</label>
-                <Form.Input
-                    placeholder='Add Info about the project here.'
-                    name='pSummary'
-                    value={this.state.projectInfo.pSummary}
-                    onChange={this.handleChangeFeatures}
-                />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-            <Divider horizontal>Project Information</Divider>
-            
-           
-           
-        </Form>
-    </Message>
+    <Segment textAlign='center'>
+            <h1>
+                {this.state.project.name}
+                </h1>
+    </Segment>
+    
     <Segment>
         <h2>Feature List:</h2>
         {features ? 
@@ -152,14 +146,7 @@ class ProjectDetails extends Component {
       </Segment>
       <Segment>   
           <h2> Contributors:</h2>
-      {/* {this.contributor ?  */}
-        {/* <>
-            <ContributorsList key={contributor._id} contributor ={this.contributor}/> 
-        </> 
-        : ''} */}
-
-      </Segment>
-      <Segment  textAlign='left' className='AddProject'>
+     
         {this.state.project.contributors ? 
             <>
                 {this.state.project.contributors.map(contributor =>
@@ -171,6 +158,9 @@ class ProjectDetails extends Component {
                 <div>Not loaded</div>
             </>
         }
+
+      </Segment>
+      <Segment  textAlign='left' className='AddProject'>
             <h1>Add Contributors:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
@@ -188,15 +178,14 @@ class ProjectDetails extends Component {
         </Form>
       </Segment>
     <Message>
-        <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmitFeatures}> */}
+        <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
             <Form.Field>
                 <label>Comments:</label>
                 <Form.Input
-                    placeholder='Add Info about the project here.'
-                    name='pSummary'
-                    value={this.state.projectInfo.comments}
-                    onChange={this.handleChangeFeatures}
+                    placeholder='Add comments here...'
+                    name='comments'
+                    value={this.state.commentsFormData.comments}
+                    onChange={this.handleChangeComment}
                 />
             </Form.Field>
             <Button type='submit'>Submit</Button>
