@@ -1,11 +1,13 @@
 import React from 'react'
 import { Grid, Image, Button, Icon, Divider, Card, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import user from '../../../models/user'
 
 
 const UsersProfile = ({userInfo}) => {
     const {userInfo} = this.state
     return ( 
+        <>
         <h1>Profile Page</h1>
         <Divider>
         </Divider>
@@ -34,7 +36,7 @@ const UsersProfile = ({userInfo}) => {
                   <span className='date'>{userInfo.bio}</span>
                 </Card.Meta>
                 <Card.Description>
-                  PAJ is a software engineer living on Mars.
+                  {userInfo.bio}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
@@ -47,6 +49,7 @@ const UsersProfile = ({userInfo}) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        </>
      );
 }
  

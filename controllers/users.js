@@ -4,7 +4,7 @@ module.exports = {
   index,
   updateUser,
   showUserProject,
-  showOneUser
+  showOneUser,
 };
 
 function showOneUser(req, res){
