@@ -2,7 +2,7 @@ import React from 'react';
 // import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
-import { Grid, Divider, Icon } from 'semantic-ui-react'
+import { Grid, Divider, Icon, Button } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 
 const ProjectBoard = () => (
@@ -26,6 +26,19 @@ const ProjectBoard = () => (
                 <TaskCard />
                 <TaskCard/>
                 <TaskCardEM/>
+                <br></br>
+                <br></br>
+                <div>
+                <Grid>
+                <Grid.Column textAlign="center">
+                    <Button size='massive' color='blue'>
+                        <Grid.Column textAlign="center">
+                            <Icon name='plus'/>
+                        </Grid.Column>
+                    </Button>
+                </Grid.Column>
+                </Grid>
+                </div>
             </Grid.Column>
         </Grid.Row>
     </Grid>
