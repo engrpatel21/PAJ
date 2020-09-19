@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 
 const FeatureDetails = ({features}) => {
-    console.log(features)
     return ( 
     <List>
         {features.map((feature, idx) =>
