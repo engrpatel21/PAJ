@@ -2,7 +2,7 @@ import React from 'react';
 // import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
-import { Grid, Divider } from 'semantic-ui-react'
+import { Grid, Divider, Icon } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 
 const ProjectBoard = () => (
