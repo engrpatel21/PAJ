@@ -11,7 +11,7 @@ class ProjectDetails extends Component {
     state = {
         project: {},
         commentsFormData: {
-            comments: ''
+            comment: ''
             
         },
 
@@ -38,6 +38,7 @@ class ProjectDetails extends Component {
     }
 
     handleAddComment = async (project_id, comment) => {
+        console.log(comment)
         await projectApi.addProjectComments(project_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
@@ -183,8 +184,8 @@ class ProjectDetails extends Component {
                 <label>Comments:</label>
                 <Form.Input
                     placeholder='Add comments here...'
-                    name='comments'
-                    value={this.state.commentsFormData.comments}
+                    name='comment'
+                    value={this.state.commentsFormData.comment}
                     onChange={this.handleChangeComment}
                 />
             </Form.Field>

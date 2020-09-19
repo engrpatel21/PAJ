@@ -3,8 +3,16 @@ const User = require("../models/user");
 module.exports = {
   index,
   updateUser,
-  showUserProject
+  showUserProject,
+  showOneUser
 };
+
+function showOneUser(req, res){
+  User.findbyId(req.params.userId)
+  .then(user => 
+    res.json(user)
+    )
+}
 
 function showUserProject(req, res){
   User.findById(req.user._id)
