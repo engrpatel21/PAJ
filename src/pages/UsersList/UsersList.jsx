@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
-
-
+import { Icon, Divider, Button, Message, Card, Image, Grid } from 'semantic-ui-react'
+import './UserList.css'
 
 class UserList extends Component {
     state = { 
@@ -18,9 +18,14 @@ class UserList extends Component {
         const {users} = this.state
         return ( 
             <>
-                {users.map(user => 
-                    <UserCard  key={user._id} user={user}/>
+                <h1>User List Page</h1>
+                <Divider>
+                </Divider>
+                    <div className="UserList-grid">
+                    {users.map(user => 
+                        <UserCard  key={user._id} user={user}/>
                     )}
+                    </div>
             </>
          );
     }
