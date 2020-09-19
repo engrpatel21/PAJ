@@ -23,7 +23,7 @@ class ProjectDetails extends Component {
         },
 
         contributorFormData:{
-            contributor:[]
+            contributor:''
         }
     }
 
@@ -38,42 +38,40 @@ class ProjectDetails extends Component {
             ()=> this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
 
-    contributerHandleSubmit = e =>{
-        e.preventDefault();
-        this.handelAddContributor(this.state.project._id, this.state.contributorFormData)
-    
-    }
-
-
-    contributerHandleChange = e => {
-       const contributorFormData = {...this.state.contributorFormData, [e.target.name]: e.target.value};
-       this.setState({
-        contributorFormData
-       });
-    }
-
-
     handleAddFeature = async (project_id, feature) => {
         const project = await projectApi.addProjectFeature(project_id, feature)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
+
+    
+    handleChangeContributors = e => {
+        const contributorFormData = {...this.state.contributorFormData, [e.target.name]: e.target.value};
+        this.setState({
+         contributorFormData
+        });
+     }
+    
+     handleChangeFeatures = e => {
+        const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
+        this.setState({
+         featureFormData
+        });
+     }
     
 
-
-    handleSubmit = e =>{
+    handleSubmitFeatures = e =>{
         e.preventDefault();
-        this.handleAddFeature(this.state.project._id, this.state.featureFormData)
+        this.handleAddFeature(this.props.match.params.projectId, this.state.featureFormData)
     
     }
 
-
-    handleChange = e => {
-       const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
-       this.setState({
-        featureFormData
-       });
+    handleSubmitContributors = e => {
+        e.preventDefault()
+        this.handelAddContributor(this.props.match.params.projectId, this.state.contributorFormData)
     }
+
+
 
     formRef = React.createRef()
     
@@ -81,23 +79,21 @@ class ProjectDetails extends Component {
         const {features} = this.state.project
         return ( 
     <>
-    {features ? features.map(feature => <div>
-        {feature.featureStatus}
-    </div>) : 'not loading'}
+  
     <h1>Project Details Page</h1>
     <Divider>
     </Divider>
-  
+            {this.state.project.name}
     <Message>
         <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmitFeatures}> */}
             <Form.Field>
                 <label>Project Information:</label>
                 <Form.Input
                     placeholder='Add Info about the project here.'
                     name='pSummary'
                     value={this.state.projectInfo.pSummary}
-                    onChange={this.handleChange}
+                    onChange={this.handleChangeFeatures}
                 />
             </Form.Field>
             <Button type='submit'>Submit</Button>
@@ -119,13 +115,13 @@ class ProjectDetails extends Component {
 
     <Segment  textAlign='left' className='AddProject'>
             <h1>Add Features:</h1>
-        <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+        <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
           <Form.Group>
             <Form.Input
               placeholder='Feature Name'
               name='feature'
               value={this.state.featureFormData.feature}
-              onChange={this.handleChange}
+              onChange={this.handleChangeFeatures}
             />
             </Form.Group>
             <Form.Group> 
@@ -136,51 +132,51 @@ class ProjectDetails extends Component {
               label='Description'
               name='description'
               value={this.state.featureFormData.description}
-              onChange={this.handleChange}
+              onChange={this.handleChangeFeatures}
             />
             </Form.Group>
             <Form.Group>
-            <Form.Button content='Submit' 
+            <Form.Button type='submit' content='Submit' 
             />
           </Form.Group>
         </Form>
       </Segment>
       <Segment>   
           <h2> Contributors:</h2>
-      {this.contributor ? 
-        <>
-            <ContributorsList contributor ={this.contributor}/> 
+      {/* {this.contributor ?  */}
+        {/* <>
+            <ContributorsList key={contributor._id} contributor ={this.contributor}/> 
         </> 
-        : ''}
+        : ''} */}
 
       </Segment>
       <Segment  textAlign='left' className='AddProject'>
             <h1>Add Contributors:</h1>
-        <Form ref={this.formRef} onSubmit={this.contributorHandleSubmit}>
+        <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
             <Form.Input
               placeholder='enter email address'
               name='contributor'
               value={this.state.contributorFormData.contributor}
-              onChange={this.contributorHandleChange}
+              onChange={this.handleChangeContributors}
             />
             </Form.Group>
             <Form.Group>
-            <Form.Button content='Submit' 
+            <Form.Button type='submit' content='Submit' 
             />
           </Form.Group>
         </Form>
       </Segment>
     <Message>
         <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
+        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmitFeatures}> */}
             <Form.Field>
                 <label>Comments:</label>
                 <Form.Input
                     placeholder='Add Info about the project here.'
                     name='pSummary'
                     value={this.state.projectInfo.comments}
-                    onChange={this.handleChange}
+                    onChange={this.handleChangeFeatures}
                 />
             </Form.Field>
             <Button type='submit'>Submit</Button>

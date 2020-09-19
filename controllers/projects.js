@@ -10,14 +10,22 @@ module.exports = {
 }
 
 async function updateProject(req, res){
+    console.log(req.body)
     const contributor = await User.findOne({ email: req.body.contributor });
+    console.log(contributor)
     if(contributor){
-        Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
+        console.log('here')
+        console.log(contributor._id)
+        Project.findById(req.params.projectId)
         .then(project =>{
-        contributor.projects.push(project._id)
-        contributor.save().then(()=>
-            res.json(project)
-        )
+            project.contributors.push(contributor._id)
+            project.save().then(() =>{
+                    contributor.projects.push(project._id)
+                    contributor.save().then(()=>
+                        res.json(project)
+                    )
+            })
+     
     })
     }else{
         Project.findByIdAndUpdate(req.params.projectId, req.body, {new: true})
@@ -40,6 +48,7 @@ function showProject(req, res){
     .populate('owner')
     .populate('comments.createdBy')
     .populate('features.tasks.user')
+    .populate('contributors')
     .then( project => 
         res.json(project)
         )

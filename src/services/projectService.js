@@ -35,6 +35,7 @@ export function addProjectFeature(project_id, feature){
 }
 
 export function addProjectContributors(project_id, contributor){
+    console.log(contributor)
     return fetch(`${BASE_URL}/${project_id}`,{
         method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
