@@ -26,6 +26,11 @@ class Profile extends Component {
     const userProjects = await userApi.getUserProjects(this.props.user)
     this.setState({userProjects})
 }
+
+async componentDidMount(){
+  const user = await userApi.getOneUser(this.props.user)
+  this.setState({user})
+}
   
 
   render() {
