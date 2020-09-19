@@ -27,7 +27,8 @@ const projectSchema = new Schema({
     status:{type: Boolean, default: false},
     description: String,
     contributors: [{ type: Schema.Types.ObjectId, ref: 'User'}],
-    comments: [commentSchema]
+    comments: [commentSchema],
+    isEdit: {type: Boolean, default: false}
 
 })
 
