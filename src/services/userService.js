@@ -12,7 +12,7 @@ export function getAllUsers() {
 }
 
 export function getUserProjects(user){
-  return fetch(`${BASE_URL}/${user._id}`,{
+  return fetch(`${BASE_URL}/${user._id}/projects`,{
     headers: { Authorization: "Bearer " + tokenService.getToken() },
   })
   .then(res => res.json())
@@ -25,3 +25,9 @@ export function getUserMessages(user){
   .then(res => res.json())
 }
 
+export function getOneUser(user_id){
+  return fetch(`${BASE_URL}/${user_id}/user`, {
+    headers: { Authorization: "Bearer " + tokenService.getToken() },
+  })
+  .then(res => res.json())
+}

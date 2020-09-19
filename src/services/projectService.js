@@ -46,10 +46,10 @@ export function addProjectContributors(project_id, contributor){
 
 export function addProjectComments(project_id, comment){
     return fetch(`${BASE_URL}/${project_id}/comments`, {
-        method: 'PUT',
+        method: "POST",
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(comment)
-    })
+    }, {mode: "cors"})
     .then(res => res.json())
     
 }

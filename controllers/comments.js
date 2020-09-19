@@ -38,9 +38,9 @@ function index(req,res){
 }
 
 function createComment(req, res){
+    req.body.createdBy = req.user._id
     Project.findById(req.params.projectId)
     .then(project =>{
-        console.log(project)
         project.comments.push(req.body)
         project.save().then( project =>
             res.json(project)
