@@ -41,7 +41,7 @@ class ProjectDetails extends Component {
         await projectApi.addProjectComments(project_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            () => this.props.hisotry.push(`/projectdetails/${this.state.project._id}`))
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
 
     handleAddFeature = async (project_id, feature) => {
@@ -95,14 +95,14 @@ class ProjectDetails extends Component {
     formRef = React.createRef()
     
     render() { 
-        const {features} = this.state.project
+        const {features} = this.state.project ? this.state.project : ['not loading']
         return ( 
     <>
   
     <h1>Project Details Page</h1>
     <Segment textAlign='center'>
             <h1>
-                {this.state.project.name}
+                {this.state.project.name ? this.state.project.name : 'no project'}
                 </h1>
     </Segment>
     
