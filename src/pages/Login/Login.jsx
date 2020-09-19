@@ -34,7 +34,7 @@ class LoginPage extends Component {
     const {email, pw} = this.state
     return (
       <main className="Login">
-        <h3>Log In</h3>
+        <h1>Log In</h1>
         <Divider>
         </Divider>
           <Segment inverted>

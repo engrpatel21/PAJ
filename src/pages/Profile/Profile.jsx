@@ -11,7 +11,8 @@ import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndF
 
 class Profile extends Component {
   state = {
-    userProjects: []
+    userProjects: [],
+    name: "Mr. PAJ"
   };
 
   async componentDidMount(){
@@ -21,6 +22,7 @@ class Profile extends Component {
   
 
   render() {
+    const {name} = this.state
     return (
       <>
         <h1>Profile Page</h1>
@@ -46,7 +48,7 @@ class Profile extends Component {
             <Card>
               <Image src={profile} wrapped ui={false} />
               <Card.Content>
-                <Card.Header>Mr. PAJ</Card.Header>
+                <Card.Header>{name}</Card.Header>
                 <Card.Meta>
                   <span className='date'>Joined in 2035</span>
                 </Card.Meta>
