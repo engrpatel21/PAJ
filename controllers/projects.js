@@ -10,21 +10,22 @@ module.exports = {
 }
 
 async function updateProject(req, res){
-    console.log(req.body)
     const contributor = await User.findOne({ email: req.body.contributor });
-    console.log(contributor)
     if(contributor){
-        console.log('here')
-        console.log(contributor._id)
         Project.findById(req.params.projectId)
         .then(project =>{
-            project.contributors.push(contributor._id)
-            project.save().then(() =>{
-                    contributor.projects.push(project._id)
-                    contributor.save().then(()=>
-                        res.json(project)
-                    )
-            })
+            const idx = project.contributors.findIndex(c => c._id.equals(contributor._id))
+            if(idx === -1){
+                project.contributors.push(contributor._id)
+                project.save().then(() =>{
+                        contributor.projects.push(project._id)
+                        contributor.save().then(()=>
+                            res.json(project)
+                        )
+                })
+            }else{
+                res.json(project)
+            }
      
     })
     }else{
