@@ -5,19 +5,17 @@ import {Link} from 'react-router-dom'
 
 
 const ContributorsList = ({contributor}) => {
-    console.log(contributor)
     return ( 
     <List>
-        {contributor.map((contributor, idx) =>
+       
         <List.Item 
         as={Link} 
         to={{pathname: '/', state: {contributor}}} 
         key={contributor._id}
         >
-        {contributor.contributor ? contributor.contributor : `Contributor ${idx}`}
+        {contributor.name ? contributor.name : `notloading`}
         </List.Item>
        
-        )}
         </List>
      );
 }
