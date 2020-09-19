@@ -44,3 +44,12 @@ export function addProjectContributors(project_id, contributor){
     .then(res => res.json())
 }
 
+export function addProjectComments(project_id, comment){
+    return fetch(`${BASE_URL}/${project_id}/comments`, {
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(comment)
+    })
+    .then(res => res.json())
+    
+}
