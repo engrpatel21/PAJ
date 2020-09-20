@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
 
-import { Grid, Divider,  Button, Icon } from 'semantic-ui-react'
+import { Grid, Divider,  Button, Icon, Popup } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 import * as projectApi from '../../services/projectService'
 
@@ -77,11 +77,9 @@ class ProjectBoard extends Component {
                                  <div>
                                     <Grid>
                                     <Grid.Column textAlign="center">
-                                        <Button onClick={this.renderAddTask} size='massive' color='blue'>
-                                            <Grid.Column textAlign="center">
-                                                <Icon name='plus'/>
-                                            </Grid.Column>
-                                        </Button>
+                                        <Popup content="Click to add a Task" trigger={<Button onClick={this.renderAddTask} size='tiny' color='blue' icon="plus"/>} />
+                                  
+                                          
                                     </Grid.Column>
                                     </Grid>
                                 </div>

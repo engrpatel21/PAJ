@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Button, Icon, Grid} from 'semantic-ui-react'
+import {Card, Button, Popup, Grid} from 'semantic-ui-react'
 import TaskCardEM from '../TaskCard(EMode)/TaskCard(EMode)'
 
 class TaskCard extends Component {
@@ -19,7 +19,9 @@ class TaskCard extends Component {
                      <Card.Content>
                          <Card.Header>{task ? task.name : 'no task'}
                              <Grid.Column floated='right'>
-                                {!this.state.isEdit ? <Button onClick={this.renderEditTask} icon='edit' /> : 'not edit'} 
+                                {!this.state.isEdit ?
+                                 <Popup content="Click to edit Task" trigger={<Button onClick={this.renderEditTask} icon='edit' />} /> : 
+                                 'not edit'} 
                              </Grid.Column>
                          </Card.Header>
                          <Card.Meta>Head of Project Here</Card.Meta>
@@ -28,13 +30,19 @@ class TaskCard extends Component {
                          </Card.Description>
                      </Card.Content>
                      <Card.Content extra>
-                     <div className='ui two buttons'>
-                         <Button 
-                             basic color='red'
-                             onClick={()=> handleDeleteTask(projectId, featureId, task._id)}
-                             >
-                             DELETE
-                         </Button>
+                     <div style={{padding:'0 4rem'}} className='ui two buttons'>
+                         <Popup content="Delete Task"
+                         trigger={
+                            <Button 
+                            basic color='red'
+                            onClick={()=> handleDeleteTask(projectId, featureId, task._id)}
+                            >
+                            DELETE
+                        </Button>
+
+                         }
+                         />
+                    
                          </div>
                          
                         
