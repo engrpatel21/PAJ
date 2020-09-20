@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment, Item } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment, Item, Container } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
 import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
+
 //this is working
 
 
@@ -120,11 +121,19 @@ class ProjectDetails extends Component {
     <h1>Project Details Page</h1>
    
  
-    <Segment >
-         
-        <Item.Group>
-            <ProjectNameCard project={this.state.project}/>
+    <Segment style={{height: 'auto'}} >
+        <Grid>
+            <Grid.Column>
+         <Container>
+            <Item.Group>
+            
+            <ProjectNameCard project={this.state.project}/> 
+          
+        
         </Item.Group>
+        </Container>
+        </Grid.Column>
+        </Grid>
     </Segment>
 
 
