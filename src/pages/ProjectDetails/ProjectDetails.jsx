@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, Grid } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
+import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
@@ -232,33 +233,22 @@ class ProjectDetails extends Component {
     
      
         <Message>
-            <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
-                <Form.Field>
-                    <label>Comments:</label>
-                    <Form.Input
-                        placeholder='Add comments here...'
-                        name='comment'
-                        value={this.state.commentsFormData.comment}
-                        onChange={this.handleChangeComment}
+
+        <Divider horizontal>Comments</Divider>
+            <Comment.Group style={{ display: "block", margin:' auto'}}>
+                {this.state.project.comments? this.state.project.comments.map(comment => 
+                    <CommentCard comment={comment} />
+                ): ''}
+               
+                <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
+                    <Form.TextArea 
+                        name='comment' 
+                        value={this.state.commentsFormData.comment} 
+                        onChange={this.handleChangeComment}    
                     />
-                </Form.Field>
-                <Button type='submit'>Submit</Button>
-                <Divider horizontal>Comments</Divider>
-            </Form>
-            <Grid>
-            <Grid.Column textAlign="center">
-                <Button size='large' basic color='green'>
-                    <Grid.Column textAlign="center">
-                        EDIT
-                    </Grid.Column>
-                </Button>
-                <Button size='large' basic color='red'>
-                    <Grid.Column textAlign="center">
-                        REMOVE ALL
-                    </Grid.Column>
-                </Button>
-            </Grid.Column>
-            </Grid>
+                    <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+                </Form>
+            </Comment.Group>
         </Message>
         
     </>
