@@ -21,13 +21,18 @@ const commentSchema = new Schema({
     createdBy: {type: Schema.Types.ObjectId, ref: 'User'}
 },{timestamps: true})
 
+const contributorSchema = new Schema({
+    contributor: { type: Schema.Types.ObjectId, ref: 'User'},
+    notes: String
+},{timestamps: true})
+
 const projectSchema = new Schema({
     name: String,
     owner:  { type: Schema.Types.ObjectId, ref: 'User'},
     features: [featureSchema],
     status:{type: Boolean, default: false},
     description: String,
-    contributors: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    contributors: [contributorSchema],
     comments: [commentSchema],
     isEdit: {type: Boolean, default: false}
 

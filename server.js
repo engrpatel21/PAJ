@@ -14,6 +14,7 @@ const commentRouter = require('./routes/comments')
 const featureRouter = require('./routes/features')
 const taskRouter = require('./routes/tasks')
 const messageRouter = require('./routes/messages')
+const contributorRouter = require('./routes/contributors.js')
 
 const cors = require('cors')
 
@@ -32,6 +33,7 @@ app.use('/api/projects', commentRouter)
 app.use('/api/projects', featureRouter)
 app.use('/api/projects', taskRouter)
 app.use('/api/users/', messageRouter)
+app.use('/api/projects', contributorRouter)
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

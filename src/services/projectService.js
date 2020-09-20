@@ -35,13 +35,16 @@ export function addProjectFeature(project_id, feature){
 }
 
 export function addProjectContributors(project_id, contributor){
-    console.log(contributor)
-    return fetch(`${BASE_URL}/${project_id}`,{
-        method: 'PUT',
+    return fetch(`${BASE_URL}/${project_id}/contributors`,{
+        method: 'POST',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(contributor)
     })
     .then(res => res.json())
+}
+
+export function removeProjectContributors(project_id, contributor_id){
+    return fetch(`${BASE_URL}`)
 }
 
 export function addProjectComments(project_id, comment){
