@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 
 
 
-const ContributorsList = ({contributors}) => {
+const ContributorsList = ({contributors, handleDeleteContributor}) => {
     let history = useHistory()
     const handleRedirect = userId => {
         history.push(`/profile/${userId}`)
@@ -22,10 +22,10 @@ const ContributorsList = ({contributors}) => {
             </Table.Header>
         <Table.Body>
             {contributors? contributors.map((contributor,idx) =>
-                 <Table.Row key={idx} onClick={()=> handleRedirect(`${contributor._id}`)}>
-                 <Table.Cell key={contributor.contributor._idx} >{contributor.contributor.name}</Table.Cell>
-                 <Table.Cell key={contributor.contributor.email}>{contributor.contributor.email}</Table.Cell>
-                 <Table.Cell key={`delete-${idx}`}><Button  content='Remove User' icon='eraser'/></Table.Cell>
+                 <Table.Row key={idx} >
+                 <Table.Cell onClick={()=> handleRedirect(`${contributor._id}`)}key={contributor.contributor._idx} >{contributor.contributor.name}</Table.Cell>
+                 <Table.Cell onClick={()=> handleRedirect(`${contributor._id}`)} key={contributor.contributor.email}>{contributor.contributor.email}</Table.Cell>
+                 <Table.Cell key={`delete-${idx}`}><Button onClick={()=>handleDeleteContributor(contributor._id)} content='Remove User' icon='eraser'/></Table.Cell>
              </Table.Row>
                 )  : 'run this'}
         </Table.Body>

@@ -43,8 +43,12 @@ export function addProjectContributors(project_id, contributor){
     .then(res => res.json())
 }
 
-export function removeProjectContributors(project_id, contributor_id){
-    return fetch(`${BASE_URL}`)
+export function deleteProjectContributors(project_id, contributor_id){
+    return fetch(`${BASE_URL}/${project_id}/contributors/${contributor_id}`,{
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+    })
+    .then(res => res.json())
 }
 
 export function addProjectComments(project_id, comment){

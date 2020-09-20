@@ -1,9 +1,19 @@
 const Project = require('../models/project')
-const user = require('../models/user')
 const User = require('../models/user')
 
 module.exports ={
-    createContributor
+    createContributor,
+    deleteContributor
+}
+
+function deleteContributor(req, res){
+    Project.findById(req.params.projectId)
+    .then(project => {
+        const idx = project.contributors.findIndex(c => c._id.equals(req.params.contributorId))
+        project.contributors.splice(idx,1)
+        project.save().then(()=>
+        res.json(project))
+    })
 }
 
 async function createContributor(req, res){

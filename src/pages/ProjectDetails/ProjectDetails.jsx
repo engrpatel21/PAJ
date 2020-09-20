@@ -50,6 +50,13 @@ class ProjectDetails extends Component {
             () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
+    handleDeleteContributor = async (contributor_id) =>{
+        await projectApi.deleteProjectContributors(this.props.match.params.projectId, contributor_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
+    }
+
 
     handleDeleteComment = async (comment_id) => {
         await projectApi.deleteProjectComments(this.props.match.params.projectId, comment_id)
@@ -109,7 +116,7 @@ class ProjectDetails extends Component {
 
             <Message textalign='left' className='AddProject'>
             <Divider horizontal><h3>Contributors</h3></Divider>
-            <ContributorsList contributors={this.state.project.contributors} />
+            <ContributorsList contributors={this.state.project.contributors} handleDeleteContributor={this.handleDeleteContributor}/>
             <div>
                 <Grid>
                     <Grid.Column textAlign="center">
