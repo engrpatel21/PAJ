@@ -54,6 +54,14 @@ export function addProjectComments(project_id, comment){
     
 }
 
+export function deleteProjectComments(project_id, comment_id){
+    return fetch(`${BASE_URL}/${project_id}/comments/${comment_id}`,{
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+    })
+    .then(res => res.json())
+}
+
 export function deleteFeature(project_id, feature_id){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
         method: 'DELETE',

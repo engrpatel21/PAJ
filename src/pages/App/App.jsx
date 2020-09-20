@@ -90,6 +90,7 @@ class App extends Component {
           user ? <ProjectDetails
           match={match}
           history={history}
+          user={this.state.user}
         />
         : 
         <Redirect to="/login" />

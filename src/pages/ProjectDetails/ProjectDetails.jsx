@@ -39,12 +39,20 @@ class ProjectDetails extends Component {
     }
 
     handleAddComment = async (project_id, comment) => {
-        console.log(comment)
         await projectApi.addProjectComments(project_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
+
+
+    handleDeleteComment = async (comment_id) => {
+        await projectApi.deleteProjectComments(this.state.project._id, comment_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+    }
+   
 
     handleAddFeature = async (project_id, feature) => {
         await projectApi.addProjectFeature(project_id, feature)
@@ -235,9 +243,13 @@ class ProjectDetails extends Component {
         <Message>
 
         <Divider horizontal>Comments</Divider>
-            <Comment.Group style={{ display: "block", margin:' auto'}}>
+            <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
                 {this.state.project.comments? this.state.project.comments.map(comment => 
-                    <CommentCard comment={comment} />
+                    <CommentCard 
+                        comment={comment} 
+                        user={this.props.user}
+                        handleDeleteComment={this.handleDeleteComment}
+                        />
                 ): ''}
                
                 <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
