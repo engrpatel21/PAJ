@@ -48,7 +48,7 @@ class Profile extends Component {
             <MessagesAndFriends />
             <br></br>
             <br></br>
-            <Button>
+            <Button loading>
               <label>Add Project</label>
             <Link to='/createproject'>
               <Icon name='add'/>

@@ -10,7 +10,7 @@ const ContributorsList = ({contributor}) => {
        
         <List.Item 
         as={Link} 
-        to={{pathname: '/', state: {contributor}}} 
+        to={{pathname: `/profile/${contributor._id}`}} 
         key={contributor._id}
         >
         {contributor.name ? contributor.name : `notloading`}

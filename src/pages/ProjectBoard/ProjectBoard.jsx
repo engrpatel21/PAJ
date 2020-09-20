@@ -39,9 +39,9 @@ class ProjectBoard extends Component {
                     <Grid.Column>
                         <h1>To-Do:</h1>
                             {this.state.tasks ? this.state.tasks.map( task => 
-                                <>
-                                <TaskCard task={task}/>
-                                </>
+                               
+                                <TaskCard key={task._id} task={task ? task : 'no task'}/>
+                               
                                 
                             ):
                             ''

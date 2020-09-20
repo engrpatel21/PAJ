@@ -11,6 +11,7 @@ import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
 import Profile from '../Profile/Profile'
+import FriendsProfile from '../FriendsProfile/FriendsProfile'
 import "./App.css";
 
 class App extends Component {
@@ -119,6 +120,17 @@ class App extends Component {
         render={() => (
         user ? <Profile 
         user={this.state.user}
+        />
+        : 
+        <Redirect to="/login" />
+        )}
+        
+        />
+        <Route 
+        exact path='/profile/:userId'
+        render={({match}) => (
+        user ? <FriendsProfile
+        match={match}
         />
         : 
         <Redirect to="/login" />
