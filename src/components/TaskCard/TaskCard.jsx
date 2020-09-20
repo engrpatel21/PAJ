@@ -10,7 +10,7 @@ class TaskCard extends Component {
         this.setState({isEdit: !this.state.isEdit})
     }
     render() { 
-        const {task, projectId, featureId, handleDeleteTask} = this.props
+        const {task, projectId, featureId, handleDeleteTask, handleUpdateTask} = this.props
         return ( 
             <>
             {!this.state.isEdit ? 
@@ -19,7 +19,7 @@ class TaskCard extends Component {
                      <Card.Content>
                          <Card.Header>{task ? task.name : 'no task'}
                              <Grid.Column floated='right'>
-                                {!this.state.isEdit ? <Icon onClick={this.renderEditTask} name='edit' /> : 'not edit'} 
+                                {!this.state.isEdit ? <Button onClick={this.renderEditTask} icon='edit' /> : 'not edit'} 
                              </Grid.Column>
                          </Card.Header>
                          <Card.Meta>Head of Project Here</Card.Meta>
@@ -42,7 +42,14 @@ class TaskCard extends Component {
                  </Card>
                  </Card.Group>
             :
-                <TaskCardEM isEdit={this.state.isEdit}/>
+                <TaskCardEM 
+                    isEdit={this.state.isEdit}
+                    renderEditTask={this.renderEditTask}
+                    handleUpdateTask={handleUpdateTask} 
+                    projectId={projectId}
+                    featureId={featureId}
+                    task={task}
+                    />
             }
            
         </>

@@ -79,10 +79,10 @@ export function getALlTasks(project_id, feature_id){
     .then(res => res.json())
 }
 
-export function updateFeatureTask(project_id, feature_id, task){
-    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks`,{
+export function updateFeatureTask(project_id, feature_id, task_id, task){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
         method: 'PUT',
-        headers: {'Authorization': 'Bearer ' + tokenService.getToken()},
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(task)
     })
     .then(res => res.json())

@@ -40,6 +40,14 @@ class ProjectBoard extends Component {
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
     }
 
+    handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{
+        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
+        this.setState({
+            task: this.state.tasks.map(t => t.id === task._id ? task._id : t)
+        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
+    }
+
+    
     render() { 
         const {featureId, projectId} = this.state
         return ( 
@@ -58,6 +66,8 @@ class ProjectBoard extends Component {
                                     projectId={projectId}
                                     featureId={featureId}
                                     handleDeleteTask={this.handleDeleteTask}
+                                    handleUpdateTask={this.handleUpdateTask} 
+                                    renderAddTask={this.renderAddTask}
                                 />
                             ):
                             ''
