@@ -4,7 +4,7 @@ import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
-
+//this is working
 
 
 class ProjectDetails extends Component {
