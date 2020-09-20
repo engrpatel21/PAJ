@@ -122,6 +122,7 @@ export function getALlTasks(project_id, feature_id){
 }
 
 export function updateFeatureTask(project_id, feature_id, task_id, task){
+    console.log(task)
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
         method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
