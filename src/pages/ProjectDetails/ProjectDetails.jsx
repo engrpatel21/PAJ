@@ -21,6 +21,7 @@ class ProjectDetails extends Component {
 
         addFeature: false,
         addContributor: false,
+     
     }
 
     async componentDidMount(){
@@ -34,6 +35,10 @@ class ProjectDetails extends Component {
 
     renderAddContributor = () => {
         this.setState({addContributor: !this.state.addContributor})
+    }
+
+    renderEditFeature =() => {
+        this.setState({editFeature: !this.state.editFeature})
     }
 
     handelAddContributor = async ( contributor) => {
@@ -83,6 +88,13 @@ class ProjectDetails extends Component {
     
     handleDeleteFeature = async (feature_id) =>{
         await projectApi.deleteProjectFeature(this.props.match.params.projectId, feature_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
+    }
+
+    handleUpdateFeature = async (feature_id, feature)=> {
+        await projectApi.updateProjectFeature(this.props.match.params.projectId, feature_id, feature)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
@@ -143,13 +155,20 @@ class ProjectDetails extends Component {
                         handelAddContributor={this.handelAddContributor}
                     />
             </Portal>
+           
             </Message>
             
             <Message textalign='left' className='AddProject'>
             <Divider horizontal><h3>Feature List</h3></Divider>
             {features ? 
             
-                <FeatureDetails features ={features} projectId={this.state.project._id} handleDeleteFeature={this.handleDeleteFeature}/> 
+                <FeatureDetails 
+                    features ={features} 
+                    projectId={this.state.project._id} 
+                    handleDeleteFeature={this.handleDeleteFeature}
+                    handleUpdateFeature={this.handleUpdateFeature}
+                    history={this.props.history}
+                    /> 
         
             : ''}
                     <div>
@@ -173,6 +192,7 @@ class ProjectDetails extends Component {
                             handleAddFeature={this.handleAddFeature}
                         />
                     </Portal>
+                    
             </Message>
 
             <Divider horizontal>Comments</Divider>

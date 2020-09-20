@@ -42,6 +42,16 @@ export function deleteProjectFeature(project_id, feature_id){
     .then(res => res.json())
 }
 
+export function updateProjectFeature(project_id, feature_id, feature){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(feature)
+    })
+    .then(res => res.json())
+}
+
+
 export function addProjectContributors(project_id, contributor){
     return fetch(`${BASE_URL}/${project_id}/contributors`,{
         method: 'POST',

@@ -3,17 +3,23 @@ import { Button, Form, Header, Segment} from 'semantic-ui-react'
 
 class AddFeatureForm extends Component {
     state = { 
-        featureFormData: {
+        featureFormData: this.props.editFeature? this.props.feature : {
             feature: '',
             description: ''
         }
      }
      
-     handleSubmitFeatures = e => {
+     handleSubmitFeature = e => {
          e.preventDefault()
          this.props.renderAddFeature()
          this.props.handleAddFeature(this.state.featureFormData)
      }
+
+     handleUpdateFeature = e => {
+        e.preventDefault()
+        this.props.renderEditFeature()
+        this.props.handleUpdateFeature(this.props.feature._id, this.state.featureFormData)
+    }
 
      handleChangeFeatures = e => {
         const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
@@ -35,7 +41,7 @@ class AddFeatureForm extends Component {
             <p>Add Project features and its description here.</p>
             <p>Click on the feature link to after adding the feature to compose stories for the feature.</p>
             <p>You can asign your contributors to be in charge of a feature.</p>
-            <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
+            <Form ref={this.formRef} onSubmit={this.props.editFeature? this.handleUpdateFeature : this.handleSubmitFeature}>
           <Form.Group>
             <Form.Input
               placeholder='Feature Name'
@@ -62,7 +68,7 @@ class AddFeatureForm extends Component {
             <Button
               content='Close Portal'
               negative
-              onClick={this.props.renderAddFeature}
+              onClick={ this.props.editFeature ? this.props.renderEditFeature : this.props.renderAddFeature}
             />
           </Segment>
          );
