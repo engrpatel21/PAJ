@@ -44,7 +44,7 @@ const UsersProfile = (props) => {
              
                   <Icon name='userInfo' />
                   22 Friends
-             
+      
               </Card.Content>
             </Card>
             </Grid.Column>

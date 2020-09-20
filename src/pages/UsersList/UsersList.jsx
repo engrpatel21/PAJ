@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
-import { Divider} from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 import './UserList.css'
 
 class UserList extends Component {

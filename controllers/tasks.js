@@ -52,6 +52,8 @@ function index(req, res){
 }
 
 function createTask(req, res){
+    console.log(req.body)
+    console.log(req.params)
     Project.findById(req.params.projectId)
     .then(project =>{
         const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))

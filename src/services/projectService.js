@@ -54,6 +54,23 @@ export function addProjectComments(project_id, comment){
     
 }
 
+export function deleteProjectComments(project_id, comment_id){
+    return fetch(`${BASE_URL}/${project_id}/comments/${comment_id}`,{
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+    })
+    .then(res => res.json())
+}
+
+export function updateProjectComment(project_id, comment_id, comment){
+    return fetch(`${BASE_URL}/${project_id}/comments/${comment_id}`,{
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(comment)
+    }, {mode: "cors"})
+    .then(res => res.json())
+}
+
 export function deleteFeature(project_id, feature_id){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
         method: 'DELETE',
@@ -72,10 +89,17 @@ export function addFeatureTask(project_id, feature_id, task){
     
 }
 
-export function updateFeatureTask(project_id, feature_id, task){
+export function getALlTasks(project_id, feature_id){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks`,{
-        method: 'DELETE',
-        headers: {'Authorization': 'Bearer ' + tokenService.getToken()},
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+    })
+    .then(res => res.json())
+}
+
+export function updateFeatureTask(project_id, feature_id, task_id, task){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(task)
     })
     .then(res => res.json())

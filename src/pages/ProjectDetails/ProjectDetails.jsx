@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
-import { Message, Form, Button, Divider, Segment, TextArea, Grid} from 'semantic-ui-react'
-
+import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment, Item } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
+import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
-
+import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
+//this is working
 
 
 class ProjectDetails extends Component {
@@ -40,12 +40,27 @@ class ProjectDetails extends Component {
     }
 
     handleAddComment = async (project_id, comment) => {
-        console.log(comment)
         await projectApi.addProjectComments(project_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
     }
+
+
+    handleDeleteComment = async (comment_id) => {
+        await projectApi.deleteProjectComments(this.state.project._id, comment_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+    }
+
+    handleUpdateComment = async (comment_id, comment) => {
+        await projectApi.updateProjectComment(this.state.project._id, comment_id, comment)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+    }
+   
 
     handleAddFeature = async (project_id, feature) => {
         await projectApi.addProjectFeature(project_id, feature)
@@ -103,11 +118,15 @@ class ProjectDetails extends Component {
     <>
   
     <h1>Project Details Page</h1>
-    <Segment textAlign='center'>
-            <h1>
-                {this.state.project.name ? this.state.project.name : 'no project'}
-                </h1>
+   
+ 
+    <Segment >
+         
+        <Item.Group>
+            <ProjectNameCard project={this.state.project}/>
+        </Item.Group>
     </Segment>
+
 
     <Message>
         <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
@@ -139,7 +158,7 @@ class ProjectDetails extends Component {
         </Grid>
     </Message>
     
-    <Message textAlign='left' className='AddProject'>
+    <Message textalign='left' className='AddProject'>
         <h1>Add Project Features:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
           <Form.Group>
@@ -168,9 +187,9 @@ class ProjectDetails extends Component {
         </Form>
         <Divider horizontal>Feature List</Divider>
         {features ? 
-        <>
-            <FeatureDetails features ={features}/> 
-        </> 
+        
+            <FeatureDetails features ={features} projectId={this.state.project._id}/> 
+      
         : ''}
         <Grid>
             <Grid.Column textAlign="center">
@@ -188,7 +207,7 @@ class ProjectDetails extends Component {
             </Grid>
         </Message>
 
-        <Message textAlign='left' className='AddProject'>
+        <Message textalign='left' className='AddProject'>
         <h1>Add Contributors:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
@@ -234,33 +253,28 @@ class ProjectDetails extends Component {
     
      
         <Message>
-            <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
-                <Form.Field>
-                    <label>Comments:</label>
-                    <Form.Input
-                        placeholder='Add comments here...'
-                        name='comment'
-                        value={this.state.commentsFormData.comment}
-                        onChange={this.handleChangeComment}
+
+        <Divider horizontal>Comments</Divider>
+            <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
+                {this.state.project.comments? this.state.project.comments.map(comment => 
+                    <CommentCard 
+                        key={comment._id}
+                        comment={comment} 
+                        user={this.props.user}
+                        handleUpdateComment={this.handleUpdateComment}
+                        handleDeleteComment={this.handleDeleteComment}
+                        />
+                ): ''}
+               
+                <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
+                    <Form.TextArea 
+                        name='comment' 
+                        value={this.state.commentsFormData.comment} 
+                        onChange={this.handleChangeComment}    
                     />
-                </Form.Field>
-                <Button type='submit'>Submit</Button>
-                <Divider horizontal>Comments</Divider>
-            </Form>
-            <Grid>
-            <Grid.Column textAlign="center">
-                <Button size='large' basic color='green'>
-                    <Grid.Column textAlign="center">
-                        EDIT
-                    </Grid.Column>
-                </Button>
-                <Button size='large' basic color='red'>
-                    <Grid.Column textAlign="center">
-                        REMOVE ALL
-                    </Grid.Column>
-                </Button>
-            </Grid.Column>
-            </Grid>
+                    <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
+                </Form>
+            </Comment.Group>
         </Message>
         
     </>
