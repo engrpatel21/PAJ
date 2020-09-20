@@ -82,8 +82,8 @@ export function updateFeatureTask(project_id, feature_id, task){
 }
 
 export function deleteFeatureTask(project_id, feature_id, task_id){
-    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
-        method: 'DELETE',
+    return fetch(`${BASE_URL}/${project_id}/feature/${feature_id}/tasks/${task_id}`,{
+        method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
     })
     .then(res => res.json())

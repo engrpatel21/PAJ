@@ -10,7 +10,7 @@ const FeatureDetails = ({features, projectId}) => {
         {features.map((feature, idx) =>
         <List.Item 
         as={Link} 
-        to={{pathname: `/projectboard/${projectId}`, state: {feature, projectId}}} 
+        to={{pathname: '/projectboard', state: {feature, projectId}}} 
         key={feature._id}
         >
         {feature.feature ? feature.feature : `Feature ${idx}`}

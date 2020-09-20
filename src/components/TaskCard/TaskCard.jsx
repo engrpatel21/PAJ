@@ -1,25 +1,28 @@
 import React from 'react';
 import {Card, Button, Icon, Grid} from 'semantic-ui-react'
 
-const TaskCard = ({task, handleDeleteTask, projectId, featureId}) => {
+const TaskCard = () => {
     return ( 
         <>
             <Card.Group centered >
             <Card>
                 <Card.Content>
-                    <Card.Header>{task ? task.name : 'not loading'}
+                    <Card.Header>Placeholder Project
                         <Grid.Column floated='right'>
                             <Icon name='edit' />
                         </Grid.Column>
                     </Card.Header>
                     <Card.Meta>Head of Project Here</Card.Meta>
                     <Card.Description>
-                    {task ? task.content : 'not loading'}
+                    Specific project objectives will go <strong>IN THIS AREA</strong>
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    <Button basic color='red'onClick={()=>handleDeleteTask(projectId, featureId, task._id)} >
+                    <Button basic color='green'>
+                        DETAILS
+                    </Button>
+                    <Button basic color='red'>
                         DELETE
                     </Button>
                     </div>
