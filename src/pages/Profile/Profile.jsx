@@ -48,12 +48,13 @@ class Profile extends Component {
             <MessagesAndFriends />
             <br></br>
             <br></br>
-            <Button loading>
-              <label>Add Project</label>
             <Link to='/createproject'>
-              <Icon name='add'/>
-            </Link>
+            <Button color='blue'>
+              <label>
+              <Icon name='add'/> Add Project
+              </label>
             </Button>
+            </Link>
           </Grid.Column>
           </Grid.Row>
 
