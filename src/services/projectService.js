@@ -62,6 +62,15 @@ export function deleteProjectComments(project_id, comment_id){
     .then(res => res.json())
 }
 
+export function updateProjectComment(project_id, comment_id, comment){
+    return fetch(`${BASE_URL}/${project_id}/comments/${comment_id}`,{
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(comment)
+    }, {mode: "cors"})
+    .then(res => res.json())
+}
+
 export function deleteFeature(project_id, feature_id){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
         method: 'DELETE',

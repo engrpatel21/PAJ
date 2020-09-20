@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment, Item } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
+import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
 //this is working
 
 
@@ -48,6 +49,13 @@ class ProjectDetails extends Component {
 
     handleDeleteComment = async (comment_id) => {
         await projectApi.deleteProjectComments(this.state.project._id, comment_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+    }
+
+    handleUpdateComment = async (comment_id, comment) => {
+        await projectApi.updateProjectComment(this.state.project._id, comment_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
@@ -110,11 +118,15 @@ class ProjectDetails extends Component {
     <>
   
     <h1>Project Details Page</h1>
-    <Segment textAlign='center'>
-            <h1>
-                {this.state.project.name ? this.state.project.name : 'no project'}
-                </h1>
+   
+ 
+    <Segment >
+         
+        <Item.Group>
+            <ProjectNameCard project={this.state.project}/>
+        </Item.Group>
     </Segment>
+
 
     <Message>
         <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
@@ -175,9 +187,9 @@ class ProjectDetails extends Component {
         </Form>
         <Divider horizontal>Feature List</Divider>
         {features ? 
-        <>
+        
             <FeatureDetails features ={features} projectId={this.state.project._id}/> 
-        </> 
+      
         : ''}
         <Grid>
             <Grid.Column textAlign="center">
@@ -249,6 +261,7 @@ class ProjectDetails extends Component {
                         key={comment._id}
                         comment={comment} 
                         user={this.props.user}
+                        handleUpdateComment={this.handleUpdateComment}
                         handleDeleteComment={this.handleDeleteComment}
                         />
                 ): ''}

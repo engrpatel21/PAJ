@@ -14,19 +14,34 @@ class CommentCard extends Component {
         this.setState({isEdit: !this.state.isEdit})
     }
     
+    handleChangeComment = e => {
+        const commentsFormData = {...this.state.commentsFormData, [e.target.name]: e.target.value};
+        this.setState({
+         commentsFormData
+        });
+     }
+    
+    
+    handleSubmitComment = e => {
+        e.preventDefault()
+        this.renderEditComment()
+        this.props.handleUpdateComment(this.props.comment._id, this.state.commentsFormData)
+    }
+
     render() { 
         const {comment, user, handleDeleteComment} = this.props
         return ( 
             <Comment>
         <Comment.Avatar as='a' src='/images/avatar/small/joe.jpg' />
         <Comment.Content>
-        <Comment.Author>{comment.createdBy.name}{user._id === comment.createdBy._id ?  
+        <Comment.Author>{comment.createdBy?  comment.createdBy.name : 'not loaded'}
+        {comment.createdBy? (user._id === comment.createdBy._id ?  
         <Button.Group size='mini' floated='right'> 
             <Button onClick={this.renderEditComment}><Icon name='edit'/>Edit</Button>
             <Button onClick={()=>handleDeleteComment(comment._id)}><Icon name='eraser'/>Delete</Button>
         </Button.Group>
 
-        : '' }</Comment.Author>
+        : '' ) : '' }</Comment.Author>
           <Comment.Metadata>
             <div>Date: {comment.createdAt}</div>
           </Comment.Metadata>
