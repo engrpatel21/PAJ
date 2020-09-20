@@ -50,8 +50,8 @@ class ProjectDetails extends Component {
             () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
-    handleDeleteContributor = async (contributor_id) =>{
-        await projectApi.deleteProjectContributors(this.props.match.params.projectId, contributor_id)
+    handleDeleteContributor = async (contributor_id, user_id) =>{
+        await projectApi.deleteProjectContributors(this.props.match.params.projectId, contributor_id, user_id)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))

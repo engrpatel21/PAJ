@@ -25,7 +25,7 @@ const ContributorsList = ({contributors, handleDeleteContributor}) => {
                  <Table.Row key={idx} >
                  <Table.Cell onClick={()=> handleRedirect(`${contributor._id}`)}key={contributor.contributor._idx} >{contributor.contributor.name}</Table.Cell>
                  <Table.Cell onClick={()=> handleRedirect(`${contributor._id}`)} key={contributor.contributor.email}>{contributor.contributor.email}</Table.Cell>
-                 <Table.Cell key={`delete-${idx}`}><Button onClick={()=>handleDeleteContributor(contributor._id)} content='Remove User' icon='eraser'/></Table.Cell>
+                 <Table.Cell key={`delete-${idx}`}><Button onClick={()=>handleDeleteContributor(contributor._id, contributor.contributor._id)} content='Remove User' icon='eraser'/></Table.Cell>
              </Table.Row>
                 )  : 'run this'}
         </Table.Body>

@@ -6,13 +6,21 @@ module.exports ={
     deleteContributor
 }
 
-function deleteContributor(req, res){
+async function deleteContributor(req, res){
     Project.findById(req.params.projectId)
     .then(project => {
         const idx = project.contributors.findIndex(c => c._id.equals(req.params.contributorId))
         project.contributors.splice(idx,1)
         project.save().then(()=>
-        res.json(project))
+            User.findById(req.params.userId)
+            .then(user =>{
+                const idx = user.projects.findIndex(p=> p._id.equals(project._id))
+                user.projects.splice(idx,1)
+                user.save().then(()=>{
+                    res.json(project)
+                })
+            })
+        )
     })
 }
 
@@ -29,7 +37,6 @@ async function createContributor(req, res){
                 project.contributors.push(req.body)
                 project.save().then(() =>{
                         contributor.projects.push(project._id)
-                        console.log(contributor)
                         contributor.save().then(()=>
                             res.json(project)
                         )
