@@ -6,21 +6,21 @@ import * as userApi from "../../services/userService";
 class FriendsProfile extends Component {
     state = { 
         userInfo: {
-            name: '',
-            bio: '',
-            email: ''
+           
         }
      }
      async componentDidMount(){
-        const users = await userApi.getOneUser()
-        this.setState({users})
+        const userInfo = await userApi.getOneUser(this.props.match.params.userId)
+        this.setState({userInfo})
     }
 
+
     render() { 
+        const {userInfo} = this.state
         return ( 
             <>
             <UsersProfile 
-            usersInfo = {userInfo}
+            usersInfo = {userInfo ? userInfo : 'LOADING'}
 
             />
             </>

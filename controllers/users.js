@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function showOneUser(req, res){
-  User.findbyId(req.params.userId)
+  User.findById(req.params.userId)
   .then(user => 
     res.json(user)
     )
