@@ -26,6 +26,8 @@ class ProjectBoard extends Component {
         })
     }
 
+    
+
     render() { 
         const {featureId, projectId} = this.state
         console.log(featureId, projectId)
@@ -57,7 +59,6 @@ class ProjectBoard extends Component {
                                 renderAddTask={this.renderAddTask}
                                 projectId={projectId} 
                                 featureId={featureId}/>
-                                <Button onClick={this.renderAddTask}>Cancel</Button>
                             </>    
                              
                                 
@@ -72,9 +73,6 @@ class ProjectBoard extends Component {
                     </Grid.Column>
                     <Grid.Column>
                         <h1>Backlog:</h1>
-                        <TaskCard />
-                        <TaskCard/>
-                        <TaskCardEM/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

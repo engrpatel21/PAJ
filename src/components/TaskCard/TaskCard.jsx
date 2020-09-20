@@ -2,7 +2,6 @@ import React from 'react';
 import {Card, Button, Icon, Grid} from 'semantic-ui-react'
 
 const TaskCard = ({task}) => {
-    console.log(task)
     return ( 
         <>
             <Card.Group centered >
@@ -20,9 +19,6 @@ const TaskCard = ({task}) => {
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                    <Button basic color='green'>
-                        DETAILS
-                    </Button>
                     <Button basic color='red'>
                         DELETE
                     </Button>
