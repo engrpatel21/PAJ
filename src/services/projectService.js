@@ -72,9 +72,16 @@ export function addFeatureTask(project_id, feature_id, task){
     
 }
 
+export function getALlTasks(project_id, feature_id){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks`,{
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+    })
+    .then(res => res.json())
+}
+
 export function updateFeatureTask(project_id, feature_id, task){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks`,{
-        method: 'DELETE',
+        method: 'PUT',
         headers: {'Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(task)
     })
@@ -82,8 +89,8 @@ export function updateFeatureTask(project_id, feature_id, task){
 }
 
 export function deleteFeatureTask(project_id, feature_id, task_id){
-    return fetch(`${BASE_URL}/${project_id}/feature/${feature_id}/tasks/${task_id}`,{
-        method: 'PUT',
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
+        method: 'DELETE',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
     })
     .then(res => res.json())

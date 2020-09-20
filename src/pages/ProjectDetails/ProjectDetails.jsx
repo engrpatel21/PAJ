@@ -167,7 +167,7 @@ class ProjectDetails extends Component {
         <Divider horizontal>Feature List</Divider>
         {features ? 
         <>
-            <FeatureDetails features ={features}/> 
+            <FeatureDetails features ={features} projectId={this.state.project._id}/> 
         </> 
         : ''}
         <Grid>
