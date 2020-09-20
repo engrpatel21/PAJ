@@ -31,13 +31,12 @@ class AddFeatureForm extends Component {
               zIndex: 1000,
             }}
           >
-            <Header>This is a controlled portal</Header>
-            <p>Portals have tons of great callback functions to hook into.</p>
-            <p>To close, simply click the close button or click away</p>
+            <Header>Add users who will help you complete this project</Header>
+            <p>Enter the user's email that was used to sign up to PAJ</p>
             <Form ref={this.formRef} onSubmit={this.handleSubmitContributor}>
             <Form.Group>
                 <Form.Input
-                placeholder='enter email address'
+                placeholder='Enter Email Address'
                 name='contributor'
                 value={this.state.contributorFormData.contributor}
                 onChange={this.handleChangeContributor}

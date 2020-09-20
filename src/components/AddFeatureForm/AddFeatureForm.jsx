@@ -31,9 +31,10 @@ class AddFeatureForm extends Component {
               zIndex: 1000,
             }}
           >
-            <Header>This is a controlled portal</Header>
-            <p>Portals have tons of great callback functions to hook into.</p>
-            <p>To close, simply click the close button or click away</p>
+            <Header>Add Project Features</Header>
+            <p>Add Project features and its description here.</p>
+            <p>Click on the feature link to after adding the feature to compose stories for the feature.</p>
+            <p>You can asign your contributors to be in charge of a feature.</p>
             <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
           <Form.Group>
             <Form.Input

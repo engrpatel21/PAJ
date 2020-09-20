@@ -19,14 +19,6 @@ class ProjectDetails extends Component {
             
         },
 
-        featureFormData: {
-            feature: '',
-            description: '',
-        },
-
-        contributorFormData:{
-            contributor:''
-        },
         addFeature: false,
         addContributor: false,
     }
@@ -82,20 +74,8 @@ class ProjectDetails extends Component {
     }
 
     
-    handleChangeContributors = e => {
-        const contributorFormData = {...this.state.contributorFormData, [e.target.name]: e.target.value};
-        this.setState({
-         contributorFormData
-        });
-     }
-    
-     handleChangeFeatures = e => {
-        const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
-        this.setState({
-         featureFormData
-        });
-     }
-
+  
+ 
      handleChangeComment = e => {
         const commentsFormData = {...this.state.commentsFormData, [e.target.name]: e.target.value};
         this.setState({
@@ -103,24 +83,10 @@ class ProjectDetails extends Component {
         });
      }
     
-
-    handleSubmitFeatures = e =>{
-        e.preventDefault();
-        this.handleAddFeature(this.props.match.params.projectId, this.state.featureFormData)
-    
-    }
-
-    handleSubmitContributors = e => {
-        e.preventDefault()
-        this.handelAddContributor(this.props.match.params.projectId, this.state.contributorFormData)
-    }
-
     handleSubmitComment = e => {
         e.preventDefault()
         this.handleAddComment(this.props.match.params.projectId, this.state.commentsFormData)
     }
-
-
 
     formRef = React.createRef()
     
@@ -165,94 +131,62 @@ class ProjectDetails extends Component {
                         handelAddContributor={this.handelAddContributor}
                     />
             </Portal>
-            <h1>Add Contributors:</h1>
-            <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
-            <Form.Group>
-                <Form.Input
-                placeholder='enter email address'
-                name='contributor'
-                value={this.state.contributorFormData.contributor}
-                onChange={this.handleChangeContributors}
-                />
-                </Form.Group>
-                <Form.Group>
-                <Form.Button type='submit' content='Submit' 
-                />
-            </Form.Group>
-            </Form>
-            <Grid>
-                <Grid.Column textAlign="center">
-                    <Button size='large' basic color='green'>
-                        <Grid.Column textAlign="center">
-                            EDIT
-                        </Grid.Column>
-                    </Button>
-                    <Button size='large' basic color='red'>
-                        <Grid.Column textAlign="center">
-                            REMOVE ALL
-                        </Grid.Column>
-                    </Button>
-                </Grid.Column>
-                </Grid>
             </Message>
+            
+            <Message textalign='left' className='AddProject'>
+            <Divider horizontal><h3>Feature List</h3></Divider>
+            {features ? 
+            
+                <FeatureDetails features ={features} projectId={this.state.project._id}/> 
         
-     
-    
-
-        <Message textalign='left' className='AddProject'>
-        <Divider horizontal><h3>Feature List</h3></Divider>
-        {features ? 
-        
-            <FeatureDetails features ={features} projectId={this.state.project._id}/> 
-      
-        : ''}
-                <div>
-                    <Grid>
-                    <Grid.Column textAlign="center">
-                        <Popup content="Click to add a Feature" 
-                        trigger={<Button onClick={this.renderAddFeature} 
-                            size='tiny' 
-                            color='blue' 
-                            icon='plus'
-                            content='Feature'
-                            disabled={this.state.addFeature}
-                            />} 
-                        />    
-                    </Grid.Column>
-                    </Grid>
-                </div>
-                <Portal onClose={this.renderAddFeature} open={this.state.addFeature} >
-                    <AddFeatureForm 
-                        renderAddFeature={this.renderAddFeature}
-                        handleAddFeature={this.handleAddFeature}
-                    />
-                </Portal>
-        </Message>
-
-        <Divider horizontal>Comments</Divider>
-            <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
-                {this.state.project.comments? this.state.project.comments.map(comment => 
-                    <CommentCard 
-                        key={comment._id}
-                        comment={comment} 
-                        user={this.props.user}
-                        handleUpdateComment={this.handleUpdateComment}
-                        handleDeleteComment={this.handleDeleteComment}
+            : ''}
+                    <div>
+                        <Grid>
+                        <Grid.Column textAlign="center">
+                            <Popup content="Click to add a Feature" 
+                            trigger={<Button onClick={this.renderAddFeature} 
+                                size='tiny' 
+                                color='blue' 
+                                icon='plus'
+                                content='Feature'
+                                disabled={this.state.addFeature}
+                                />} 
+                            />    
+                        </Grid.Column>
+                        </Grid>
+                    </div>
+                    <Portal onClose={this.renderAddFeature} open={this.state.addFeature} >
+                        <AddFeatureForm 
+                            renderAddFeature={this.renderAddFeature}
+                            handleAddFeature={this.handleAddFeature}
                         />
-                ): ''}
-               
-                <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
-                    <Form.TextArea 
-                        name='comment' 
-                        value={this.state.commentsFormData.comment} 
-                        onChange={this.handleChangeComment}    
-                    />
-                    <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
-                </Form>
-            </Comment.Group>
-    
+                    </Portal>
+            </Message>
+
+            <Divider horizontal>Comments</Divider>
+                <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
+                    {this.state.project.comments? this.state.project.comments.map(comment => 
+                        <CommentCard 
+                            key={comment._id}
+                            comment={comment} 
+                            user={this.props.user}
+                            handleUpdateComment={this.handleUpdateComment}
+                            handleDeleteComment={this.handleDeleteComment}
+                            />
+                    ): ''}
+                
+                    <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
+                        <Form.TextArea 
+                            name='comment' 
+                            value={this.state.commentsFormData.comment} 
+                            onChange={this.handleChangeComment}    
+                        />
+                        <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
+                    </Form>
+                </Comment.Group>
         
-    </>
+            
+        </>
         );
     }
 }
