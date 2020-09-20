@@ -81,7 +81,12 @@ class ProjectDetails extends Component {
     }
 
     
-  
+    handleDeleteFeature = async (feature_id) =>{
+        await projectApi.deleteProjectFeature(this.props.match.params.projectId, feature_id)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
+    }
  
      handleChangeComment = e => {
         const commentsFormData = {...this.state.commentsFormData, [e.target.name]: e.target.value};
@@ -144,7 +149,7 @@ class ProjectDetails extends Component {
             <Divider horizontal><h3>Feature List</h3></Divider>
             {features ? 
             
-                <FeatureDetails features ={features} projectId={this.state.project._id}/> 
+                <FeatureDetails features ={features} projectId={this.state.project._id} handleDeleteFeature={this.handleDeleteFeature}/> 
         
             : ''}
                     <div>

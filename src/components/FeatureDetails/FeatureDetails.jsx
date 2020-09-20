@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 
 
 
-const FeatureDetails = ({features, projectId}) => {
+const FeatureDetails = ({features, projectId, handleDeleteFeature}) => {
     let history = useHistory()
     const handleRedirect = featureId => {
         history.push(`/projectboard/${projectId}/${featureId}`)
@@ -24,7 +24,7 @@ const FeatureDetails = ({features, projectId}) => {
             <Table.Row key={idx} >
             <Table.Cell onClick={()=> handleRedirect(feature._id)} key={`feature-${idx}`} >{feature.feature}</Table.Cell>
             <Table.Cell onClick={()=> handleRedirect(feature._id)} key={feature._id}>{feature.description}</Table.Cell>
-            <Table.Cell key={`delete-${idx}`}><Button icon='eraser'/></Table.Cell>
+            <Table.Cell onClick={()=> handleDeleteFeature(feature._id)} key={`delete-${idx}`}><Button icon='eraser'/></Table.Cell>
         </Table.Row>
            )  : 'run this'}
    </Table.Body>
