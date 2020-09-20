@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, Grid, Icon } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, Grid } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
