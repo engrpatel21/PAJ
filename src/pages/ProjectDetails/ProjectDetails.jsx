@@ -146,7 +146,7 @@ class ProjectDetails extends Component {
         </Grid>
     </Message>
     
-    <Message textAlign='left' className='AddProject'>
+    <Message textalign='left' className='AddProject'>
         <h1>Add Project Features:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
           <Form.Group>
@@ -195,7 +195,7 @@ class ProjectDetails extends Component {
             </Grid>
         </Message>
 
-        <Message textAlign='left' className='AddProject'>
+        <Message textalign='left' className='AddProject'>
         <h1>Add Contributors:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
@@ -246,6 +246,7 @@ class ProjectDetails extends Component {
             <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
                 {this.state.project.comments? this.state.project.comments.map(comment => 
                     <CommentCard 
+                        key={comment._id}
                         comment={comment} 
                         user={this.props.user}
                         handleDeleteComment={this.handleDeleteComment}
@@ -258,7 +259,7 @@ class ProjectDetails extends Component {
                         value={this.state.commentsFormData.comment} 
                         onChange={this.handleChangeComment}    
                     />
-                    <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+                    <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
                 </Form>
             </Comment.Group>
         </Message>

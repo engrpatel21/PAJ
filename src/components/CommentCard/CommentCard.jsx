@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Comment, Icon} from 'semantic-ui-react'
+import { Button, Comment, Form, Icon} from 'semantic-ui-react'
 
 
 class CommentCard extends Component {
     state = { 
-        isEdit: false
+        isEdit: false,
+        commentsFormData: {
+            comment: this.props.comment.comment
+        }
      }
     
-    renderEditComment =() => {
+     renderEditComment = () => {
         this.setState({isEdit: !this.state.isEdit})
     }
     
@@ -19,8 +22,8 @@ class CommentCard extends Component {
         <Comment.Content>
         <Comment.Author>{comment.createdBy.name}{user._id === comment.createdBy._id ?  
         <Button.Group size='mini' floated='right'> 
-            <Button icon='edit'/>
-            <Button onClick={()=>handleDeleteComment(comment._id)} icon='delete'/>
+            <Button onClick={this.renderEditComment}><Icon name='edit'/>Edit</Button>
+            <Button onClick={()=>handleDeleteComment(comment._id)}><Icon name='eraser'/>Delete</Button>
         </Button.Group>
 
         : '' }</Comment.Author>
@@ -28,9 +31,21 @@ class CommentCard extends Component {
             <div>Date: {comment.createdAt}</div>
           </Comment.Metadata>
           <Comment.Text>
-            <p>
-                {comment.comment}
-            </p>
+            {!this.state.isEdit ? 
+                <p>
+                    {comment.comment}
+                </p>
+            :
+            <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
+            <Form.TextArea 
+                name='comment' 
+                value={this.state.commentsFormData.comment} 
+                onChange={this.handleChangeComment}    
+            />
+            <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
+            </Form>
+            }
+          
           </Comment.Text>
           <Comment.Actions>
             <Comment.Action>Reply</Comment.Action>
