@@ -5,7 +5,8 @@ const taskSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User'},
     name: String,
     content: String,
-    taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog']}
+    taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog']},
+    isEdit: {type: Boolean, default: false}
 })
 
 const featureSchema = new Schema({

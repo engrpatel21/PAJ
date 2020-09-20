@@ -107,6 +107,18 @@ class ProjectDetails extends Component {
                 </h1>
     </Segment>
 
+    
+    <Segment>
+        <h2>Feature List:</h2>
+        {features ? 
+        <>
+            <FeatureDetails features ={features} projectId={this.state.project._id}/> 
+        </> 
+        : ''}
+
+    </Segment>
+
+
     <Message>
         <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
             <Form.Field>
