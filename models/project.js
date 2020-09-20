@@ -7,19 +7,19 @@ const taskSchema = new Schema({
     content: String,
     taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog']},
     isEdit: {type: Boolean, default: false}
-})
+},{timestamps: true})
 
 const featureSchema = new Schema({
     feature: String,
     description: String,
     featureStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
     tasks: [taskSchema]
-})
+},{timestamps: true})
 
 const commentSchema = new Schema({
     comment: String,
     createdBy: {type: Schema.Types.ObjectId, ref: 'User'}
-})
+},{timestamps: true})
 
 const projectSchema = new Schema({
     name: String,
@@ -31,7 +31,7 @@ const projectSchema = new Schema({
     comments: [commentSchema],
     isEdit: {type: Boolean, default: false}
 
-})
+},{timestamps: true})
 
 
 module.exports = mongoose.model('Project', projectSchema)

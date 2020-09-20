@@ -6,11 +6,12 @@ import {Link} from 'react-router-dom'
 
 const FeatureDetails = ({features, projectId}) => {
     return ( 
+       
     <List>
         {features.map((feature, idx) =>
         <List.Item 
         as={Link} 
-        to={{pathname: '/projectboard', state: {feature, projectId}}} 
+        to={{pathname: `/projectboard/${projectId}/${feature._id}`}} 
         key={feature._id}
         >
         {feature.feature ? feature.feature : `Feature ${idx}`}

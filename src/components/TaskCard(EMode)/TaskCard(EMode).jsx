@@ -4,18 +4,20 @@ import {Card, Button, Input, TextArea,Form} from 'semantic-ui-react'
 
 class TaskCardEm extends Component {
     state = { 
-        taskFormData:{
-            name:'',
-            content:''
-        }
+        taskFormData: this.props.task ? this.props.task : {name: '', content: ''}
     }
     
-    handleSubmit = e =>{
+    handleSubmitAddTask = e =>{
         e.preventDefault();
         this.props.renderAddTask()
         this.props.handleAddTask(this.props.projectId, this.props.featureId, this.state.taskFormData)
     }
 
+    handleSubmitUpdateTask = e => {
+        e.preventDefault();
+        this.props.renderEditTask()
+        this.props.handleUpdateTask(this.props.projectId, this.props.featureId, this.props.task._id, this.state.taskFormData)
+    }
     handleChange = e => {
        const taskFormData = {...this.state.taskFormData, [e.target.name]: e.target.value};
        this.setState({
@@ -27,7 +29,7 @@ class TaskCardEm extends Component {
     render() { 
         return ( 
             <>
-            <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+            <Form ref={this.formRef} onSubmit={!this.props.isEdit ? this.handleSubmitAddTask : this.handleSubmitUpdateTask}>
                 <Card.Group centered>
                 <Card>
                     <Card.Content>
@@ -58,7 +60,7 @@ class TaskCardEm extends Component {
                         <Button basic color='blue'>
                             CONFIRM
                         </Button>
-                        <Button basic color='grey'>
+                        <Button onClick={!this.props.isEdit ? this.props.renderAddTask : this.props.renderEditTask} basic color='grey'>
                             CANCEL
                         </Button>
                         </div>

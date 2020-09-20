@@ -11,15 +11,6 @@ import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndF
 class Profile extends Component {
   state = {
     userProjects: [],
-    user: {
-      name: '',
-      email: '',
-      avatar: '',
-      friends: '',
-      messages: [],
-      bio: '',
-    }
-
   };
 
   async componentDidMount(){
@@ -36,7 +27,7 @@ class Profile extends Component {
 
 
   render() {
-    const {user} = this.state
+    const {user} = this.props
     return (
       <>
         <h1>Profile Page</h1>
