@@ -57,7 +57,7 @@ function createTask(req, res){
         const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
         project.features[idx].tasks.push(req.body)
         project.save().then(project =>
-            res.json(project.features[idx].tasks)
+            res.json(project.features[idx].tasks[project.features[idx].tasks.length-1])
             )
     })
 }

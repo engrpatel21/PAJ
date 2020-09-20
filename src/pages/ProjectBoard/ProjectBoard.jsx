@@ -22,7 +22,7 @@ class ProjectBoard extends Component {
     handleAddTask = async (project_id, feature_id, taskData) => {
         const newTask = await projectApi.addFeatureTask(project_id, feature_id, taskData)
         this.setState({
-            tasks: [...this.state.tasks, newTask]
+            tasks: [...this.state.tasks,newTask]
         })
     }
 
