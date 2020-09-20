@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
 
-import { Grid, Divider,  Button, Icon, Popup } from 'semantic-ui-react'
+import { Grid, Divider,  Button, Popup } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 import * as projectApi from '../../services/projectService'
 
