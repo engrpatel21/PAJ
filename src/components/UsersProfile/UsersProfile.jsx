@@ -1,13 +1,14 @@
 import React from 'react'
 import { Grid, Image, Button, Icon, Divider, Card, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import user from '../../../models/user'
+import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
 
-const UsersProfile = ({userInfo}) => {
-    const {userInfo} = this.state
+
+const UsersProfile = (props) => {
+    const {usersInfo} = props
     return ( 
-        <>
+    <>
         <h1>Profile Page</h1>
         <Divider>
         </Divider>
@@ -29,14 +30,14 @@ const UsersProfile = ({userInfo}) => {
           <Grid.Row>
             <Grid.Column width={5}>
             <Card>
-              <Image src={userInfo.avatar} wrapped ui={false} />
+              <Image src={usersInfo.avatar} wrapped ui={false} />
               <Card.Content>
-                <Card.Header>{userInfo.name}</Card.Header>
+                <Card.Header>{usersInfo.name}</Card.Header>
                 <Card.Meta>
-                  <span className='date'>{userInfo.bio}</span>
+                  <span className='date'>{usersInfo.bio}</span>
                 </Card.Meta>
                 <Card.Description>
-                  {userInfo.bio}
+                  {usersInfo.bio}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
@@ -48,7 +49,7 @@ const UsersProfile = ({userInfo}) => {
             </Card>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
+        </Grid> 
         </>
      );
 }
