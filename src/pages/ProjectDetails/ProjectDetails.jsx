@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, TextArea, Grid} from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
@@ -106,6 +106,7 @@ class ProjectDetails extends Component {
                 {this.state.project.name ? this.state.project.name : 'no project'}
                 </h1>
     </Segment>
+
     
     <Segment>
         <h2>Feature List:</h2>
@@ -117,8 +118,39 @@ class ProjectDetails extends Component {
 
     </Segment>
 
-    <Segment  textAlign='left' className='AddProject'>
-            <h1>Add Features:</h1>
+
+    <Message>
+        <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
+            <Form.Field>
+                <label>Project Description:</label>
+                <Form.Input
+                    placeholder='Add project description here...'
+                    name='comment'
+                    value={this.state.commentsFormData.comment}
+                    onChange={this.handleChangeComment}
+                />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Divider horizontal>Project Description</Divider>
+        </Form>
+        <Grid>
+        <Grid.Column textAlign="center">
+            <Button size='large' basic color='green'>
+                <Grid.Column textAlign="center">
+                    EDIT
+                </Grid.Column>
+            </Button>
+            <Button size='large' basic color='red'>
+                <Grid.Column textAlign="center">
+                    REMOVE ALL
+                </Grid.Column>
+            </Button>
+        </Grid.Column>
+        </Grid>
+    </Message>
+    
+    <Message textAlign='left' className='AddProject'>
+        <h1>Add Project Features:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
           <Form.Group>
             <Form.Input
@@ -144,25 +176,30 @@ class ProjectDetails extends Component {
             />
           </Form.Group>
         </Form>
-      </Segment>
-      <Segment>   
-          <h2> Contributors:</h2>
-     
-        {this.state.project.contributors ? 
-            <>
-                {this.state.project.contributors.map(contributor =>
-                    <ContributorsList key={contributor._id} contributor={contributor}/>
-                    )}
-            </>
-            :
-            <>
-                <div>Not loaded</div>
-            </>
-        }
+        <Divider horizontal>Feature List</Divider>
+        {features ? 
+        <>
+            <FeatureDetails features ={features}/> 
+        </> 
+        : ''}
+        <Grid>
+            <Grid.Column textAlign="center">
+                <Button size='large' basic color='green'>
+                    <Grid.Column textAlign="center">
+                        EDIT
+                    </Grid.Column>
+                </Button>
+                <Button size='large' basic color='red'>
+                    <Grid.Column textAlign="center">
+                        REMOVE ALL
+                    </Grid.Column>
+                </Button>
+            </Grid.Column>
+            </Grid>
+        </Message>
 
-      </Segment>
-      <Segment  textAlign='left' className='AddProject'>
-            <h1>Add Contributors:</h1>
+        <Message textAlign='left' className='AddProject'>
+        <h1>Add Contributors:</h1>
         <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
           <Form.Group>
             <Form.Input
@@ -177,22 +214,65 @@ class ProjectDetails extends Component {
             />
           </Form.Group>
         </Form>
-      </Segment>
-    <Message>
-        <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
-            <Form.Field>
-                <label>Comments:</label>
-                <Form.Input
-                    placeholder='Add comments here...'
-                    name='comment'
-                    value={this.state.commentsFormData.comment}
-                    onChange={this.handleChangeComment}
-                />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-            <Divider horizontal>Comments</Divider>
-        </Form>
-    </Message>
+        <Divider horizontal>Contributors</Divider>
+        {this.state.project.contributors ? 
+            <>
+                {this.state.project.contributors.map(contributor =>
+                    <ContributorsList key={contributor._id} contributor={contributor}/>
+                    )}
+            </>
+            :
+            <>
+                <div>Not loaded</div>
+            </>
+        }
+        <Grid>
+            <Grid.Column textAlign="center">
+                <Button size='large' basic color='green'>
+                    <Grid.Column textAlign="center">
+                        EDIT
+                    </Grid.Column>
+                </Button>
+                <Button size='large' basic color='red'>
+                    <Grid.Column textAlign="center">
+                        REMOVE ALL
+                    </Grid.Column>
+                </Button>
+            </Grid.Column>
+            </Grid>
+        </Message>
+    
+     
+        <Message>
+            <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
+                <Form.Field>
+                    <label>Comments:</label>
+                    <Form.Input
+                        placeholder='Add comments here...'
+                        name='comment'
+                        value={this.state.commentsFormData.comment}
+                        onChange={this.handleChangeComment}
+                    />
+                </Form.Field>
+                <Button type='submit'>Submit</Button>
+                <Divider horizontal>Comments</Divider>
+            </Form>
+            <Grid>
+            <Grid.Column textAlign="center">
+                <Button size='large' basic color='green'>
+                    <Grid.Column textAlign="center">
+                        EDIT
+                    </Grid.Column>
+                </Button>
+                <Button size='large' basic color='red'>
+                    <Grid.Column textAlign="center">
+                        REMOVE ALL
+                    </Grid.Column>
+                </Button>
+            </Grid.Column>
+            </Grid>
+        </Message>
+        
     </>
         );
     }
