@@ -41,10 +41,10 @@ const UsersProfile = (props) => {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-             
+                <a>
                   <Icon name='userInfo' />
                   22 Friends
-             
+                </a>
               </Card.Content>
             </Card>
             </Grid.Column>

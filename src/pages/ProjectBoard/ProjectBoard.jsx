@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
-import { Grid, Divider, Button } from 'semantic-ui-react'
+
+import { Grid, Divider, Icon, Button } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 import * as projectApi from '../../services/projectService'
 
@@ -25,16 +27,9 @@ class ProjectBoard extends Component {
         })
     }
 
-    handleDeleteTask = async (project_id, feature_id, task_id) =>{
-        await projectApi.deleteFeatureTask(project_id, feature_id, task_id)
-        this.setState({
-            tasks: this.state.tasks.filter(t => t._id !== task_id)
-        },() => this.props.history.push(`/projectboard/${this.state.projectId}`))
-    }
-    
-
     render() { 
         const {featureId, projectId} = this.state
+        console.log(featureId, projectId)
         return ( 
             <>
             <h1>Project Board Page</h1>
@@ -44,17 +39,13 @@ class ProjectBoard extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <h1>To-Do:</h1>
-                            {this.state.tasks.map( (task, idx) => 
-                                <div key={idx}>
-                                    <TaskCard  
-                                    task={task ? task : 'no task'} 
-                                    handleDeleteTask={this.handleDeleteTask}
-                                    projectId={projectId}
-                                    featureId={featureId} 
-                                />
-                                </div>
-                               
-                            )
+                            {this.state.tasks ? this.state.tasks.map( task => 
+                                <>
+                                <TaskCard task={task}/>
+                                </>
+                                
+                            ):
+                            ''
                             }
                             {this.state.addTask ?  
                             <>
@@ -67,8 +58,14 @@ class ProjectBoard extends Component {
                                 renderAddTask={this.renderAddTask}
                                 projectId={projectId} 
                                 featureId={featureId}/>
-                            </>       
+                                <Button onClick={this.renderAddTask}>Cancel</Button>
+                            </>    
+                             
+                                
                             }
+                                
+                       
+                            
                             </Grid.Column>
                             <Grid.Column>
                         <h1>Completed:</h1>
@@ -76,6 +73,9 @@ class ProjectBoard extends Component {
                     </Grid.Column>
                     <Grid.Column>
                         <h1>Backlog:</h1>
+                        <TaskCard />
+                        <TaskCard/>
+                        <TaskCardEM/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

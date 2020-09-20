@@ -58,7 +58,7 @@ class TaskCardEm extends Component {
                         <Button basic color='blue'>
                             CONFIRM
                         </Button>
-                        <Button basic onClick={this.props.renderAddTask} color='grey'>
+                        <Button basic color='grey'>
                             CANCEL
                         </Button>
                         </div>
