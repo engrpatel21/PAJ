@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Input, Grid } from 'semantic-ui-react'
 import './UserList.css'
 
 class UserList extends Component {
@@ -21,6 +21,20 @@ class UserList extends Component {
                 <h1>User List Page</h1>
                 <Divider>
                 </Divider>
+                <Grid>
+                <Grid.Column textAlign="center">
+                    <Input 
+                        huge icon='search' 
+                        focus 
+                        placeholder='Search for Users...' 
+                        type='text' 
+                        value ={this.state.user}
+                        onChange={this.state.user}
+                    />
+                </Grid.Column>
+                </Grid>
+                    <br></br>
+                    <br></br>
                     <div className="UserList-grid">
                     {users.map(user => 
                         <UserCard  key={user._id} user={user}/>
