@@ -4,19 +4,20 @@ import {Link} from 'react-router-dom'
 
 
 
-const ContributorsList = ({contributor}) => {
+const ContributorsList = ({contributors}) => {
     return ( 
     <List>
+        {contributors ? contributors.map(contributor =>
+         <List.Item 
+         as={Link} 
+         to={{pathname: `/profile/${contributor._id}`}} 
+         key={contributor._id}
+         >
+         {contributor.name ? contributor.name : `notloading`}
+         </List.Item>
        
-        <List.Item 
-        as={Link} 
-        to={{pathname: `/profile/${contributor._id}`}} 
-        key={contributor._id}
-        >
-        {contributor.name ? contributor.name : `notloading`}
-        </List.Item>
-       
-        </List>
+        ): 'not loading'}
+       </List>
      );
 }
  

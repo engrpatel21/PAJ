@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, TextArea, Grid, Comment, Item, Container } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, Grid, Comment, Item, Container,Popup, Portal } from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
 import ContributorsList from '../../components/ContributorsList/ContributorsList'
 import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
-
+import AddFeatureForm from '../../components/AddFeatureForm/AddFeatureForm'
+import AddContributorForm from '../../components/AddContributorForm/AddContributorForm'
 //this is working
 
 
@@ -25,7 +26,9 @@ class ProjectDetails extends Component {
 
         contributorFormData:{
             contributor:''
-        }
+        },
+        addFeature: false,
+        addContributor: false,
     }
 
     async componentDidMount(){
@@ -33,41 +36,49 @@ class ProjectDetails extends Component {
         this.setState({project})
     }
 
-    handelAddContributor = async (project_id, contributor) => {
-        await projectApi.addProjectContributors(project_id, contributor)
+    renderAddFeature = () => {
+        this.setState({addFeature: !this.state.addFeature})
+    }
+
+    renderAddContributor = () => {
+        this.setState({addContributor: !this.state.addContributor})
+    }
+
+    handelAddContributor = async ( contributor) => {
+        await projectApi.addProjectContributors(this.props.match.params.projectId, contributor)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            ()=> this.props.history.push(`/projectdetails/${this.state.project._id}`))
+            ()=> this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
     handleAddComment = async (project_id, comment) => {
         await projectApi.addProjectComments(project_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
 
     handleDeleteComment = async (comment_id) => {
-        await projectApi.deleteProjectComments(this.state.project._id, comment_id)
+        await projectApi.deleteProjectComments(this.props.match.params.projectId, comment_id)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
     handleUpdateComment = async (comment_id, comment) => {
-        await projectApi.updateProjectComment(this.state.project._id, comment_id, comment)
+        await projectApi.updateProjectComment(this.props.match.params.projectId, comment_id, comment)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
    
 
-    handleAddFeature = async (project_id, feature) => {
-        await projectApi.addProjectFeature(project_id, feature)
+    handleAddFeature = async (feature) => {
+        await projectApi.addProjectFeature(this.props.match.params.projectId, feature)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
-            () => this.props.history.push(`/projectdetails/${this.state.project._id}`))
+            () => this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
     
@@ -116,152 +127,107 @@ class ProjectDetails extends Component {
     render() { 
         const {features} = this.state.project ? this.state.project : ['not loading']
         return ( 
-    <>
-  
-    <h1>Project Details Page</h1>
-   
- 
-    <Segment style={{height: 'auto'}} >
-        <Grid>
-            <Grid.Column>
-         <Container>
-            <Item.Group>
-            
-            <ProjectNameCard project={this.state.project}/> 
-          
-        
-        </Item.Group>
-        </Container>
-        </Grid.Column>
-        </Grid>
-    </Segment>
-
-
-    <Message>
-        <Form ref={this.formRef} onSubmit={this.handleSubmitComment}>
-            <Form.Field>
-                <label>Project Description:</label>
-                <Form.Input
-                    placeholder='Add project description here...'
-                    name='comment'
-                    value={this.state.commentsFormData.comment}
-                    onChange={this.handleChangeComment}
-                />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-            <Divider horizontal>Project Description</Divider>
-        </Form>
-        <Grid>
-        <Grid.Column textAlign="center">
-            <Button size='large' basic color='green'>
-                <Grid.Column textAlign="center">
-                    EDIT
+            <> 
+            <Segment style={{height: 'auto'}} >
+            <Divider horizontal><h1>Project</h1></Divider>
+                <Grid>
+                    <Grid.Column>
+                <Container>
+                    <Item.Group>
+                    <ProjectNameCard project={this.state.project}/> 
+                </Item.Group>
+                </Container>
                 </Grid.Column>
-            </Button>
-            <Button size='large' basic color='red'>
-                <Grid.Column textAlign="center">
-                    REMOVE ALL
-                </Grid.Column>
-            </Button>
-        </Grid.Column>
-        </Grid>
-    </Message>
-    
-    <Message textalign='left' className='AddProject'>
-        <h1>Add Project Features:</h1>
-        <Form ref={this.formRef} onSubmit={this.handleSubmitFeatures}>
-          <Form.Group>
-            <Form.Input
-              placeholder='Feature Name'
-              name='feature'
-              value={this.state.featureFormData.feature}
-              onChange={this.handleChangeFeatures}
-            />
-            </Form.Group>
-            <Form.Group> 
-            <Form.Input
-              id='form-textarea-control-opinion'
-              placeholder='Add a description'
-              control={TextArea}
-              label='Description'
-              name='description'
-              value={this.state.featureFormData.description}
-              onChange={this.handleChangeFeatures}
-            />
-            </Form.Group>
+                </Grid>
+            </Segment>
+
+            <Message textalign='left' className='AddProject'>
+            <Divider horizontal><h3>Contributors</h3></Divider>
+            <ContributorsList contributors={this.state.project.contributors} />
+            <div>
+                <Grid>
+                    <Grid.Column textAlign="center">
+                        <Popup content="Click to add a Contributors" 
+                        trigger={<Button onClick={this.renderAddContributor} 
+                            size='tiny' 
+                            color='blue' 
+                            icon='plus'
+                            content='Contributor'
+                            disabled={this.state.addContributor}
+                            />} 
+                        />    
+                    </Grid.Column>
+                </Grid>
+            </div>
+            <Portal onClose={this.renderAddContributor} open={this.state.addContributor} >
+                    <AddContributorForm 
+                        renderAddContributor={this.renderAddContributor}
+                        handelAddContributor={this.handelAddContributor}
+                    />
+            </Portal>
+            <h1>Add Contributors:</h1>
+            <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
             <Form.Group>
-            <Form.Button type='submit' content='Submit' 
-            />
-          </Form.Group>
-        </Form>
-        <Divider horizontal>Feature List</Divider>
+                <Form.Input
+                placeholder='enter email address'
+                name='contributor'
+                value={this.state.contributorFormData.contributor}
+                onChange={this.handleChangeContributors}
+                />
+                </Form.Group>
+                <Form.Group>
+                <Form.Button type='submit' content='Submit' 
+                />
+            </Form.Group>
+            </Form>
+            <Grid>
+                <Grid.Column textAlign="center">
+                    <Button size='large' basic color='green'>
+                        <Grid.Column textAlign="center">
+                            EDIT
+                        </Grid.Column>
+                    </Button>
+                    <Button size='large' basic color='red'>
+                        <Grid.Column textAlign="center">
+                            REMOVE ALL
+                        </Grid.Column>
+                    </Button>
+                </Grid.Column>
+                </Grid>
+            </Message>
+        
+     
+    
+
+        <Message textalign='left' className='AddProject'>
+        <Divider horizontal><h3>Feature List</h3></Divider>
         {features ? 
         
             <FeatureDetails features ={features} projectId={this.state.project._id}/> 
       
         : ''}
-        <Grid>
-            <Grid.Column textAlign="center">
-                <Button size='large' basic color='green'>
+                <div>
+                    <Grid>
                     <Grid.Column textAlign="center">
-                        EDIT
+                        <Popup content="Click to add a Feature" 
+                        trigger={<Button onClick={this.renderAddFeature} 
+                            size='tiny' 
+                            color='blue' 
+                            icon='plus'
+                            content='Feature'
+                            disabled={this.state.addFeature}
+                            />} 
+                        />    
                     </Grid.Column>
-                </Button>
-                <Button size='large' basic color='red'>
-                    <Grid.Column textAlign="center">
-                        REMOVE ALL
-                    </Grid.Column>
-                </Button>
-            </Grid.Column>
-            </Grid>
+                    </Grid>
+                </div>
+                <Portal onClose={this.renderAddFeature} open={this.state.addFeature} >
+                    <AddFeatureForm 
+                        renderAddFeature={this.renderAddFeature}
+                        handleAddFeature={this.handleAddFeature}
+                    />
+                </Portal>
         </Message>
-
-        <Message textalign='left' className='AddProject'>
-        <h1>Add Contributors:</h1>
-        <Form ref={this.formRef} onSubmit={this.handleSubmitContributors}>
-          <Form.Group>
-            <Form.Input
-              placeholder='enter email address'
-              name='contributor'
-              value={this.state.contributorFormData.contributor}
-              onChange={this.handleChangeContributors}
-            />
-            </Form.Group>
-            <Form.Group>
-            <Form.Button type='submit' content='Submit' 
-            />
-          </Form.Group>
-        </Form>
-        <Divider horizontal>Contributors</Divider>
-        {this.state.project.contributors ? 
-            <>
-                {this.state.project.contributors.map(contributor =>
-                    <ContributorsList key={contributor._id} contributor={contributor}/>
-                    )}
-            </>
-            :
-            <>
-                <div>Not loaded</div>
-            </>
-        }
-        <Grid>
-            <Grid.Column textAlign="center">
-                <Button size='large' basic color='green'>
-                    <Grid.Column textAlign="center">
-                        EDIT
-                    </Grid.Column>
-                </Button>
-                <Button size='large' basic color='red'>
-                    <Grid.Column textAlign="center">
-                        REMOVE ALL
-                    </Grid.Column>
-                </Button>
-            </Grid.Column>
-            </Grid>
-        </Message>
-    
-     
-        <Message>
 
         <Divider horizontal>Comments</Divider>
             <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
@@ -284,7 +250,7 @@ class ProjectDetails extends Component {
                     <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
                 </Form>
             </Comment.Group>
-        </Message>
+    
         
     </>
         );

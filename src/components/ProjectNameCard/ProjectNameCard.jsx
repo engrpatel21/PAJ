@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Item, Con, Container} from 'semantic-ui-react'
+import {Item} from 'semantic-ui-react'
 
 class ProjectNameCard extends Component {
     state = {  }
@@ -10,7 +10,7 @@ class ProjectNameCard extends Component {
             <Item.Image size='tiny' src='https://picsum.photos/200/300' />
       
             <Item.Content>
-              <Item.Header style={{fontSize: '3rem', height: '4rem', margin: '0 0'}}>
+              <Item.Header style={{fontSize: '2.4rem', height: '4rem', margin: '0 0'}}>
            
                   {project.name}
           

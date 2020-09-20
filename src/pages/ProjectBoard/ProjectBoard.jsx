@@ -77,9 +77,12 @@ class ProjectBoard extends Component {
                                  <div>
                                     <Grid>
                                     <Grid.Column textAlign="center">
-                                        <Popup content="Click to add a Task" trigger={<Button onClick={this.renderAddTask} size='tiny' color='blue' icon="plus"/>} />
-                                  
-                                          
+                                        <Popup content="Click to add a Task" trigger={<Button 
+                                        onClick={this.renderAddTask} 
+                                        size='tiny'
+                                        content='Add Task' 
+                                        color='blue' 
+                                        icon="plus"/>} />
                                     </Grid.Column>
                                     </Grid>
                                 </div>
