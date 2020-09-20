@@ -27,7 +27,6 @@ class TaskCardEm extends Component {
     
     formRef = React.createRef()
     render() { 
-        console.log(this.props.projectId)
         return ( 
             <>
             <Form ref={this.formRef} onSubmit={!this.props.isEdit ? this.handleSubmitAddTask : this.handleSubmitUpdateTask}>

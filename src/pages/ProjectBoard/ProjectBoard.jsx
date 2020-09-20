@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TaskCard from '../../components/TaskCard/TaskCard'
 import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
 
-import { Grid, Divider,  Button } from 'semantic-ui-react'
+import { Grid, Divider,  Button, Icon } from 'semantic-ui-react'
 import "./ProjectBoard.css";
 import * as projectApi from '../../services/projectService'
 
@@ -47,7 +47,7 @@ class ProjectBoard extends Component {
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
     }
 
-    
+
     render() { 
         const {featureId, projectId} = this.state
         return ( 
@@ -74,7 +74,17 @@ class ProjectBoard extends Component {
                             }
                             {this.state.addTask ?  
                             <>
-                                <Button onClick={this.renderAddTask}>Add</Button>  
+                                 <div>
+                                    <Grid>
+                                    <Grid.Column textAlign="center">
+                                        <Button onClick={this.renderAddTask} size='massive' color='blue'>
+                                            <Grid.Column textAlign="center">
+                                                <Icon name='plus'/>
+                                            </Grid.Column>
+                                        </Button>
+                                    </Grid.Column>
+                                    </Grid>
+                                </div>
                             </>
                             : 
                             <>  
@@ -83,7 +93,7 @@ class ProjectBoard extends Component {
                                 renderAddTask={this.renderAddTask}
                                 projectId={projectId} 
                                 featureId={featureId}/>
-                                <Button onClick={this.renderAddTask}>Cancel</Button>
+                            
                             </>    
                             }
                             </Grid.Column>

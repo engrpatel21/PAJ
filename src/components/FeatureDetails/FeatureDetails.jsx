@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 
 const FeatureDetails = ({features, projectId}) => {
-    console.log('infeatures', projectId)
     return ( 
        
     <List>
