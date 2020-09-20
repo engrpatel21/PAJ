@@ -96,11 +96,10 @@ class App extends Component {
         )}/>
         {/* Route to Project Board Page */}
         <Route 
-          exact path='/projectboard/:projectId'
-          render={( {location, history} ) => (
+          exact path='/projectboard'
+          render={( {location} ) => (
           user ? <ProjectBoard
           location={location}
-          history={history}
         />
         : 
         <Redirect to="/login" />
