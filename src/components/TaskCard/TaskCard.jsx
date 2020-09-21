@@ -47,14 +47,13 @@ class TaskCard extends Component {
                     
                          </div>
                          <div style={{padding:'0 4rem', marginTop:'.5rem'}} className='ui two buttons'>
-                         {task.taskStatus === 'Backlog' ? 'backlog' : 'notloaded'}
                          <Popup content="Move To In Progress"
                          trigger={
                             <Button 
                             icon='pencil alternate'
                             basic color='green'
                             content='Change Status'
-                            onClick={()=> handleUpdateTask(projectId, featureId, {taskStatus: 'In Progress'})}
+                            onClick={()=> handleUpdateTask(projectId, featureId, task._id, {taskStatus:'Backlog'})}
                             />
                             
   
