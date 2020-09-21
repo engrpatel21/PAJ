@@ -1,23 +1,39 @@
 import React from 'react'
-import { List} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import { Button, Table} from 'semantic-ui-react'
+import {useHistory} from 'react-router-dom'
 
 
 
-const ContributorsList = ({contributor}) => {
+const ContributorsList = ({contributors, handleDeleteContributor}) => {
+    let history = useHistory()
+    const handleRedirect = userId => {
+        history.push(`/profile/${userId}`)
+    } 
+
     return ( 
-    <List>
+
+        <Table striped selectable collapsing>
+             <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>User</Table.HeaderCell>
+                    <Table.HeaderCell>Email</Table.HeaderCell>
+                    <Table.HeaderCell>Remove</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+        <Table.Body>
+            {contributors? contributors.map((contributor,idx) =>
+                 <Table.Row key={idx} >
+                 <Table.Cell onClick={()=> handleRedirect(`${contributor.contributor._id}`)}key={contributor.contributor._idx} >{contributor.contributor.name}</Table.Cell>
+                 <Table.Cell onClick={()=> handleRedirect(`${contributor.contributor_id}`)} key={contributor.contributor.email}>{contributor.contributor.email}</Table.Cell>
+                 <Table.Cell key={`delete-${idx}`}><Button onClick={()=>handleDeleteContributor(contributor._id, contributor.contributor._id)}  icon='eraser'/></Table.Cell>
+             </Table.Row>
+                )  : <Table.Row></Table.Row>}
+        </Table.Body>
+        </Table>
        
-        <List.Item 
-        as={Link} 
-        to={{pathname: `/profile/${contributor._id}`}} 
-        key={contributor._id}
-        >
-        {contributor.name ? contributor.name : `notloading`}
-        </List.Item>
-       
-        </List>
      );
 }
  
 export default ContributorsList;
+
+

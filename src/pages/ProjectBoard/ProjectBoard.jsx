@@ -38,15 +38,26 @@ class ProjectBoard extends Component {
         this.setState({
             tasks: this.state.tasks.filter(t => t._id !== task_id)
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
+        console.log(this.state.tasks)
     }
 
     handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{
         const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
+        console.log(task)
         this.setState({
-            task: this.state.tasks.map(t => t.id === task._id ? task._id : t)
+            tasks: this.state.tasks.map(t => t._id === task._id ? task : t)
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
+        console.log(this.state.tasks)
     }
 
+    handleUpdateTaskStatus = async (project_id, feature_id, task_id, taskData) =>{
+        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
+        console.log(task)
+        this.setState({
+            taskStatus: task.taskStatus
+        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
+        console.log(this.state.tasks)
+    } 
 
     render() { 
         const {featureId, projectId} = this.state
@@ -58,7 +69,7 @@ class ProjectBoard extends Component {
             <Grid columns={3} divided>
                 <Grid.Row>
                     <Grid.Column>
-                        <h1>To-Do:</h1>
+                        <h1>Backlog:</h1>
                             {this.state.tasks ? this.state.tasks.map( task => 
                                 <TaskCard 
                                     key={task._id}
@@ -68,6 +79,7 @@ class ProjectBoard extends Component {
                                     handleDeleteTask={this.handleDeleteTask}
                                     handleUpdateTask={this.handleUpdateTask} 
                                     renderAddTask={this.renderAddTask}
+                                    handleUpdateTaskStatus={this.handleUpdateTaskStatus}
                                 />
                             ):
                             ''
@@ -77,9 +89,12 @@ class ProjectBoard extends Component {
                                  <div>
                                     <Grid>
                                     <Grid.Column textAlign="center">
-                                        <Popup content="Click to add a Task" trigger={<Button onClick={this.renderAddTask} size='tiny' color='blue' icon="plus"/>} />
-                                  
-                                          
+                                        <Popup content="Click to add a Task" trigger={<Button 
+                                        onClick={this.renderAddTask} 
+                                        size='tiny'
+                                        content='Add Task' 
+                                        color='blue' 
+                                        icon="plus"/>} />
                                     </Grid.Column>
                                     </Grid>
                                 </div>
@@ -96,11 +111,11 @@ class ProjectBoard extends Component {
                             }
                             </Grid.Column>
                             <Grid.Column>
-                        <h1>Completed:</h1>
+                        <h1>In Progress:</h1>
                    
                     </Grid.Column>
                     <Grid.Column>
-                        <h1>Backlog:</h1>
+                        <h1>Completed:</h1>
                     
                     </Grid.Column>
                 </Grid.Row>

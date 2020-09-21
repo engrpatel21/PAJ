@@ -34,12 +34,37 @@ export function addProjectFeature(project_id, feature){
     .then(res => res.json())
 }
 
-export function addProjectContributors(project_id, contributor){
-    console.log(contributor)
-    return fetch(`${BASE_URL}/${project_id}`,{
+export function deleteProjectFeature(project_id, feature_id){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+    })
+    .then(res => res.json())
+}
+
+export function updateProjectFeature(project_id, feature_id, feature){
+    return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
         method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(feature)
+    })
+    .then(res => res.json())
+}
+
+
+export function addProjectContributors(project_id, contributor){
+    return fetch(`${BASE_URL}/${project_id}/contributors`,{
+        method: 'POST',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(contributor)
+    })
+    .then(res => res.json())
+}
+
+export function deleteProjectContributors(project_id, contributor_id, user_id){
+    return fetch(`${BASE_URL}/${project_id}/contributors/${contributor_id}/${user_id}`,{
+        method: 'DELETE',
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
     })
     .then(res => res.json())
 }
@@ -97,6 +122,7 @@ export function getALlTasks(project_id, feature_id){
 }
 
 export function updateFeatureTask(project_id, feature_id, task_id, task){
+    console.log(task)
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
         method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},

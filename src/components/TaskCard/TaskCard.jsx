@@ -27,6 +27,7 @@ class TaskCard extends Component {
                          <Card.Meta>Head of Project Here</Card.Meta>
                          <Card.Description>
                          {task ? task.content : 'no content'} 
+                         {task.taskStatus === 'Backlog' ? 'backlog' : 'notloaded'}
                          </Card.Description>
                      </Card.Content>
                      <Card.Content extra>
@@ -35,16 +36,32 @@ class TaskCard extends Component {
                          trigger={
                             <Button 
                             basic color='red'
+                            icon='trash alternate'
+                            content='Delete'
                             onClick={()=> handleDeleteTask(projectId, featureId, task._id)}
-                            >
-                            DELETE
-                        </Button>
+                            />
+                      
 
                          }
                          />
                     
                          </div>
-                         
+                         <div style={{padding:'0 4rem', marginTop:'.5rem'}} className='ui two buttons'>
+                         <Popup content="Move To In Progress"
+                         trigger={
+                            <Button 
+                            icon='pencil alternate'
+                            basic color='green'
+                            content='Change Status'
+                            onClick={()=> handleUpdateTask(projectId, featureId, task._id, {taskStatus:'Backlog'})}
+                            />
+                            
+  
+
+                         }
+                         />
+                    
+                         </div>
                         
                      </Card.Content>
                  </Card>

@@ -49,7 +49,7 @@ function showProject(req, res){
     .populate('owner')
     .populate('comments.createdBy')
     .populate('features.tasks.user')
-    .populate('contributors')
+    .populate('contributors.contributor')
     .then( project => 
         res.json(project)
         )

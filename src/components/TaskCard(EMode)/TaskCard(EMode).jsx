@@ -18,6 +18,8 @@ class TaskCardEm extends Component {
         this.props.renderEditTask()
         this.props.handleUpdateTask(this.props.projectId, this.props.featureId, this.props.task._id, this.state.taskFormData)
     }
+
+
     handleChange = e => {
        const taskFormData = {...this.state.taskFormData, [e.target.name]: e.target.value};
        this.setState({
