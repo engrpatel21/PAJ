@@ -12,6 +12,7 @@ import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
 import Profile from '../Profile/Profile'
 import FriendsProfile from '../FriendsProfile/FriendsProfile'
+import MessagePage from '../MessagePage/MessagePage'
 import "./App.css";
 
 class App extends Component {
@@ -125,9 +126,8 @@ class App extends Component {
         />
         : 
         <Redirect to="/login" />
-        )}
-        
-        />
+        )}/>
+
         <Route 
         exact path='/profile/:userId'
         render={({match}) => (
@@ -136,8 +136,14 @@ class App extends Component {
         />
         : 
         <Redirect to="/login" />
-        )}
-        
+        )}/>
+
+        <Route
+          exact
+          path="/messagepage"
+          render={() => (user ? <MessagePage /> : <Redirect to="/login" />)}
+            />
+          )}
         />
 
       </>

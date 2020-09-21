@@ -46,16 +46,3 @@ class UserList extends Component {
 }
  
 export default UserList;
-
-
-// const UserList = ({users}) => {
-//     return ( 
-//         <>
-//          {users.map(user =>
-//             <div>{user.name}</div>
-//             )}
-//         </>
-//      );
-// }
- 
-// export default UserList;

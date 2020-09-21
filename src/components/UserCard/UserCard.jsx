@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const UserCard = ({ user }) => { 
     return ( 
@@ -16,4 +17,4 @@ const UserCard = ({ user }) => {
     }
 
  
-export default UserCard ;
+export default UserCard;
