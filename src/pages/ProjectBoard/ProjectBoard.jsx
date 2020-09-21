@@ -43,21 +43,12 @@ class ProjectBoard extends Component {
 
     handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{
         const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
-        console.log(task)
         this.setState({
             tasks: this.state.tasks.map(t => t._id === task._id ? task : t)
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-        console.log(this.state.tasks)
     }
 
-    handleUpdateTaskStatus = async (project_id, feature_id, task_id, taskData) =>{
-        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
-        console.log(task)
-        this.setState({
-            taskStatus: task.taskStatus
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-        console.log(this.state.tasks)
-    } 
+
 
     render() { 
         const {featureId, projectId} = this.state
@@ -70,17 +61,27 @@ class ProjectBoard extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <h1>Backlog:</h1>
-                            {this.state.tasks ? this.state.tasks.map( task => 
-                                <TaskCard 
-                                    key={task._id}
-                                    task={task}
-                                    projectId={projectId}
-                                    featureId={featureId}
-                                    handleDeleteTask={this.handleDeleteTask}
-                                    handleUpdateTask={this.handleUpdateTask} 
-                                    renderAddTask={this.renderAddTask}
-                                    handleUpdateTaskStatus={this.handleUpdateTaskStatus}
-                                />
+                            {this.state.tasks? this.state.tasks.map( task => 
+                                
+                                <>
+                                    {task.taskStatus === 'Backlog' ? 
+
+                                        <TaskCard 
+                                        key={task._id}
+                                        task={task}
+                                        projectId={projectId}
+                                        featureId={featureId}
+                                        handleDeleteTask={this.handleDeleteTask}
+                                        handleUpdateTask={this.handleUpdateTask} 
+                                        renderAddTask={this.renderAddTask}
+                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                        />
+                                        :
+                                        ''                                  
+                                    }
+                                </>
+
+                            
                             ):
                             ''
                             }
@@ -112,11 +113,57 @@ class ProjectBoard extends Component {
                             </Grid.Column>
                             <Grid.Column>
                         <h1>In Progress:</h1>
-                   
+                        {this.state.tasks? this.state.tasks.map( task => 
+                                
+                                <>
+                                    {task.taskStatus === 'In Progress' ? 
+
+                                        <TaskCard 
+                                        key={task._id}
+                                        task={task}
+                                        projectId={projectId}
+                                        featureId={featureId}
+                                        handleDeleteTask={this.handleDeleteTask}
+                                        handleUpdateTask={this.handleUpdateTask} 
+                                        renderAddTask={this.renderAddTask}
+                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                        />
+                                        :
+                                       ''                                  
+                                    }
+                                </>
+
+                            
+                            ):
+                            ''
+                            }
                     </Grid.Column>
                     <Grid.Column>
                         <h1>Completed:</h1>
-                    
+                        {this.state.tasks? this.state.tasks.map( task => 
+                                
+                                <>
+                                    {task.taskStatus === 'Completed' ? 
+
+                                        <TaskCard 
+                                        key={task._id}
+                                        task={task}
+                                        projectId={projectId}
+                                        featureId={featureId}
+                                        handleDeleteTask={this.handleDeleteTask}
+                                        handleUpdateTask={this.handleUpdateTask} 
+                                        renderAddTask={this.renderAddTask}
+                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                        />
+                                        :
+                                       ''                                  
+                                    }
+                                </>
+
+                            
+                            ):
+                            ''
+                            }
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
