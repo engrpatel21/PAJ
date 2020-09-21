@@ -10,7 +10,7 @@ const SearchBox = (props) => {
                     focus 
                     placeholder='Search for Users...' 
                     type='text' 
-                    value ={''}
+                    value ={null}
                     onChange={props.handleChange}
                     />
             </Grid.Column>
