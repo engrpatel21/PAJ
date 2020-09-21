@@ -1,11 +1,11 @@
 import React from 'react'
-import { Grid, Image, Button, Icon, Divider, Card, } from 'semantic-ui-react'
+import { Button, Divider, Grid, Icon, Image, Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 
 
 
-const UsersProfile = (props) => {
+const UsersProfile = (props, mobile) => {
     const {usersInfo} = props
     return ( 
     <>
