@@ -143,8 +143,6 @@ class App extends Component {
           path="/messagepage"
           render={() => (user ? <MessagePage /> : <Redirect to="/login" />)}
             />
-          )}
-        />
 
       </>
     );

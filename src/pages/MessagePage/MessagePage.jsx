@@ -1,8 +1,13 @@
 import React from 'react'
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Divider, Grid} from 'semantic-ui-react'
 
 const MessagePage = () => (
+
+  <Grid centered columns={1}>
   <Comment.Group>
+    <h1>User List Page</h1>
+    <Divider>
+    </Divider>
     <Header as='h3' dividing>
       Comments
     </Header>
@@ -71,6 +76,7 @@ const MessagePage = () => (
       <Button content='Add Reply' labelPosition='left' icon='edit' primary />
     </Form>
   </Comment.Group>
+  </Grid>
 )
 
 export default MessagePage
