@@ -29,13 +29,13 @@ class UserList extends Component {
                 <h1>User List Page</h1>
                 <Divider>
                 </Divider>
-                {/* Added search function. */}
+                {/* Added for search function. */}
                     <SearchBar 
                     handleChange={(e) => this.setState({searchField: e.target.value})
                     }/>
                 <br></br>
                     <div className="UserList-grid">
-
+                    {/* Added filterUsers from users for search function. */}
                     {filteredUsers.map(user => 
                         <UserCard  key={user._id} user={user}/>
                     )}
