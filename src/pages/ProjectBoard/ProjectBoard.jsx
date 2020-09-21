@@ -50,14 +50,7 @@ class ProjectBoard extends Component {
         console.log(this.state.tasks)
     }
 
-    handleUpdateTaskStatus = async (project_id, feature_id, task_id, taskData) =>{
-        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
-        console.log(task)
-        this.setState({
-            taskStatus: task.taskStatus
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-        console.log(this.state.tasks)
-    } 
+
 
     render() { 
         const {featureId, projectId} = this.state

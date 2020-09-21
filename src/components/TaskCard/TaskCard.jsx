@@ -4,7 +4,7 @@ import TaskCardEM from '../TaskCard(EMode)/TaskCard(EMode)'
 
 class TaskCard extends Component {
     state = { 
-        isEdit: false,
+       task: this.props.task
     }
     renderEditTask = () => {
         this.setState({isEdit: !this.state.isEdit})
@@ -53,14 +53,14 @@ class TaskCard extends Component {
                             icon='pencil alternate'
                             basic color='green'
                             content='Change Status'
-                            onClick={()=> handleUpdateTask(projectId, featureId, task._id, {taskStatus:'Backlog'})}
-                            />
-                            
-  
-
-                         }
+                            onClick={()=> handleUpdateTask(projectId, featureId, task._id, {
+                                _id: task._id, 
+                                taskStatus:'In Progress',
+                                content: task.content,
+                                name: task.name
+                            })}
+                            />}
                          />
-                    
                          </div>
                         
                      </Card.Content>
