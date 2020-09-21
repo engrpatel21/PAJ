@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
+import SearchBar from '../../components/SearchBar/SearchBar'
 import { Divider, Input, Grid } from 'semantic-ui-react'
 import './UserList.css'
 
 class UserList extends Component {
     state = { 
-        users: []
+        users: [],
+        // Added for search.
+        searchField: ''
      }
 
     async componentDidMount(){
@@ -15,28 +18,25 @@ class UserList extends Component {
     }
 
     render() { 
-        const {users} = this.state
+        // Added searchField for search.
+        const {users, searchField} = this.state
+        // Added for search.
+        const filteredUsers = users.filter(user =>(
+            user.name.toLowerCase().includes(searchField.toLowerCase())
+        ))
         return ( 
             <>
                 <h1>User List Page</h1>
                 <Divider>
                 </Divider>
-                <Grid>
-                <Grid.Column textAlign="center">
-                    <Input 
-                        huge icon='search' 
-                        focus 
-                        placeholder='Search for Users...' 
-                        type='text' 
-                        value ={this.state.user}
-                        onChange={this.state.user}
-                    />
-                </Grid.Column>
-                </Grid>
-                    <br></br>
-                    <br></br>
+                {/* Added search function. */}
+                    <SearchBar 
+                    handleChange={(e) => this.setState({searchField: e.target.value})
+                    }/>
+                <br></br>
                     <div className="UserList-grid">
-                    {users.map(user => 
+
+                    {filteredUsers.map(user => 
                         <UserCard  key={user._id} user={user}/>
                     )}
                     </div>
