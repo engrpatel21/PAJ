@@ -30,7 +30,7 @@ class NavBar extends Component {
           style={{ minHeight: 50, padding: '1em 0em' }}
           vertical
         >
-          {'/' ? 
+          
           <Menu
             fixed={fixed ? 'top' : null}
             inverted={!fixed}
@@ -117,16 +117,9 @@ class NavBar extends Component {
               </>
                 }
             </Container>
-          </Menu>
-          :
-          <>
-          {null}
-          </>
-  }
+          </Menu>  
         </Segment>
       </Visibility>
-
-
       {children}
     </Segment>
 

@@ -1,16 +1,47 @@
-import React from 'react'
-import { Image, Segment } from 'semantic-ui-react'
-import P from './P.JPG'
-import A from './A.JPG'
-import J from './J.jpeg'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import StaffComp from '../../components/StaffComp/StaffComp'
+import * as userApi from '../../services/userService'
 
-const Staff = () => (
-    <Segment>
-        <Image src={P} size='medium' circular />
-        <Image src={A} size='medium' circular />
-        <Image src={J} size='medium' circular />
+class Staff extends Component {
+    state = { 
+    users: '',
+     }
 
-    </Segment>
-      )
+     async componentDidMount(){
+        const users = await userApi.getAllUsers()
+        this.setState({users})}
 
-export default Staff
+render() { 
+    const {users} = this.state
+    // {this.state.users ? 'isloading' : 'not loading'}
+    // const filterUsers = users.filter(user => (users.name.includes('j@j.com', '12@12.com', 'gundam@rx.com')))
+
+    return ( 
+       <>
+       {/* {this.state.users ? 
+       
+       <>
+       {filterUsers.map(user =>
+            <StaffComp 
+            user={this.state.user}
+            getAllUsers={this.getAllUsers}
+    
+            />
+
+            )} 
+
+       </>
+       
+       
+       
+       
+       
+       : 'not loading'} */}
+       
+       </>
+    );
+}
+}
+ 
+export default Staff;

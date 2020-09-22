@@ -14,6 +14,7 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Item
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -21,10 +22,7 @@ import { Link } from 'react-router-dom'
 
 
 
-/* Heads up!
- * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
- * components for such things.
- */
+
 const HomepageHeading = ({ mobile }) => (
   <Container text>
     <Header
@@ -48,16 +46,21 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? '0.5em' : '1.5em',
       }}
     />
+    <Divider/>
     <Button primary size='huge'>
       
       <Link
-      to='/createproject'
+      to='/signup'
       style={{
         color: 'whitesmoke'
       }}
       >Get Started</Link>
       <Icon name='right arrow' />
     </Button>
+    <Divider hidden/>
+    <Container>
+    <Item.Header as={Link} to='/login'>Log in</Item.Header>
+    </Container>
   </Container>
 )
 
@@ -65,10 +68,7 @@ HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
 }
 
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
+
 class DesktopContainer extends Component {
   state = {}
 
@@ -127,10 +127,7 @@ class MobileContainer extends Component {
   handleToggle = () => this.setState({ sidebarOpened: true })
 
   render() {
-    const { children } = this.props
-    const { sidebarOpened } = this.state
-    const { activeItem } = this.state
-    const { fixed } = this.state
+    
 
     return (
       <Segment as={Sidebar.Pushable} at='mobile'>
@@ -148,10 +145,7 @@ MobileContainer.propTypes = {
 }
 
 const ResponsiveContainer = ({ children }) => (
-  /* Heads up!
-   * For large applications it may not be best option to put all page into these containers at
-   * they will be rendered twice for SSR.
-   */
+  
   <Segment>
     {DesktopContainer === DesktopContainer ?
     <DesktopContainer>{children}</DesktopContainer>
