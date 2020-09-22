@@ -9,11 +9,11 @@ const MessagePage = () => (
 
   <Grid centered columns={1}>
   <Comment.Group>
-    <h1>User List Page</h1>
+    <h1>Mesage Board Page</h1>
     <Divider>
     </Divider>
     <Header as='h3' dividing>
-      Comments
+      Messages
     </Header>
 
     <Comment>
@@ -76,7 +76,7 @@ const MessagePage = () => (
     </Comment>
 
     <Comment>
-      <Comment.Avatar src='https://vignette.wikia.nocookie.net/starfox/images/0/0f/FoxMcCloud3D.jpg/revision/latest/top-crop/width/300/height/300?cb=20140226211125' />
+      <Comment.Avatar src='https://vignette.wikia.nocookie.net/starfox/images/7/77/Foxhead.gif/revision/latest/top-crop/width/220/height/220?cb=20081028023846' />
       <Comment.Content>
         <Comment.Author as='a'>Fox</Comment.Author>
         <Comment.Metadata>
