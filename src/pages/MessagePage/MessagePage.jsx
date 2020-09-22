@@ -1,5 +1,9 @@
 import React from 'react'
 import { Button, Comment, Form, Header, Divider, Grid} from 'semantic-ui-react'
+import Ryu from './01.png'
+import Ken from './02.png'
+import Bison from './03.png'
+import Guile from './04.png'
 
 const MessagePage = () => (
 
@@ -13,13 +17,13 @@ const MessagePage = () => (
     </Header>
 
     <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+      <Comment.Avatar src={Ryu} />
       <Comment.Content>
-        <Comment.Author as='a'>Matt</Comment.Author>
+        <Comment.Author as='a'>Ryu</Comment.Author>
         <Comment.Metadata>
           <div>Today at 5:42PM</div>
         </Comment.Metadata>
-        <Comment.Text>How artistic!</Comment.Text>
+        <Comment.Text>Hadouken!</Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
         </Comment.Actions>
@@ -27,14 +31,14 @@ const MessagePage = () => (
     </Comment>
 
     <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
+      <Comment.Avatar src={Ken} />
       <Comment.Content>
-        <Comment.Author as='a'>Elliot Fu</Comment.Author>
+        <Comment.Author as='a'>Ken</Comment.Author>
         <Comment.Metadata>
           <div>Yesterday at 12:30AM</div>
         </Comment.Metadata>
         <Comment.Text>
-          <p>This has been very useful for my research. Thanks as well!</p>
+          <p>Shoruken!</p>
         </Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
@@ -42,13 +46,13 @@ const MessagePage = () => (
       </Comment.Content>
       <Comment.Group>
         <Comment>
-          <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
+          <Comment.Avatar src={Bison} />
           <Comment.Content>
-            <Comment.Author as='a'>Jenny Hess</Comment.Author>
+            <Comment.Author as='a'>M. Bison</Comment.Author>
             <Comment.Metadata>
               <div>Just now</div>
             </Comment.Metadata>
-            <Comment.Text>Elliot you are always so right :)</Comment.Text>
+            <Comment.Text>Psycho Breaker :)</Comment.Text>
             <Comment.Actions>
               <Comment.Action>Reply</Comment.Action>
             </Comment.Actions>
@@ -58,13 +62,13 @@ const MessagePage = () => (
     </Comment>
 
     <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
+      <Comment.Avatar src={Guile} />
       <Comment.Content>
-        <Comment.Author as='a'>Joe Henderson</Comment.Author>
+        <Comment.Author as='a'>Guile</Comment.Author>
         <Comment.Metadata>
           <div>5 days ago</div>
         </Comment.Metadata>
-        <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+        <Comment.Text>Sonic Boom!</Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
         </Comment.Actions>
