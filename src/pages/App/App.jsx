@@ -48,15 +48,18 @@ class App extends Component {
     const {user} = this.state
     return (
       <>
+    
         <NavBar user={user} handleLogout={this.handleLogout} />
         <Route
           exact
           path="/"
           render={() => (
+          
             <main>
               {/* <h1>Welcome. This is an authorization template.</h1> */}
               <LandingPage /> 
             </main>
+            
           )}
         />
         <Route
