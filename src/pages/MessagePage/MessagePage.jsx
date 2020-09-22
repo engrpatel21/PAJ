@@ -75,6 +75,34 @@ const MessagePage = () => (
       </Comment.Content>
     </Comment>
 
+    <Comment>
+      <Comment.Avatar src='https://vignette.wikia.nocookie.net/starfox/images/0/0f/FoxMcCloud3D.jpg/revision/latest/top-crop/width/300/height/300?cb=20140226211125' />
+      <Comment.Content>
+        <Comment.Author as='a'>Fox</Comment.Author>
+        <Comment.Metadata>
+          <div>5 days ago</div>
+        </Comment.Metadata>
+        <Comment.Text>Who are these guys?</Comment.Text>
+        <Comment.Actions>
+          <Comment.Action>Reply</Comment.Action>
+        </Comment.Actions>
+      </Comment.Content>
+    </Comment>
+
+    <Comment>
+      <Comment.Avatar src='https://vignette.wikia.nocookie.net/starfox/images/9/9e/Falcohead.gif/revision/latest/top-crop/width/220/height/220?cb=20081028023846' />
+      <Comment.Content>
+        <Comment.Author as='a'>Falco</Comment.Author>
+        <Comment.Metadata>
+          <div>5 days ago</div>
+        </Comment.Metadata>
+        <Comment.Text>Different franchise...</Comment.Text>
+        <Comment.Actions>
+          <Comment.Action>Reply</Comment.Action>
+        </Comment.Actions>
+      </Comment.Content>
+    </Comment>
+
     <Form reply>
       <Form.TextArea />
       <Button content='Add Reply' labelPosition='left' icon='edit' primary />
