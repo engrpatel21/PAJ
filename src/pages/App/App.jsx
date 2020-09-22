@@ -13,6 +13,7 @@ import * as projectApi from '../../services/projectService'
 import Profile from '../Profile/Profile'
 import FriendsProfile from '../FriendsProfile/FriendsProfile'
 import MessagePage from '../MessagePage/MessagePage'
+import Staff from '../Staff/Staff'
 import "./App.css";
 
 class App extends Component {
@@ -146,6 +147,17 @@ class App extends Component {
           path="/messagepage"
           render={() => (user ? <MessagePage /> : <Redirect to="/login" />)}
             />
+
+        <Route 
+        exact path='/staff'
+        render={() => (
+        user ? <Staff
+        />
+        : 
+        <Redirect to="/login" />
+        )}
+        
+        />
 
       </>
     );

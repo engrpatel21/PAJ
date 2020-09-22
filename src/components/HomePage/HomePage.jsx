@@ -175,8 +175,8 @@ const HomepageLayout = () => (
               We Help Companies and Companions
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+            We aim to deliver a tool that will help individuals collaborate on projects to achieve maximum productivity, on an easy to use platform.
+              
             </p>
             <Header as='h3' style={{ fontSize: '2em' }}>
               We Make Bananas That Can Dance
@@ -187,7 +187,7 @@ const HomepageLayout = () => (
             </p>
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+            <Image bordered rounded size='large' src='https://picsum.photos/200/300' />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -266,7 +266,6 @@ const HomepageLayout = () => (
               <List link inverted>
                 <List.Item as='a'>Sitemap</List.Item>
                 <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
                 <List.Item as='a'>Gazebo Plans</List.Item>
               </List>
             </Grid.Column>
