@@ -152,6 +152,8 @@ class App extends Component {
         exact path='/staff'
         render={() => (
         user ? <Staff
+        user={this.state.user}
+        
         />
         : 
         <Redirect to="/login" />
