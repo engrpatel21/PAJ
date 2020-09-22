@@ -126,8 +126,10 @@ class NavBar extends Component {
         </Segment>
       </Visibility>
 
+
       {children}
     </Segment>
+
     )
   }
 }
