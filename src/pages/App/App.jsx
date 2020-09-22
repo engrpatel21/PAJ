@@ -12,11 +12,8 @@ import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
 import Profile from '../Profile/Profile'
 import FriendsProfile from '../FriendsProfile/FriendsProfile'
-<<<<<<< HEAD
-import Staff from '../Staff/Staff'
-=======
 import MessagePage from '../MessagePage/MessagePage'
->>>>>>> 20b8a1b638b486be8c839fde1eddffbeccfbddd6
+import Staff from '../Staff/Staff'
 import "./App.css";
 
 class App extends Component {
