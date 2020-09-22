@@ -1,10 +1,12 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const UserCard = ({ user }) => { 
     return ( 
       <>
-          <Card centered items style={{marginBottom: '2rem'}}
+          <Card as={Link} to={{pathname: `/profile/${user._id}`}}
+            centered items style={{marginBottom: '2rem'}}
             image={user.avatar? user.avatar : 'https://picsum.photos/200/300'}
             header={user.name}
             meta={user.email}
@@ -15,4 +17,4 @@ const UserCard = ({ user }) => {
     }
 
  
-export default UserCard ;
+export default UserCard;
