@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import {   Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Segment,
-  Sidebar,
-  Visibility,} from 'semantic-ui-react'
+import { Button, Container, Menu, Segment, Visibility } from 'semantic-ui-react'
+
 
 class NavBar extends Component {
   state = { activeItem: 'home' }
@@ -26,7 +16,6 @@ class NavBar extends Component {
     const { activeItem } = this.state
     const { children } = this.props
     const { fixed } = this.state
-    const { sidebarOpened } = this.state
    
     return (
       <Segment greaterThan='mobile'>
@@ -41,13 +30,14 @@ class NavBar extends Component {
           style={{ minHeight: 50, padding: '1em 0em' }}
           vertical
         >
-          {!'/' ? 
+          {'/' ? 
           <Menu
             fixed={fixed ? 'top' : null}
             inverted={!fixed}
             pointing={!fixed}
             secondary={!fixed}
             size='large'
+            
           >
             <Container>
               <Menu.Item 
@@ -89,7 +79,7 @@ class NavBar extends Component {
             <Menu.Item
             as={Link}
             to='/'
-            name='logout'
+            name='Log out'
             active={activeItem === 'logout'}
             onClick={this.props.handleLogout}
             />

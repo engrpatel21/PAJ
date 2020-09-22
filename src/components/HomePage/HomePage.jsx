@@ -80,7 +80,6 @@ class DesktopContainer extends Component {
   render() {
     const { children } = this.props
     const { fixed } = this.state
-    const { activeItem } = this.state
 
     return (
       <Segment greaterThan='mobile'>
@@ -103,66 +102,7 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item 
-                as={Link}
-                to='/'
-                name='home'
-                active={activeItem === 'home'}
-                onClick={this.handleItemClick}
                 
-                >
-                  Home
-                </Menu.Item>
-                <Menu.Item 
-                 as={Link}
-                 to='/users'
-                 name='All Users'
-                 active={activeItem === 'users page'}
-                 onClick={this.handleItemClick}
-                
-                >
-                  
-                </Menu.Item>
-
-                <Menu.Item
-                 as={Link}
-                 to='/createproject'
-                 name='Create Project'
-                 active={activeItem === 'create project'}
-                 onClick={this.handleItemClick}
-                >
-
-                </Menu.Item>
-
-                <Menu.Item 
-                as={Link}
-                to='/profile'
-                name='Profile'
-                active={activeItem === 'profile'}
-                onClick={this.handleItemClick}
-                >
-
-                </Menu.Item>
-              
-                <Menu.Item
-                as={Link}
-                to='/'
-                name='logout'
-                active={activeItem === 'logout'}
-                onClick={this.props.handleLogout}
-                >
-
-                </Menu.Item>
-              
-
-                <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed}>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
-                </Menu.Item>
               </Container>
             </Menu>
             <HomepageHeading />
@@ -194,106 +134,11 @@ class MobileContainer extends Component {
 
     return (
       <Segment as={Sidebar.Pushable} at='mobile'>
-        <Sidebar.Pushable>
-          {this.props.user ? <>
-          <Sidebar
-            as={Menu}
-            animation='overlay'
-            inverted
-            onHide={this.handleSidebarHide}
-            vertical
-            visible={sidebarOpened}
-          >
-            <Menu.Item
-            as={Link}
-            to='/'
-            name='Home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-            >
-              Home
-            </Menu.Item>
-              
-              <Menu.Item 
-               as={Link}
-               to='/users'
-               name='All Users'
-               active={activeItem === 'users page'}
-               onClick={this.handleItemClick}
-              
-              >
-                
-              </Menu.Item>
-              <Menu.Item
-               as={Link}
-               to='/createproject'
-               name='Create Project'
-               active={activeItem === 'create project'}
-               onClick={this.handleItemClick}
-              ></Menu.Item>
-
-              <Menu.Item 
-              as={Link}
-              to='/profile'
-              name='Profile'
-              active={activeItem === 'profile'}
-              onClick={this.handleItemClick}
-              ></Menu.Item>
-            
-            <Menu.Item
-            as={Link}
-            to='/'
-            name='logout'
-            active={activeItem === 'logout'}
-            onClick={this.props.handleLogout}
-            />
-          </Sidebar>
-            </> 
-            :
-            
-          <Sidebar.Pusher dimmed={sidebarOpened}>
-            <Segment
-              inverted
-              textAlign='center'
-              style={{ minHeight: 350, padding: '1em 0em' }}
-              vertical
-            >
               <Container>
-                <Menu inverted pointing secondary size='large'>
-                  <Menu.Item onClick={this.handleToggle}>
-                    <Icon name='sidebar' />
-                  </Menu.Item>
-                  <Menu.Item position='right'>
-                  <Button 
-                as={Link}
-                to='/login'
-                name='Log in'
-                active={activeItem === 'login'}
-                onClick={this.handleItemClick}
-                inverted={!fixed}>
-                  Log in
-                </Button>
-                <Button 
-                 as={Link}
-                 to='/signup'
-                 name='Sign Up'
-                 active={activeItem === 'signup'}
-                 onClick={this.handleItemClick} 
-                 inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                   Sign up
-                </Button>
-                  </Menu.Item>
-        
-                </Menu>
+                
               </Container>
               <HomepageHeading mobile />
             </Segment>
-
-            {children}
-          </Sidebar.Pusher>
-         }
-        </Sidebar.Pushable>
-      </Segment>
       )
     }
 }
@@ -308,8 +153,11 @@ const ResponsiveContainer = ({ children }) => (
    * they will be rendered twice for SSR.
    */
   <Segment>
+    {DesktopContainer === DesktopContainer ?
     <DesktopContainer>{children}</DesktopContainer>
+    :
     <MobileContainer>{children}</MobileContainer>
+  }
   </Segment>
 )
 
