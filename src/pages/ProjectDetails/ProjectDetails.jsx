@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, Grid, Comment, Item, Container,Popup, Portal } from 'semantic-ui-react'
+import { Message, Form, Button, Divider, Segment, Grid, Comment, Item, Container,Popup, Portal} from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
@@ -8,6 +8,7 @@ import ContributorsList from '../../components/ContributorsList/ContributorsList
 import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
 import AddFeatureForm from '../../components/AddFeatureForm/AddFeatureForm'
 import AddContributorForm from '../../components/AddContributorForm/AddContributorForm'
+import ToggleProject from '../../components/ToggleProject/ToggleProject'
 //this is working
 
 
@@ -43,6 +44,13 @@ class ProjectDetails extends Component {
 
     handelAddContributor = async ( contributor) => {
         await projectApi.addProjectContributors(this.props.match.params.projectId, contributor)
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            ()=> this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
+    }
+
+    handleUpdateProject = async (project_id, projectData) => {
+        await projectApi.updateProject(project_id, projectData)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
         this.setState({project},
             ()=> this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
@@ -116,8 +124,10 @@ class ProjectDetails extends Component {
     
     render() { 
         const {features} = this.state.project ? this.state.project : ['not loading']
+       
         return ( 
             <> 
+            <ToggleProject project={this.state.project._id ? this.state.project : 'notloading'} handleUpdateProject={this.handleUpdateProject}/>
             <Segment style={{height: 'auto'}} >
             <Divider horizontal><h1>Project</h1></Divider>
                 <Grid>
@@ -163,6 +173,7 @@ class ProjectDetails extends Component {
             {features ? 
             
                 <FeatureDetails 
+                    key={`work`}
                     features ={features} 
                     projectId={this.state.project._id} 
                     handleDeleteFeature={this.handleDeleteFeature}

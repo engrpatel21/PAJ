@@ -25,6 +25,15 @@ export function getOneProject(project_id){
     .then(res => res.json())
 }
 
+export function updateProject(project_id, project){
+    return fetch(`${BASE_URL}/${project_id}`,{
+        method: "PUT",
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(project)
+    }, {mode: "cors"})
+    .then(res => res.json())
+}
+
 export function addProjectFeature(project_id, feature){
     return fetch(`${BASE_URL}/${project_id}/features`,{
         method: 'POST',
@@ -96,6 +105,7 @@ export function updateProjectComment(project_id, comment_id, comment){
     .then(res => res.json())
 }
 
+
 export function deleteFeature(project_id, feature_id){
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}`,{
         method: 'DELETE',
@@ -122,7 +132,6 @@ export function getALlTasks(project_id, feature_id){
 }
 
 export function updateFeatureTask(project_id, feature_id, task_id, task){
-    console.log(task)
     return fetch(`${BASE_URL}/${project_id}/features/${feature_id}/tasks/${task_id}`,{
         method: 'PUT',
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
