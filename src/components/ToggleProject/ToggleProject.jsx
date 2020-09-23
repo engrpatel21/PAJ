@@ -19,10 +19,10 @@ class ToggleProject extends Component {
             <Table.Body>
                 <Table.Row>
                     <Table.Cell collapsing style={{paddingTop: '1rem'}}>
-                        <Checkbox toggle onClick={this.renderCheckBox} checked={!this.props.project.isPublic}/>
+                        <Checkbox toggle onClick={this.renderCheckBox} checked={this.props.project.isPublic}/>
                     </Table.Cell>
                     <Table.Cell style={{fontSize: '1.2rem', padding: '0 0'}}>
-                        Your your project is set to {this.props.project.isPublic? 'Private' : 'Public' }
+                        Your your project is set to {!this.props.project.isPublic? 'Private' : 'Public' }
                     </Table.Cell>
                 </Table.Row>
             </Table.Body>
