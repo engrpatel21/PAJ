@@ -24,7 +24,7 @@ class Profile extends Component {
 //   this.setState({user})
 // }
   
-
+handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const {user} = this.props
@@ -36,7 +36,13 @@ class Profile extends Component {
         <Grid celled>
           <Grid.Row>
           <Grid.Column width={3}>
-            <MessagesAndFriends />
+          <Button.Group>
+            <Link to='/messageboard'>
+              <Button>Messages</Button>
+            </Link>
+              <Button.Or />
+              <Button>Friends</Button>
+            </Button.Group>
             <br></br>
             <br></br>
             <Link to='/createproject'>
@@ -54,12 +60,16 @@ class Profile extends Component {
             <Card>
               <Image src={user.avatar} wrapped ui={false} />
               <Card.Content>
-                <Card.Header>{user.name}</Card.Header>
+                <Card.Header>{user.name}
+                <Grid.Column floated='right' width={5}>
+                    <Icon name='edit' />
+                </Grid.Column>
+                </Card.Header>
                 <Card.Meta>
                   <span className='date'>{user.bio}</span>
                 </Card.Meta>
                 <Card.Description>
-                  PAJ is a software engineer living on Mars.
+                  Amuro is a software engineer living on Mars.
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>

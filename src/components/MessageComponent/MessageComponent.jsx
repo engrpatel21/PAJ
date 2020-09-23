@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Comment, Form, Header, Divider, Grid} from 'semantic-ui-react'
-import Ryu from './01.png'
 
 const MessageComponent = (props) => (
 <>
