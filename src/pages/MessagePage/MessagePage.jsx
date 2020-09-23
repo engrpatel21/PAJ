@@ -1,75 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
+import * as userApi from "../../services/userService"
 import { Button, Comment, Form, Header, Divider, Grid} from 'semantic-ui-react'
+import MessageComponent from '../../components/MessageComponent/MessageComponent'
 
-const MessagePage = () => (
+class MessagePage extends Component {
+  state = { 
+      users: [],
+
+   }
+
+  async componentDidMount(){
+      const users = await userApi.getAllUsers()
+      this.setState({users})
+  }
+
+  render() { 
+    const {users} = this.state
+    return ( 
+    <>
 
   <Grid centered columns={1}>
   <Comment.Group>
-    <h1>User List Page</h1>
+    <h1>Mesage Board Page</h1>
     <Divider>
     </Divider>
     <Header as='h3' dividing>
-      Comments
+      Messages
     </Header>
 
-    <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Matt</Comment.Author>
-        <Comment.Metadata>
-          <div>Today at 5:42PM</div>
-        </Comment.Metadata>
-        <Comment.Text>How artistic!</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
-
-    <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Elliot Fu</Comment.Author>
-        <Comment.Metadata>
-          <div>Yesterday at 12:30AM</div>
-        </Comment.Metadata>
-        <Comment.Text>
-          <p>This has been very useful for my research. Thanks as well!</p>
-        </Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-      <Comment.Group>
-        <Comment>
-          <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
-          <Comment.Content>
-            <Comment.Author as='a'>Jenny Hess</Comment.Author>
-            <Comment.Metadata>
-              <div>Just now</div>
-            </Comment.Metadata>
-            <Comment.Text>Elliot you are always so right :)</Comment.Text>
-            <Comment.Actions>
-              <Comment.Action>Reply</Comment.Action>
-            </Comment.Actions>
-          </Comment.Content>
-        </Comment>
-      </Comment.Group>
-    </Comment>
-
-    <Comment>
-      <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Joe Henderson</Comment.Author>
-        <Comment.Metadata>
-          <div>5 days ago</div>
-        </Comment.Metadata>
-        <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
+    {users.map(user =>
+    <MessageComponent key={user._id} user={user} username={user.name} />
+    )}
 
     <Form reply>
       <Form.TextArea />
@@ -77,6 +38,10 @@ const MessagePage = () => (
     </Form>
   </Comment.Group>
   </Grid>
-)
+
+  </>
+         );
+    }
+}
 
 export default MessagePage
