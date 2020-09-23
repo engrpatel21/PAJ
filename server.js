@@ -15,6 +15,7 @@ const featureRouter = require('./routes/features')
 const taskRouter = require('./routes/tasks')
 const messageRouter = require('./routes/messages')
 const contributorRouter = require('./routes/contributors.js')
+const fileRoutes = require('./routes/file-upload')
 
 const cors = require('cors')
 
@@ -25,6 +26,8 @@ app.use(express.json());
 
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
+
+app.use('/api/v1', fileRoutes);
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
