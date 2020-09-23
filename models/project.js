@@ -34,7 +34,7 @@ const projectSchema = new Schema({
     description: String,
     contributors: [contributorSchema],
     comments: [commentSchema],
-    isEdit: {type: Boolean, default: false}
+    isPublic: {type: Boolean, default: true}
 
 },{timestamps: true})
 

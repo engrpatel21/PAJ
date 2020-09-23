@@ -30,14 +30,13 @@ class FeatureDetails extends Component {
            </Table.Header>
        <Table.Body>
            {features? features.map((feature,idx) =>
-            <>
+       
                 <Table.Row key={idx} >
-                <Table.Cell onClick={()=> handleRedirect(feature._id)} key={`feature-${idx}`} >{feature.feature}</Table.Cell>
+                <Table.Cell onClick={()=> handleRedirect(feature._id)}>{feature.feature}</Table.Cell>
                 <Table.Cell onClick={()=> handleRedirect(feature._id)} key={feature._id}>{feature.description}</Table.Cell>
-                <Table.Cell><Button onClick={this.renderEditFeature} icon='edit'/></Table.Cell>
+                <Table.Cell ><Button onClick={this.renderEditFeature} icon='edit'/></Table.Cell>
                 <Table.Cell onClick={()=> handleDeleteFeature(feature._id)} key={`delete-${idx}`}><Button icon='eraser'/></Table.Cell>
-            </Table.Row>
-            <Portal  open={this.state.editFeature} >
+                <Portal  open={this.state.editFeature} >
                         <AddFeatureForm 
                             renderEditFeature={this.renderEditFeature}
                             handleUpdateFeature={handleUpdateFeature}
@@ -45,7 +44,9 @@ class FeatureDetails extends Component {
                             feature={feature}
                         />
                     </Portal>
-            </>
+            </Table.Row>
+   
+    
                )  : 'run this'}
        </Table.Body>
        </Table>
