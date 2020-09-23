@@ -30,7 +30,7 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
     const {user} = this.props
     return (
       <>
-        <h1>Profile Page</h1>
+        <h1>Your Profile Page</h1>
         <Divider>
         </Divider>
         <Grid celled>
