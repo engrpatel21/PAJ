@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import authService from "../../services/authService"
-import { Button, Form, Segment, Divider } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 class LoginPage extends Component {
   state = {
@@ -34,39 +34,52 @@ class LoginPage extends Component {
     const {email, pw} = this.state
     return (
       <main className="Login">
-        <h1>Log In</h1>
-        <Divider>
-        </Divider>
-          <Segment inverted>
-            <Form inverted autoComplete="off" onSubmit={this.handleSubmit}>
-              <Form.Group widths='equal'>
-                <Form.Input 
-                  fluid label='User Email' 
-                  placeholder='Email' 
-                  type="text"
-                  autoComplete="off"
-                  id="email"
-                  value={email}
-                  name="email"
-                  onChange={this.handleChange}
-                />
-                <Form.Input 
-                  fluid label='Password' 
-                  placeholder='Password' 
-                  type="password"
-                  autoComplete="off"
-                  id="password"
-                  value={pw}
-                  name="pw"
-                  onChange={this.handleChange}
-                /> 
-              </Form.Group>
-                <Button type='submit'>Log In</Button>
-                <br></br>
-                <br></br>
-                <Link to="/">Cancel</Link>
-            </Form>
-          </Segment>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h2' color='teal' textAlign='center'>
+        <Image src='/logo.png' /> Log-in to your account
+      </Header>
+      <Form size='large' onSubmit={this.handleSubmit}>
+        <Segment stacked>
+          <Form.Input 
+          fluid icon='user' 
+          iconPosition='left'
+          placeholder='E-mail address' 
+          fluid label='User Email' 
+          type="text"
+          autoComplete="off"
+          id="email"
+          value={email}
+          name="email"
+          onChange={this.handleChange}
+          
+          />
+          <Form.Input
+            fluid
+            icon='lock'
+            iconPosition='left'
+            placeholder='Password'
+            type='password'
+            fluid label='password' 
+            autoComplete="off"
+            id="password"
+            value={pw}
+            name="pw"
+            onChange={this.handleChange}
+          />
+
+          <Button color='teal' fluid size='large' type='submit'>
+            Login
+          </Button>
+        </Segment>
+      </Form>
+      <Message>
+        New to us? <a href='/signup'>Sign Up</a>
+      </Message>
+    </Grid.Column>
+  </Grid>
+
+    
       </main>
     );
   }
