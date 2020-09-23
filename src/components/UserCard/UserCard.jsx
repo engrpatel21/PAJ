@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const UserCard = ({ user }) => { 
     return ( 
       <>
-          <Card as={Link} to={{pathname: `/profile/${user._id}`}}>
+          <Card as={Link} to={{pathname: `/profile/${user._id}`}} >
             <Image src={user.avatar? user.avatar : 'https://picsum.photos/200/300'} wrapped ui={false} />
             <Card.Content>
               <Card.Header>{user.name }
