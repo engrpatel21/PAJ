@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import authService from "../../services/authService";
-import { Button, Form, Segment, Divider } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 class SignupForm extends Component {
   state = {
@@ -40,33 +40,36 @@ class SignupForm extends Component {
     const { name, email, password, passwordConf } = this.state;
     return (
       <div>
-        <h1>Sign Up</h1>
-        <Divider>
-        </Divider>
-        <Segment inverted>
-          <Form inverted autoComplete="off" onSubmit={this.handleSubmit}>
-            <Form.Group widths='equal'>
-              <Form.Input 
-              fluid label='User Name' 
-              placeholder='User Name' 
-              type="text"
-              autoComplete="off"
-              id="name"
-              value={name}
-              name="name"
-              onChange={this.handleChange}
-              />
-              <Form.Input 
-              fluid label='Email' 
-              placeholder='Email' 
-              type="text"
-              autoComplete="off"
-              id="email"
-              value={email}
-              name="email"
-              onChange={this.handleChange}
-              />
-              <Form.Input 
+       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h2' color='teal' textAlign='center'>
+        <Image src='/logo.png' /> Sign-Up with a New Account!
+      </Header>
+      <Form size='large' onSubmit={this.handleSubmit}>
+        <Segment stacked>
+          <Form.Input 
+           fluid label='User Name' 
+           placeholder='User Name' 
+           type="text"
+           autoComplete="off"
+           id="name"
+           value={name}
+           name="name"
+           onChange={this.handleChange}
+          
+          />
+          <Form.Input
+             fluid label='Email' 
+             placeholder='Email' 
+             type="text"
+             autoComplete="off"
+             id="email"
+             value={email}
+             name="email"
+             onChange={this.handleChange}
+          />
+
+            <Form.Input 
               fluid label='Create Password' 
               placeholder='Password' 
               type="password"
@@ -75,8 +78,9 @@ class SignupForm extends Component {
               value={password}
               name="password"
               onChange={this.handleChange}
-              />
-              <Form.Input 
+          />
+
+            <Form.Input 
               fluid label='Confirm Password' 
               placeholder='Password' 
               type="password"
@@ -85,14 +89,18 @@ class SignupForm extends Component {
               value={passwordConf}
               name="passwordConf"
               onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button type='submit' disabled={this.isFormInvalid()}>Sign Up</Button>
-            <br></br>
-            <br></br>
-            <Link to="/">Cancel</Link>
-          </Form>
+          />
+
+          <Button color='teal' fluid size='large' type='submit' disabled={this.isFormInvalid()}>
+            Sign Up
+          </Button>
         </Segment>
+      </Form>
+      <Message>
+        Already have an account? <a href='/login'>Log in</a>
+      </Message>
+    </Grid.Column>
+  </Grid>
         
       </div>
     );
