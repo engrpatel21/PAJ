@@ -25,14 +25,14 @@ Our motivation for creating this app is based on our desire to help people plan 
 - AAU I should be able to change the status of tasks in the feature set to completed, backlog, or in progress.
 - AAU I should be able to send messages to other users that are part of the same project.
 ## Wireframes
-![wireframe1](/)
-![wireframe1](/)
-![wireframe1](/)
+![wireframe1](/public/Images/wireframe1.png)
+![wireframe1](/public/Images/wireframe2.png)
 
 ## Trello Board 
 **Link here: https://trello.com/b/w2iQ5obb/paj**
 ![trelloboard](/public/Images/trello.png)
-
+## ERD
+![ERD](/public/Images/erd.png)
 
 
 ## Screenshots:
