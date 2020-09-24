@@ -11,6 +11,7 @@ import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndF
 class Profile extends Component {
   state = {
     userProjects: [],
+    
   };
 
   async componentDidMount(){
