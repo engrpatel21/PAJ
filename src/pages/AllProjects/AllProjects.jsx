@@ -16,7 +16,7 @@ class AllUserProjects extends Component {
         const {user} = this.props
         return (
             <>
-            <h1>Message Board Page</h1>
+            <h1>All Projects Page</h1>
             <Divider>
             </Divider>
                 <Grid centered columns={2} divided>
