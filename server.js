@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/api/v1', fileRoutes);
+app.use('/api/image', fileRoutes);
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
