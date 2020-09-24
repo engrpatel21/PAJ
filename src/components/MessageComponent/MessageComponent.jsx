@@ -8,7 +8,7 @@ const MessageComponent = (props) => (
       <Comment.Content>
         <Comment.Author as='a'>{props.username}</Comment.Author>
         <Comment.Metadata>
-          <div>Today at 5:42PM</div>
+          <div>{props.date}</div>
         </Comment.Metadata>
         <Comment.Text>My email address is {props.user.email}.</Comment.Text>
         <Comment.Actions>
