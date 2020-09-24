@@ -6,7 +6,7 @@ module.exports = {
     createProject,
     showProject,
     deleteProject,
-    updateProject
+    updateProject,
 }
 
 async function updateProject(req, res){
