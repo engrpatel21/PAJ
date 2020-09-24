@@ -8,6 +8,7 @@ import ProjectListContainer from '../../components/ProjectListContainer/ProjectL
 class Profile extends Component {
   state = {
     userProjects: [],
+    
   };
 
   async componentDidMount(){
