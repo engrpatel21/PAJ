@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import { Grid, Card, Message } from 'semantic-ui-react'
+import { Grid, Card, Message, Icon } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import { Link } from 'react-router-dom'
+import './ProjectListContainer'
 
 class ProjectListContainer extends Component {
     state = {
@@ -16,23 +17,71 @@ class ProjectListContainer extends Component {
         const {user} = this.props
         return (
             <>
-            <Grid.Column width={3}>
-                <Message floating>
+            
+            <Grid.Column width={3} style={{
+                width: '100%',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridGap: '10px',
+                justifyItems: 'center',
+                margin:'10px 20px 200px',
+                padding: '-110px'
+
+            }}>
+                {/* <Message floating style={{              
+                    width: '100%',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gridGap: '1px',
+                    justifyItems: 'center',
+                    margin:'10px 10px 200px'
+                }}> */}
                     {this.state.userProjects.map((project)=>
-                        <div key={project._id}>
-                            <Card color='black'>
-                            <Link
+                            <div key={project._id}>
+                            <Card
+                                className='container' 
+                                style={{
+                                    height:'100px',
+                                    color:'white',
+                                    textShadow:'#1b1c1d 2px 2px',
+                                    fontSize:'20px',
+                                    textAlign:'center',
+                                    fontWeight: 'bold',
+                                    backgroundColor:'cornflowerblue',
+                                    boxShadow:'#1b1c1d 2px 2px',
+                                    marginBottom:'20px',
+                                    display:'flex',
+                                    flexFlow:'column nowrap',
+                                    justifyContent:'center',
+                                    
+                                    
+
+                                    
+                                
+                            
+                                }} 
+                                as={Link}
                                 to={{
                                 pathname: `/projectdetails/${project._id}`
                                 }}
                                 >
                                 {project.name ? project.name : 'Link to Project'}
-                            </Link>
+                                <Icon disabled name='users' 
+                                style={{
+                                    position:'absolute',
+                                    top:'70px',
+                                    left:'7px'
+                                }}
+                                />
+                            
                             </Card>
+                            
+                            
+                            
                             <br></br>
                         </div>
                     )}
-                </Message>
+                {/* </Message> */}
             </Grid.Column>
             </>
         )
