@@ -30,8 +30,8 @@ class ProjectCreation extends Component {
         return (  
             <>
         <Segment inverted textAlign='center' className='AddProject'>
-            <h1>Create Project:</h1>
-        <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}>
+            <h1>Create Project</h1>
+        <Form inverted ref={this.formRef} onSubmit={this.handleSubmit} size='massive'>
           <Form.Group>
             <Form.Input
               placeholder='Add Name'
@@ -53,6 +53,10 @@ class ProjectCreation extends Component {
             </Form.Group>
             <Form.Group>
             <Form.Button content='Submit' 
+            size='large' 
+            color='blue' 
+            icon='plus'
+            
             />
           </Form.Group>
         </Form>
