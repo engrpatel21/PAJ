@@ -12,13 +12,15 @@ class ProjectBoard extends Component {
     state = { 
         tasks: [],
         addTask: true,
+        project: {},
         projectId: this.props.match.params.projectId,
         featureId: this.props.match.params.featureId
      }
     
     async componentDidMount(){
         const tasks = await projectApi.getALlTasks(this.state.projectId,this.state.featureId)
-        this.setState({tasks})
+        const project = await projectApi.getOneProject(this.state.projectId)
+        this.setState({tasks,project})
     }
 
 
@@ -75,6 +77,8 @@ class ProjectBoard extends Component {
                                         handleUpdateTask={this.handleUpdateTask} 
                                         renderAddTask={this.renderAddTask}
                                         handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                        owner = {this.state.project.owner._id ? this.state.project.owner : 'not loading'}
+                                        contributors = {this.state.project.contributors.length? this.state.project.contributors : ''}
                                         />
                                         :
                                         ''                                  
@@ -105,6 +109,8 @@ class ProjectBoard extends Component {
                                 <TaskCardEM 
                                 handleAddTask={this.handleAddTask} 
                                 renderAddTask={this.renderAddTask}
+                                owner = {this.state.project.owner._id ? this.state.project.owner : 'not loading'}
+                                contributors = {this.state.project.contributors.length? this.state.project.contributors : ''}
                                 projectId={projectId} 
                                 featureId={featureId}/>
                             

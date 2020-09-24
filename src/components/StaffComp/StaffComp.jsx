@@ -19,7 +19,8 @@ const StaffComp = (props) => {
     <Segment>
         <Grid>
         <Item>
-        <Image src={props.user.email === 'j@j.com' ? J : '' && props.user.email === '12@12.com' ? P : '' && props.user.email === 'gundam@rx.com' ? A : ''} size='medium' avatar floated='left' verticalAlign='middle'/>
+        <Image src={props.user.email === 'j@j.com' ? J :  props.user.email === '12@12.com' ? P :  props.user.email === 'gundam@rx.com' ? A : ''} size='medium' avatar floated='left' verticalAlign='middle'/>
+        <div>{props.user.email}</div>
         <Item.Content>
         <Item.Header><h1>{''}</h1></Item.Header>
         <Item.Meta>
@@ -42,7 +43,7 @@ const StaffComp = (props) => {
           <Label icon='globe' content='Well Rounded' />
           <Button primary floated='right' 
           as={Link}
-          to='/'
+          to={{pathname: `/profile/${props.user._id}`}}
           >
             Go to Profile
             <Icon name='right chevron' />
