@@ -14,7 +14,7 @@ class FeatureDetails extends Component {
     }
 
     render() { 
-        const {features, projectId, handleDeleteFeature, history, handleUpdateFeature} = this.props
+        const {features, projectId, handleDeleteFeature, history, handleUpdateFeature, owner, contributors} = this.props
         const handleRedirect = featureId => {
         history.push(`/projectboard/${projectId}/${featureId}`)
     } 
@@ -24,6 +24,7 @@ class FeatureDetails extends Component {
                <Table.Row>
                    <Table.HeaderCell>Feature</Table.HeaderCell>
                    <Table.HeaderCell>Description</Table.HeaderCell>
+                   <Table.HeaderCell>Lead Developer</Table.HeaderCell>
                    <Table.HeaderCell>Edit</Table.HeaderCell>
                    <Table.HeaderCell>Remove</Table.HeaderCell>
                </Table.Row>
@@ -34,6 +35,7 @@ class FeatureDetails extends Component {
                 <Table.Row key={idx} >
                 <Table.Cell onClick={()=> handleRedirect(feature._id)}>{feature.feature}</Table.Cell>
                 <Table.Cell onClick={()=> handleRedirect(feature._id)} key={feature._id}>{feature.description}</Table.Cell>
+                <Table.Cell>{feature.lead.name}</Table.Cell>
                 <Table.Cell ><Button onClick={this.renderEditFeature} icon='edit'/></Table.Cell>
                 <Table.Cell onClick={()=> handleDeleteFeature(feature._id)} key={`delete-${idx}`}><Button icon='eraser'/></Table.Cell>
                 <Portal  open={this.state.editFeature} >
@@ -42,6 +44,8 @@ class FeatureDetails extends Component {
                             handleUpdateFeature={handleUpdateFeature}
                             editFeature={this.state.editFeature}
                             feature={feature}
+                            owner={owner}
+                            contributors={contributors}
                         />
                     </Portal>
             </Table.Row>

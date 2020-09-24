@@ -13,7 +13,8 @@ const featureSchema = new Schema({
     feature: String,
     description: String,
     featureStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
-    tasks: [taskSchema]
+    tasks: [taskSchema],
+    lead: {type: Schema.Types.ObjectId, ref: 'User'}
 },{timestamps: true})
 
 const commentSchema = new Schema({

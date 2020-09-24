@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Table, Checkbox} from 'semantic-ui-react'
+import { Button, Table} from 'semantic-ui-react'
 import {useHistory} from 'react-router-dom'
 import ToggleAdmin from '../ToggleAdmin/ToggleAdmin'
 

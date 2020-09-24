@@ -45,7 +45,9 @@ class TaskCardEm extends Component {
                             onChange={this.handleChange}
                         />
                         </Card.Header>
-                        <Card.Meta>Head of Project Here</Card.Meta>
+                        <Form.Dropdown 
+                        
+                        />
                         <Card.Description>
                         <TextArea 
                             style={{width: "19rem"}} 

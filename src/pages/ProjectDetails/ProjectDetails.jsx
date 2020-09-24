@@ -190,6 +190,8 @@ class ProjectDetails extends Component {
                     handleDeleteFeature={this.handleDeleteFeature}
                     handleUpdateFeature={this.handleUpdateFeature}
                     history={this.props.history}
+                    contributors={this.state.project.contributors.length ? this.state.project.contributors : 'not loading'}
+                    owner={this.state.project.owner._id ? this.state.project.owner : 'not loading'}
                     /> 
         
             : ''}
@@ -212,6 +214,8 @@ class ProjectDetails extends Component {
                         <AddFeatureForm 
                             renderAddFeature={this.renderAddFeature}
                             handleAddFeature={this.handleAddFeature}
+                            contributors={this.state.project._id ? this.state.project.contributors : 'notloading'}
+                            owner={this.state.project._id ? this.state.project.owner : 'notloading'}
                         />
                     </Portal>
                     
