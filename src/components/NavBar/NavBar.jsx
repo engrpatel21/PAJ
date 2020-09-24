@@ -44,7 +44,7 @@ class NavBar extends Component {
               as={Link}
               to='/'
               name='Home'
-              active={activeItem === 'home'}
+              active={activeItem === 'Home'}
               onClick={this.handleItemClick}
               >
               </Menu.Item>
@@ -54,17 +54,24 @@ class NavBar extends Component {
                as={Link}
                to='/users'
                name='All Users'
-               active={activeItem === 'users page'}
+               active={activeItem === 'All Users'}
                onClick={this.handleItemClick}
               
-              >
-                
-              </Menu.Item>
+              ></Menu.Item>
+
+              <Menu.Item
+               as={Link}
+               to='/allprojects'
+               name='All Projects'
+               active={activeItem === 'All Projects'}
+               onClick={this.handleItemClick}
+              ></Menu.Item>
+
               <Menu.Item
                as={Link}
                to='/createproject'
                name='Create Project'
-               active={activeItem === 'create project'}
+               active={activeItem === 'Create Project'}
                onClick={this.handleItemClick}
               ></Menu.Item>
 
@@ -72,7 +79,7 @@ class NavBar extends Component {
               as={Link}
               to='/profile'
               name='Profile'
-              active={activeItem === 'profile'}
+              active={activeItem === 'Profile'}
               onClick={this.handleItemClick}
               ></Menu.Item>
 
@@ -80,7 +87,7 @@ class NavBar extends Component {
               as={Link}
               to='/staff'
               name='Staff'
-              active={activeItem === 'staff'}
+              active={activeItem === 'Staff'}
               onClick={this.handleItemClick}
               ></Menu.Item>
             
@@ -88,7 +95,7 @@ class NavBar extends Component {
             as={Link}
             to='/'
             name='Log out'
-            active={activeItem === 'logout'}
+            active={activeItem === 'Log out'}
             onClick={this.props.handleLogout}
             />
             </> 
@@ -99,7 +106,7 @@ class NavBar extends Component {
                 as={Link}
                 to='/login'
                 name='Log in'
-                active={activeItem === 'login'}
+                active={activeItem === 'Log in'}
                 onClick={this.handleItemClick}
                 inverted={!fixed}>
                   Log in
@@ -108,7 +115,7 @@ class NavBar extends Component {
                  as={Link}
                  to='/signup'
                  name='Sign Up'
-                 active={activeItem === 'signup'}
+                 active={activeItem === 'Sign Up'}
                  onClick={this.handleItemClick} 
                  inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
                    Sign up

@@ -14,6 +14,7 @@ import Profile from '../Profile/Profile'
 import FriendsProfile from '../FriendsProfile/FriendsProfile'
 import MessageBoard from '../MessagePage/MessagePage'
 import Staff from '../Staff/Staff'
+import AllUserProjects from '../AllProjects/AllProjects'
 import "./App.css";
 
 class App extends Component {
@@ -146,6 +147,14 @@ class App extends Component {
           path="/messageboard"
           render={() => (user ? <MessageBoard /> : <Redirect to="/login" />)}
             />
+
+                
+          <Route
+          exact
+          path="/allprojects"
+          render={() => (user ? <AllUserProjects /> : <Redirect to="/login" />)}
+            />
+
 
         <Route 
         exact path='/staff'
