@@ -16,6 +16,7 @@ class MessagePage extends Component {
 
   render() { 
     const {users} = this.state
+    
     return ( 
     <>
     <h1>Message Board Page</h1>
