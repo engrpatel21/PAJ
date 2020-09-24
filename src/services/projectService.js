@@ -78,6 +78,16 @@ export function deleteProjectContributors(project_id, contributor_id, user_id){
     .then(res => res.json())
 }
 
+export function updateProjectContributors(project_id, contributor_id, contributor){
+    return fetch(`${BASE_URL}/${project_id}/contributors/${contributor_id}`,{
+        method: 'PUT',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(contributor)
+    }, {mode: "cors"})
+    .then(res => res.json())
+    
+}
+
 export function addProjectComments(project_id, comment){
     return fetch(`${BASE_URL}/${project_id}/comments`, {
         method: 'POST',

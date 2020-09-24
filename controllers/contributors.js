@@ -3,8 +3,11 @@ const User = require('../models/user')
 
 module.exports ={
     createContributor,
-    deleteContributor
+    deleteContributor,
+    updateContributor
 }
+
+
 
 async function deleteContributor(req, res){
     Project.findById(req.params.projectId)
@@ -20,6 +23,17 @@ async function deleteContributor(req, res){
                     res.json(project)
                 })
             })
+        )
+    })
+}
+
+async function updateContributor(req, res){
+    Project.findById(req.params.projectId)
+    .then(project => {
+        const idx = project.contributors.findIndex(c => c._id.equals(req.params.contributorId))
+        project.contributors.splice(idx,1,req.body)
+        project.save().then(()=>
+            res.json(project)
         )
     })
 }

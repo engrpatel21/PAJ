@@ -49,6 +49,13 @@ class ProjectDetails extends Component {
             ()=> this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
     }
 
+    handleUpdateContributor = async (contributor_id, contributor) => {
+        await projectApi.updateProjectContributors(this.props.match.params.projectId, contributor_id, contributor )
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project},
+            ()=> this.props.history.push(`/projectdetails/${this.props.match.params.projectId}`))
+    }
+
     handleUpdateProject = async (project_id, projectData) => {
         await projectApi.updateProject(project_id, projectData)
         const project = await projectApi.getOneProject(this.props.match.params.projectId)
@@ -143,7 +150,11 @@ class ProjectDetails extends Component {
 
             <Message textalign='left' className='AddProject'>
             <Divider horizontal><h3>Contributors</h3></Divider>
-            <ContributorsList contributors={this.state.project.contributors} handleDeleteContributor={this.handleDeleteContributor}/>
+            <ContributorsList 
+                contributors={this.state.project.contributors} 
+                handleDeleteContributor={this.handleDeleteContributor}
+                handleUpdateContributor={this.handleUpdateContributor}
+                />
             <div>
                 <Grid>
                     <Grid.Column textAlign="center">

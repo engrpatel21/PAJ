@@ -23,7 +23,8 @@ const commentSchema = new Schema({
 
 const contributorSchema = new Schema({
     contributor: { type: Schema.Types.ObjectId, ref: 'User'},
-    notes: String
+    notes: String,
+    isAdmin: {type: Boolean, default: false}
 },{timestamps: true})
 
 const projectSchema = new Schema({

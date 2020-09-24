@@ -7,7 +7,7 @@ const MessageComponent = (props) => (
 <Comment>
       <Comment.Avatar src='https://vignette.wikia.nocookie.net/starfox/images/7/77/Foxhead.gif/revision/latest/top-crop/width/220/height/220?cb=20081028023846' />
       <Comment.Content>
-        <Comment.Author as='a'>{props.username}</Comment.Author>
+        <Comment.Author >{props.username}</Comment.Author>
         <Comment.Metadata>
           <div>Today at 5:42PM</div>
         </Comment.Metadata>
