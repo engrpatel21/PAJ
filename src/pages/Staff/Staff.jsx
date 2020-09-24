@@ -5,43 +5,39 @@ import * as userApi from '../../services/userService'
 
 class Staff extends Component {
     state = { 
-    users: '',
+    users: [],
      }
 
      async componentDidMount(){
         const users = await userApi.getAllUsers()
-        this.setState({users})}
+        this.setState({users})
+     }
 
 render() { 
-    const {users} = this.state
+
     // {this.state.users ? 'isloading' : 'not loading'}
     // const filterUsers = users.filter(user => (users.name.includes('j@j.com', '12@12.com', 'gundam@rx.com')))
 
     return ( 
-       <>
-       {/* {this.state.users ? 
-       
-       <>
-       {filterUsers.map(user =>
-            <StaffComp 
-            user={this.state.user}
-            getAllUsers={this.getAllUsers}
+    <>
     
-            />
-
-            )} 
-
-       </>
-       
-       
-       
-       
-       
-       : 'not loading'} */}
-       
-       </>
+        {this.state.users.length ? 
+        
+        <>
+           {this.state.users.map(user => 
+                <>
+                    {user.email === '12@12.com' || user.email === 'j@j.com' || user.email === 'gundam@rx.com' ?   <StaffComp user={user} /> : ''}
+                  
+                </>
+            )}
+        </>
+        
+        
+        
+        : 'not l'}
+    </>
     );
-}
+    }
 }
  
 export default Staff;
