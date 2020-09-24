@@ -10,6 +10,7 @@ module.exports = {
 
 function showOneUser(req, res){
   User.findById(req.params.userId)
+  .populate('projects')
   .then(user => 
     res.json(user)
     )

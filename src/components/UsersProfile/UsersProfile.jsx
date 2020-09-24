@@ -37,7 +37,7 @@ const UsersProfile = (props, mobile) => {
             </Grid.Column>
             <Grid.Column width={3}>
               <Message floating>
-              <ProjectUsersCard />
+              <ProjectUsersCard projects={usersInfo.projects ? usersInfo.projects : ''}/>
             
                
               
