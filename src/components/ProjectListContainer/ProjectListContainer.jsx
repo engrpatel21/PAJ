@@ -42,7 +42,7 @@ class ProjectListContainer extends Component {
                                 className='container' 
                                 style={{
                                     height:'100px',
-                                    color:'white',
+                                    color:'seashell',
                                     textShadow:'#1b1c1d 2px 2px',
                                     fontSize:'20px',
                                     textAlign:'center',
@@ -53,6 +53,7 @@ class ProjectListContainer extends Component {
                                     display:'flex',
                                     flexFlow:'column nowrap',
                                     justifyContent:'center',
+                                    opacity:'.8'
                                     
                                     
 
