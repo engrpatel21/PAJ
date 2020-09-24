@@ -151,9 +151,10 @@ class ProjectDetails extends Component {
             <Message textalign='left' className='AddProject'>
             <Divider horizontal><h3>Contributors</h3></Divider>
             <ContributorsList 
-                contributors={this.state.project.contributors} 
+                contributors={this.state.project._id ? this.state.project.contributors : ''} 
                 handleDeleteContributor={this.handleDeleteContributor}
                 handleUpdateContributor={this.handleUpdateContributor}
+                project={this.state.project._id ? this.state.project : 'not loading'}
                 />
             <div>
                 <Grid>
@@ -190,7 +191,7 @@ class ProjectDetails extends Component {
                     handleDeleteFeature={this.handleDeleteFeature}
                     handleUpdateFeature={this.handleUpdateFeature}
                     history={this.props.history}
-                    contributors={this.state.project.contributors.length ? this.state.project.contributors : 'not loading'}
+                    contributors={this.state.project.contributors.length ? this.state.project.contributors : ''}
                     owner={this.state.project.owner._id ? this.state.project.owner : 'not loading'}
                     /> 
         
@@ -214,7 +215,7 @@ class ProjectDetails extends Component {
                         <AddFeatureForm 
                             renderAddFeature={this.renderAddFeature}
                             handleAddFeature={this.handleAddFeature}
-                            contributors={this.state.project._id ? this.state.project.contributors : 'notloading'}
+                            contributors={this.state.project._id ? this.state.project.contributors : ''}
                             owner={this.state.project._id ? this.state.project.owner : 'notloading'}
                         />
                     </Portal>

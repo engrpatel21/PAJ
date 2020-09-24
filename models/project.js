@@ -6,7 +6,7 @@ const taskSchema = new Schema({
     name: String,
     content: String,
     taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
-    isEdit: {type: Boolean, default: false}
+    isEdit: {type: Boolean, default: false},
 },{timestamps: true})
 
 const featureSchema = new Schema({
@@ -25,7 +25,7 @@ const commentSchema = new Schema({
 const contributorSchema = new Schema({
     contributor: { type: Schema.Types.ObjectId, ref: 'User'},
     notes: String,
-    isAdmin: {type: Boolean, default: false}
+    isAdmin: {type: Boolean, default: false},
 },{timestamps: true})
 
 const projectSchema = new Schema({
@@ -36,7 +36,7 @@ const projectSchema = new Schema({
     description: String,
     contributors: [contributorSchema],
     comments: [commentSchema],
-    isPublic: {type: Boolean, default: true}
+    isPublic: {type: Boolean, default: false}
 
 },{timestamps: true})
 

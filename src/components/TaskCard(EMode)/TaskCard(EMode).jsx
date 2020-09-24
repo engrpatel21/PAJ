@@ -4,7 +4,7 @@ import {Card, Button, Input, TextArea,Form} from 'semantic-ui-react'
 
 class TaskCardEm extends Component {
     state = { 
-        taskFormData: this.props.task ? this.props.task : {name: '', content: ''}
+        taskFormData: this.props.task ? this.props.task : {name: '', content: '', user:''}
     }
     
     handleSubmitAddTask = e =>{
@@ -26,7 +26,34 @@ class TaskCardEm extends Component {
        taskFormData
        });
     }
-    
+    handleSelectChange=(e,{value})=>{
+        const taskFormData = {...this.state.taskFormData }
+        taskFormData.user = value
+        this.setState({taskFormData})
+      }
+    pushOptions = () => {
+        const options = [
+          {
+            key: this.props.owner._id,
+            text: this.props.owner.name,
+            value: this.props.owner._id,
+            image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
+          }
+        ]
+         this.props.contributors.forEach(contributor =>
+          
+            options.push({
+              key: contributor.contributor._id,
+              text: contributor.contributor.name,
+              value: contributor.contributor._id,
+              image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
+            })
+          )
+          console.log(options)
+          return options
+       }
+
+
     formRef = React.createRef()
     render() { 
         return ( 
@@ -45,8 +72,14 @@ class TaskCardEm extends Component {
                             onChange={this.handleChange}
                         />
                         </Card.Header>
-                        <Form.Dropdown 
-                        
+                        <Form.Dropdown
+                            placeholder='Select Contributor'
+                            fluid
+                            selection
+                            onChange={this.handleSelectChange}
+                            value={this.state.taskFormData.user}
+                            options={this.pushOptions()}
+                            
                         />
                         <Card.Description>
                         <TextArea 

@@ -49,7 +49,11 @@ class AddFeatureForm extends Component {
           image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
         }
       ]
-       this.props.contributors.forEach(contributor =>
+      
+      console.log(this.props.contributors)
+      if(this.props.contributors.length > 0){
+        (console.log('im here'))
+        this.props.contributors.forEach(contributor =>
         
           options.push({
             key: contributor.contributor._id,
@@ -58,6 +62,9 @@ class AddFeatureForm extends Component {
             image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
           })
         )
+
+      }
+  
         console.log(options)
         return options
      }
