@@ -28,7 +28,7 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
     const {user} = this.props
     return (
       <>
-        <h1>Your Profile Page</h1>
+        <h1>{user.name}</h1>
         <Divider>
         </Divider>
         <Grid celled>
@@ -64,16 +64,13 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
                 </Grid.Column>
                 </Card.Header>
                 <Card.Meta>
-                  <span className='date'>{user.bio}</span>
                 </Card.Meta>
                 <Card.Description>
-                  Amuro is a software engineer living on Mars.
+                  <p>{user.bio}</p>
+                  
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-        
-                  <Icon name='user' />
-                  22 Friends
             
               </Card.Content>
             </Card>
