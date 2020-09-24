@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider, Grid, Icon, Image, Card, Message } from 'semantic-ui-react'
-import ProjectUsersList from '../ProjectUsersCard/ProjectUsersCard'
+import ProjectUsersCard from '../ProjectUsersCard/ProjectUsersCard'
 
 const UsersProfile = (props, mobile) => {
     const {usersInfo} = props
@@ -28,8 +28,8 @@ const UsersProfile = (props, mobile) => {
               </Card.Content>
               <Card.Content extra>
              
-                  <Icon name='userInfo' />
-                  22 Friends
+                  {/* <Icon name='userInfo' />
+                  22 Friends */}
       
               </Card.Content>
             </Card>
@@ -37,7 +37,7 @@ const UsersProfile = (props, mobile) => {
             </Grid.Column>
             <Grid.Column width={3}>
               <Message floating>
-              <ProjectUsersList />
+              <ProjectUsersCard />
             
                
               

@@ -21,7 +21,7 @@ class FriendsProfile extends Component {
             <>
             <UsersProfile 
             usersInfo = {userInfo ? userInfo : 'LOADING'}
-
+            usersId = {this.props.match.params.userId}
             />
             </>
          );

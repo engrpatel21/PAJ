@@ -5,6 +5,7 @@ module.exports = {
   updateUser,
   showUserProject,
   showOneUser,
+  getAllUserProjects
 };
 
 function showOneUser(req, res){
@@ -33,4 +34,13 @@ function index(req, res) {
   User.find({})
   .populate('projects')
   .then((users) => res.json(users));
+}
+
+// Added for User's Profile Page.
+function getAllUserProjects(req, res){
+  User.findById(req.params.userId)
+  .populate('projects')
+  .then(user => 
+    res.json(user.projects)
+    )
 }

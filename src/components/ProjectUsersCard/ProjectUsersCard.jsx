@@ -3,18 +3,14 @@ import { Link } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 
-
-
-
-
-
-class ProjectUsersList extends Component {
+class ProjectUsersCard extends Component {
     state = {
         userProjects: [],
     };
 
     async componentDidMount(){
-        const userProjects = await userApi.getUserProjects(this.props.user)
+        const userProjects = await userApi.getAllUserProjects(this.props.usersId)
+        console.log({userProjects})
         this.setState({userProjects})
     }
 
@@ -40,4 +36,4 @@ render() {
   }
 }
 
-export default ProjectUsersList;
+export default ProjectUsersCard;
