@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 import { Grid, Image, Button, Icon, Divider, Card, Message } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
-
-
-
-
+import ProjectListContainer from '../../components/ProjectListContainer/ProjectListContainer'
 
 class Profile extends Component {
   state = {
@@ -80,21 +77,9 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
               </Card.Content>
             </Card>
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Message floating>
-              {this.state.userProjects.map((project)=>
-                <div key={project._id}>
-              <Link
-                to={{
-                  pathname: `/projectdetails/${project._id}`
-                }}
-              >
-                {project.name ? project.name : 'Link to Project'}
-              </Link>
-                </div>
-              )}
-              </Message>
-            </Grid.Column>
+            <ProjectListContainer
+              
+            />
           </Grid.Row>
         </Grid>
       </>
