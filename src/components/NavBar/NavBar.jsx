@@ -18,7 +18,7 @@ class NavBar extends Component {
     const { fixed } = this.state
    
     return (
-      <Segment greaterThan='mobile'>
+      <>
       <Visibility
         once={false}
         onBottomPassed={this.showFixedMenu}
@@ -121,7 +121,7 @@ class NavBar extends Component {
         </Segment>
       </Visibility>
       {children}
-    </Segment>
+    </>
 
     )
   }
