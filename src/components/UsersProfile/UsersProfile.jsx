@@ -10,13 +10,19 @@ const UsersProfile = (props, mobile) => {
     }
 
     return ( 
-    <>
-        <Divider>
-        </Divider>
-        <Grid celled>
-          <Grid.Row>
+    
+         <body style={{
+        backgroundColor:'#1b1c1d'}}>
+        <Grid celled style={{
+          height:'910px',
+        }}>
+          <Grid.Row >
             <Grid.Column width={5}>
-            <Card>
+            <Card style={{
+              bottom:'5px',
+              left: '150px',
+              
+            }}>
               <Image src={usersInfo.avatar} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{usersInfo.name}
@@ -25,10 +31,10 @@ const UsersProfile = (props, mobile) => {
                    
                   </Grid.Column></Card.Header>
                 <Card.Meta>
-                  <span className='date'>{usersInfo.bio}</span>
                 </Card.Meta>
                 <Card.Description>
-                  {usersInfo.bio}
+                  {usersInfo.bio ? usersInfo.bio : 'Spicy jalapeno bacon ipsum dolor amet shank jerky shoulder sed incididunt ad. Nisi alcatra short loin ut. Nisi short ribs dolor proident bresaola veniam. Sirloin meatball pariatur eu turducken short ribs do laboris adipisicing. Elit dolor bresaola tri-tip landjaeger, officia flank pork drumstick cow meatloaf t-bone kielbasa aliquip. Voluptate occaecat boudin, flank ut landjaeger kielbasa cupim ut tempor ex alcatra venison. Reprehenderit in kielbasa excepteur deserunt pork loin.'
+                  }
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
@@ -38,16 +44,17 @@ const UsersProfile = (props, mobile) => {
             
             </Grid.Column>
             <Grid.Column width={3}>
-              <Message floating>
+              
               <ProjectUsersCard projects={usersInfo.projects ? usersInfo.projects : ''}/>
             
                
               
-              </Message>
+            
             </Grid.Column>
           </Grid.Row>
         </Grid> 
-        </>
+        </body>
+        
      );
 }
  
