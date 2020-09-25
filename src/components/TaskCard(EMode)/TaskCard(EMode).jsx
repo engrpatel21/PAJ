@@ -31,27 +31,27 @@ class TaskCardEm extends Component {
         taskFormData.user = value
         this.setState({taskFormData})
       }
-    pushOptions = () => {
-        const options = [
-          {
-            key: this.props.owner._id,
-            text: this.props.owner.name,
-            value: this.props.owner._id,
-            image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
-          }
-        ]
-         this.props.contributors.forEach(contributor =>
+    // pushOptions = () => {
+    //     const options = [
+    //       {
+    //         key: this.props.owner._id,
+    //         text: this.props.owner.name,
+    //         value: this.props.owner._id,
+    //         image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
+    //       }
+    //     ]
+    //      this.props.contributors.forEach(contributor =>
           
-            options.push({
-              key: contributor.contributor._id,
-              text: contributor.contributor.name,
-              value: contributor.contributor._id,
-              image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
-            })
-          )
-          console.log(options)
-          return options
-       }
+    //         options.push({
+    //           key: contributor.contributor._id,
+    //           text: contributor.contributor.name,
+    //           value: contributor.contributor._id,
+    //           image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
+    //         })
+    //       )
+    //       console.log(options)
+    //       return options
+    //    }
 
 
     formRef = React.createRef()
@@ -72,7 +72,7 @@ class TaskCardEm extends Component {
                             onChange={this.handleChange}
                         />
                         </Card.Header>
-                        <Form.Dropdown
+                        {/* <Form.Dropdown
                             placeholder='Select Contributor'
                             fluid
                             selection
@@ -80,7 +80,7 @@ class TaskCardEm extends Component {
                             value={this.state.taskFormData.user}
                             options={this.pushOptions()}
                             
-                        />
+                        /> */}
                         <Card.Description>
                         <TextArea 
                             style={{width: "19rem"}} 
