@@ -41,9 +41,7 @@ class App extends Component {
     const user = await userApi.getOneUser()
     this.setState({projects, updatedUser: user})
   }
-
   
-
   handleAddProject = async projectData =>{
     const newProject = await projectApi.createProject(projectData)
     this.setState({projects: [...this.state.projects, newProject]},
@@ -210,3 +208,5 @@ class App extends Component {
 }
 
 export default App;
+
+// 01
