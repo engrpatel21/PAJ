@@ -101,6 +101,7 @@ class App extends Component {
         : 
         <Redirect to="/login" />
         )}/>
+
         {/* Route to Project Board Page */}
         <Route 
           exact path='/projectboard/:projectId/:featureId'
@@ -111,7 +112,8 @@ class App extends Component {
         />
         : 
         <Redirect to="/login" />
-          )}/>
+        )}/>
+        
         <Route 
         exact path='/createproject'
         render={() => (
@@ -122,7 +124,6 @@ class App extends Component {
         <Redirect to="/login" />
         )}/>
 
-        
         <Route 
         exact path='/profile'
         render={() => (
@@ -144,25 +145,25 @@ class App extends Component {
         )}/>
 
         <Route
-          exact
-          path="/messageboard"
-          render={() => (user ? <MessageBoard /> : <Redirect to="/login" />)}
-            />
-
-                
-          <Route
-          exact
-          path="/allprojects"
-          render={() => (user ? <AllUserProjects /> : <Redirect to="/login" />)}
-            />
-
+        exact
+        path="/messageboard"
+        render={() => (user ? <MessageBoard 
+        /> 
+        : <Redirect to="/login" />)}
+        />
+     
+        <Route
+        exact
+        path="/allprojects"
+        render={() => (user ? <AllUserProjects /> 
+        : <Redirect to="/   login" />)}
+        />
 
         <Route 
         exact path='/staff'
         render={() => (
         user ? <Staff
         user={this.state.user}
-        
         />
         : 
         <Redirect to="/login" />
