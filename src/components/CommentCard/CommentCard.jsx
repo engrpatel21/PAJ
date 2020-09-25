@@ -32,7 +32,7 @@ class CommentCard extends Component {
         const {comment, user, handleDeleteComment} = this.props
         return ( 
             <Comment>
-        <Comment.Avatar as='a' src='/images/avatar/small/joe.jpg' />
+        <Comment.Avatar as='a' src='https://picsum.photos/200/300' />
         <Comment.Content>
         <Comment.Author>{comment.createdBy?  comment.createdBy.name : 'not loaded'}
         {comment.createdBy? (user._id === comment.createdBy._id ?  
