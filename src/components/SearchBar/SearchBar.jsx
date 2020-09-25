@@ -8,7 +8,7 @@ const SearchBox = (props) => {
                 <Input 
                     huge icon='search' 
                     focus 
-                    placeholder='Search for Users...' 
+                    placeholder='Search Here...' 
                     type='text' 
                     value ={null}
                     onChange={props.handleChange}
