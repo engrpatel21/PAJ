@@ -44,7 +44,7 @@ render() {
             flexFlow:'column nowrap',
             justifyContent:'center',
             opacity:'.8',
-            bottom: '100px',
+            bottom: '5px',
             left:'200px'
             }} 
           >     

@@ -10,7 +10,7 @@ class FriendsProfile extends Component {
         }
      }
      async componentDidMount(){
-        const userInfo = await userApi.getOneUser(this.props.match.params.userId)
+        const userInfo = await userApi.differentUser(this.props.match.params.userId)
         this.setState({userInfo})
     }
 
@@ -21,6 +21,7 @@ class FriendsProfile extends Component {
             <>
             <UsersProfile 
             usersInfo = {userInfo ? userInfo : 'LOADING'}
+            addFriend = {this.props.addFriend}
             usersId = {this.props.match.params.userId}
             />
             </>

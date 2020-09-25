@@ -7,8 +7,9 @@ const UserCard = ({ user }) => {
       <>
       <body style={{
         backgroundColor:'#1b1c1d'
+
       }}>
-          <Card as={Link} to={{pathname: `/profile/${user._id}`}} >
+          <Card as={Link} to={{pathname: `/profile/${user._id}`, state: {user}}}  style={{marginBottom: '5px'}}>
             <Image src={user.avatar? user.avatar : 'https://picsum.photos/200/300'} wrapped ui={false} />
             <Card.Content>
               <Card.Header>{user.name }

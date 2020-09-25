@@ -163,7 +163,9 @@ formRef = React.createRef()
                 backgroundColor:'cornflowerblue',
                 boxShadow:'gray 2px 2px',
                 justifyContent:'center',
+                
             }} 
+              as={Link} to={{pathname:'/friendList/'}}
               >Friends</Button>
         
               </Card.Content>

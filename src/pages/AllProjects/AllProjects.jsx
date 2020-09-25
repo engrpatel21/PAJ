@@ -25,7 +25,10 @@ class AllUserProjects extends Component {
         ))
         return (
             <>
-            <h1>All Projects Page</h1>
+            <body style={{
+            backgroundColor:'#1b1c1d',
+            height:'950px'
+             }}>
             <Divider>
             </Divider>  
             <SearchBar 
@@ -70,6 +73,7 @@ class AllUserProjects extends Component {
                     </div>  
                 )}
             </div>
+            </body>
             </>                  
         )
     }
