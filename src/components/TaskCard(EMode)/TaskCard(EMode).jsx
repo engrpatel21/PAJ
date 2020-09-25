@@ -4,7 +4,7 @@ import {Card, Button, Input, TextArea,Form} from 'semantic-ui-react'
 
 class TaskCardEm extends Component {
     state = { 
-        taskFormData: this.props.task ? this.props.task : {name: '', content: '', user:''}
+        taskFormData: this.props.task ? this.props.task : {name: '', content: ''}
     }
     
     handleSubmitAddTask = e =>{
