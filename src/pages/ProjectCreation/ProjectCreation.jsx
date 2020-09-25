@@ -52,10 +52,20 @@ class ProjectCreation extends Component {
             />
             </Form.Group>
             <Form.Group>
-            <Form.Button content='Submit' 
-            size='large' 
-            color='blue' 
+            <Form.Button 
+            content='Submit' 
             icon='plus'
+            style={{
+              width:'300px',
+              color:'white',
+              textShadow:'#1b1c1d 2px 2px',
+              fontSize:'16px',
+              textAlign:'center',
+              fontWeight: 'bold',
+              backgroundColor:'cornflowerblue',
+              boxShadow:'gray 2px 2px',
+              justifyContent:'center',
+            }}
             
             />
           </Form.Group>

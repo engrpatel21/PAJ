@@ -32,8 +32,8 @@ export function getOneUser(user_id){
   .then(res => res.json())
 }
 
-export function getAllUserProjects(user_id){
-  return fetch(`${BASE_URL}/projects/${user_id}`, {
+export function getAllUserProjects(){
+  return fetch('/api/projects', {
     headers: { Authorization: "Bearer " + tokenService.getToken() },
   })
   .then(res => res.json())

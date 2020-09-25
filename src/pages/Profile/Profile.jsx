@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { Grid, Image, Button, Icon, Divider, Card, Message, Form  } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
-import MessagesAndFriends from '../../components/MessagesAndFriends/MessagesAndFriends'
 import ProjectListContainer from '../../components/ProjectListContainer/ProjectListContainer'
 
 class Profile extends Component {
@@ -12,6 +11,7 @@ class Profile extends Component {
    
     
   };
+
 
  
 
@@ -28,29 +28,31 @@ handleChange = e => {
   })
 }
 formRef = React.createRef()
+
   render() {
     const {user} = this.props
     return (
       <>
-        <h1>Your Profile Page</h1>
-        <Divider>
-        </Divider>
         <Grid celled>
           <Grid.Row>
           <Grid.Column width={3}>
-          <Button.Group>
-            <Link to='/messageboard'>
-              <Button>Messages</Button>
-            </Link>
-              <Button.Or />
-              <Button>Friends</Button>
-            </Button.Group>
             <br></br>
             <br></br>
             <Link to='/createproject'>
-            <Button color='blue'>
+            <Button style={{
+              width:'200px',
+              color:'white',
+              textShadow:'#1b1c1d 2px 2px',
+              fontSize:'16px',
+              textAlign:'center',
+              fontWeight: 'bold',
+              backgroundColor:'cornflowerblue',
+              boxShadow:'gray 2px 2px',
+              justifyContent:'center',
+              
+            }}>
               <label>
-              <Icon name='add'/> Add Project
+              <Icon name='add'/> New Project
               </label>
             </Button>
             </Link>
@@ -100,10 +102,14 @@ formRef = React.createRef()
                 </Grid.Column>
                 </Card.Header>
                 <Card.Meta>
+
+               
                   Bio
+
                 </Card.Meta>
                 <Card.Description>
-                  {user.bio}
+                  <p>{user.bio}</p>
+
                 </Card.Description>
               </>
 
@@ -114,15 +120,43 @@ formRef = React.createRef()
         
               </Card.Content>
               <Card.Content extra>
-        
-                  <Icon name='user' />
-                  22 Friends
             
+          
+              <Button
+              as={Link}
+              to='/messageboard'
+              style={{
+        
+                width:'120px',
+                color:'white',
+                textShadow:'#1b1c1d 2px 2px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight: 'bold',
+                backgroundColor:'cornflowerblue',
+                boxShadow:'gray 2px 2px',
+                justifyContent:'center',
+            }}
+              >Messages</Button>
+              
+              <Button 
+              style={{
+                width:'120px',
+                color:'white',
+                textShadow:'#1b1c1d 2px 2px',
+                fontSize:'16px',
+                textAlign:'center',
+                fontWeight: 'bold',
+                backgroundColor:'cornflowerblue',
+                boxShadow:'gray 2px 2px',
+                justifyContent:'center',
+            }} 
+              >Friends</Button>
+        
               </Card.Content>
             </Card>
             </Grid.Column>
             <ProjectListContainer
-              
             />
           </Grid.Row>
         </Grid>
