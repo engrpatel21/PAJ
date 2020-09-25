@@ -159,15 +159,23 @@ class ProjectDetails extends Component {
             <div>
                 <Grid>
                     <Grid.Column textAlign="center">
-                        <Popup content="Click to add a Contributors" 
-                        trigger={<Button onClick={this.renderAddContributor} 
-                            size='tiny' 
-                            color='blue' 
-                            icon='plus'
-                            content='Contributor'
-                            disabled={this.state.addContributor}
-                            />} 
-                        />    
+
+                    {this.state.project.owner ? this.state.project.owner._id === this.props.user._id ? 
+                            
+                            
+                            <Popup content="Click to add a Contributors" 
+                            trigger={<Button onClick={this.renderAddContributor} 
+                                size='tiny' 
+                                color='blue' 
+                                icon='plus'
+                                content='Contributor'
+                                disabled={this.state.addContributor}
+                                />} 
+                            />    
+                            
+                            
+                            : 'i dont' : 'i cant see button' }
+                       
                     </Grid.Column>
                 </Grid>
                 <Divider horizontal><h3>Feature List</h3></Divider>
@@ -188,6 +196,9 @@ class ProjectDetails extends Component {
                     <div>
                         <Grid>
                         <Grid.Column textAlign="center">
+                            {this.state.project.owner ? this.state.project.owner._id === this.props.user._id ? 
+                            
+                            
                             <Popup content="Click to add a Feature" 
                             trigger={<Button onClick={this.renderAddFeature} 
                                 size='tiny' 
@@ -196,7 +207,11 @@ class ProjectDetails extends Component {
                                 content='Feature'
                                 disabled={this.state.addFeature}
                                 />} 
-                            />    
+                            /> 
+                            
+                            
+                            : 'i dont' : 'i cant see button' }
+                          
                         </Grid.Column>
                         </Grid>
                     </div>

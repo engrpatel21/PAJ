@@ -9,12 +9,16 @@ class Profile extends Component {
   state = {
     editUser: false,
     userFormData: this.props.user, 
+    user: {}
    
     
   };
 
 
- 
+ async componentDidMount(){
+   const user = await userApi.getOneUser()
+   this.setState({user})
+ }
 
 handleSubmit = (e) => {
   e.preventDefault()
@@ -31,7 +35,7 @@ handleChange = e => {
 formRef = React.createRef()
 
   render() {
-    const {user} = this.props
+    const {user} = this.state
     return (
       <>
       <body style={{
