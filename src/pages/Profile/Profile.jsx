@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Grid, Image, Button, Icon, Divider, Card, Message, Form  } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import ProjectListContainer from '../../components/ProjectListContainer/ProjectListContainer'
+import './Profile'
 
 class Profile extends Component {
   state = {
@@ -33,8 +34,13 @@ formRef = React.createRef()
     const {user} = this.props
     return (
       <>
-        <Grid celled>
-          <Grid.Row>
+      <body style={{
+        backgroundColor:'#1b1c1d'
+      }}>
+        <Grid celled style={{
+          height:'910px',
+        }}>
+          <Grid.Row style={{left:'1500px'}}>
           <Grid.Column width={3}>
             <br></br>
             <br></br>
@@ -59,10 +65,17 @@ formRef = React.createRef()
           </Grid.Column>
           </Grid.Row>
 
-          <Grid.Row>
+          <Grid>
             <Grid.Column width={5}>
-            <Card>
-              <Image src={user.avatar} wrapped ui={true} />
+
+              
+
+            <Card style={{
+              bottom:'100px',
+              left: '150px'
+            }}>
+              <Image src={user.avatar} wrapped ui={false} />
+
               <Card.Content>
                 
               {this.state.editUser ? 
@@ -158,8 +171,9 @@ formRef = React.createRef()
             </Grid.Column>
             <ProjectListContainer
             />
-          </Grid.Row>
+          </Grid>
         </Grid>
+        </body>
       </>
     );
   }

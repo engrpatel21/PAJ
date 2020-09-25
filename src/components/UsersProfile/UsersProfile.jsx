@@ -6,7 +6,6 @@ const UsersProfile = (props, mobile) => {
     const {usersInfo} = props
     return ( 
     <>
-        <h1>User's Profile Page</h1>
         <Divider>
         </Divider>
         <Grid celled>

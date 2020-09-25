@@ -24,11 +24,8 @@ import { Link } from 'react-router-dom'
 
 
 const HomepageHeading = ({ mobile }) => (
-  <Container text
-  style={{
-    
-  }}
-  >
+  
+  <Container text>
     <Header
       as='h1'
       content='Welcome to PAJ'
@@ -87,6 +84,7 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
     
     return (
+      <body>
       <Segment greaterThan='mobile'>
         <Visibility
           once={false}
@@ -121,6 +119,7 @@ class DesktopContainer extends Component {
 
         {children}
       </Segment>
+      </body>
     )
   }
 }
@@ -171,6 +170,7 @@ ResponsiveContainer.propTypes = {
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
+    
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
@@ -266,7 +266,6 @@ const HomepageLayout = () => (
               <List link inverted>
                 <List.Item as={Link} to='/createproject'>Get Started</List.Item>
                 <List.Item as={Link} to='/profile'>Profile</List.Item>
-                <List.Item as={Link} to='/messageboard'>Message Board</List.Item>
                 <List.Item as={Link} to='/users'>All Users</List.Item>
               </List>
             </Grid.Column>

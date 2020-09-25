@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid, Card, Message, Divider} from 'semantic-ui-react'
+import { Card, Divider} from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { Link } from 'react-router-dom'
@@ -76,13 +76,3 @@ class AllUserProjects extends Component {
 }
 
 export default AllUserProjects
-
-// style={{
-//     width: '100%',
-//     display: 'grid',
-//     gridTemplateColumns: 'repeat(3, 1fr)',
-//     gridGap: '10px',
-//     justifyItems: 'center',
-//     margin:'10px 20px 200px',
-//     padding: '110px'
-// }}
