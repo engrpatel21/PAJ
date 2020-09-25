@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ProjectCreation.css'
-import { Form, Segment, TextArea } from 'semantic-ui-react'
+import { Form, Segment, TextArea, Divider } from 'semantic-ui-react'
 
 class ProjectCreation extends Component {
     state = { 
@@ -29,6 +29,10 @@ class ProjectCreation extends Component {
         console.log(this.state.formData)
         return (  
             <>
+            <body style={{
+        backgroundColor:'#1b1c1d'
+      }}>
+        <Divider></Divider>
         <Segment inverted textAlign='center' className='AddProject'>
             <h1>Create Project</h1>
         <Form inverted ref={this.formRef} onSubmit={this.handleSubmit} size='massive'>
@@ -71,6 +75,7 @@ class ProjectCreation extends Component {
           </Form.Group>
         </Form>
       </Segment>
+      </body>
         </>
         );
     }

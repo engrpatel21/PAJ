@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import authService from "../../services/authService"
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
 
 class LoginPage extends Component {
   state = {
@@ -33,11 +33,18 @@ class LoginPage extends Component {
   render() {
     const {email, pw} = this.state
     return (
+      <body style={{
+        backgroundColor: '#1b1c1d' 
+    }}>
       <main className="Login">
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo.png' /> Log-in to your account
+      <Header as='h3' color='teal' textAlign='center'>
+      <Icon.Group size='large'>
+      <Icon loading size='big' name='circle notch' />
+      <Icon name='user' />
+    </Icon.Group> 
+      Log in to your account
       </Header>
       <Form size='large' onSubmit={this.handleSubmit}>
         <Segment stacked>
@@ -74,13 +81,14 @@ class LoginPage extends Component {
         </Segment>
       </Form>
       <Message>
-        New to us? <a href='/signup'>Sign Up</a>
+        Don't have an account? <a href='/signup'>Sign Up</a>
       </Message>
     </Grid.Column>
   </Grid>
 
     
       </main>
+      </body>
     );
   }
 }

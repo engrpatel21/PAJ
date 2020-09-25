@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import authService from "../../services/authService";
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
 
 class SignupForm extends Component {
   state = {
@@ -42,8 +42,12 @@ class SignupForm extends Component {
       <div>
        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo.png' /> Sign-Up with a New Account!
+      <Header as='h3' color='teal' textAlign='center'>
+      <Icon.Group size='large'>
+      <Icon loading size='big' name='circle notch' />
+      <Icon name='user' />
+    </Icon.Group> 
+    Sign-Up with a New Account!
       </Header>
       <Form size='large' onSubmit={this.handleSubmit}>
         <Segment stacked>
