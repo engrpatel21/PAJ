@@ -23,14 +23,14 @@ const StaffComp = (props) => {
         />
         
         <Item.Content>
-        <Item.Header><h1>{''}</h1></Item.Header>
+        <Item.Header><h1>{props.user.name}</h1></Item.Header>
         <Item.Meta>
         </Item.Meta>
         <Item.Description style={{
-            
-        }}> <h3>
+            fontSize:'17px'
+        }}> <p>
         {props.user.email === 'j@j.com' ? props.user.bio :  props.user.email === '12@12.com' ? props.user.bio :  props.user.email === 'gundam@rx.com' ? props.user.bio : ''}
-    </h3>
+    </p>
     </Item.Description>
     <Item.Extra>
     <Label>Super Cool Guy</Label>
