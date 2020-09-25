@@ -4,7 +4,9 @@ const upload = require('../services/file-upload');
 
 const singleUpload = upload.single('image')
 
-router.post('/image-upload', function(req, res) {
+/*---------- Protected Routes ----------*/
+router.use(require("../config/auth"));
+router.post('/image-upload', checkAuth, function(req, res) {
   singleUpload(req, res, function(err, some) {
     if (err) {
       return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
@@ -13,5 +15,11 @@ router.post('/image-upload', function(req, res) {
     return res.json({'imageUrl': req.file.location});
   });
 })
+
+/*---------- Auth Checker ----------*/
+function checkAuth(req, res, next) {
+  if (req.user) return next();
+  return res.status(401).json({msg: 'Not Authorized'});
+}
 
 module.exports = router;
