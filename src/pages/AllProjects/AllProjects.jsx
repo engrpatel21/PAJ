@@ -35,6 +35,15 @@ class AllUserProjects extends Component {
             <div className='ProjectList-grid'>
                 {filteredProjects.map((project)=>
                     <div key={project._id}>
+                        <Link
+                        style={{
+                            color: 'white'
+                            }}
+                            to={{
+                            pathname: `/projectdetails/${project._id}`
+                            }}
+                            >
+                        {project.isPublic ?  '': ''}
                         <Card 
                             style={{
                                 height:'100px',
@@ -52,20 +61,15 @@ class AllUserProjects extends Component {
                                 justifyContent:'center',
                                 }}               
                         >
-                        <h3><Link
-                        style={{
-                            color: 'white'
-                            }}
-                            to={{
-                            pathname: `/projectdetails/${project._id}`
-                            }}
-                            >
+                        <h3>
                             {project.name ? project.name : 'Link to Project'}
-                        </Link></h3>
+                        </h3>
                         Project Description:
                         <br></br>
                         {project.description}
+                        
                         </Card>
+                        </Link>
                         <br></br>
                     </div>  
                 )}
