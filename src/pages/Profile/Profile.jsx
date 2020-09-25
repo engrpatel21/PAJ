@@ -40,7 +40,7 @@ formRef = React.createRef()
         <Grid celled style={{
           height:'910px',
         }}>
-          <Grid.Row style={{left:'1500px'}}>
+          <Grid.Row style={{left:'500px', bottom:'40px'}}>
           <Grid.Column width={3}>
             <br></br>
             <br></br>
