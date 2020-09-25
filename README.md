@@ -36,10 +36,11 @@ Our motivation for creating this app is based on our desire to help people plan 
 
 
 ## Screenshots:
-![web-app-sc](/)
-![web-app-sc](/)
-![web-app-sc](/)
-![web-app-sc](/)
+![web-app-sc](/public/Images/homepage.png)
+![web-app-sc](/public/Images/signUp.png)
+![web-app-sc](/public/Images/logIn.png)
+![web-app-sc](/public/Images/profile.png)
+![web-app-sc](/public/Images/createProject.png)
 
 ## Technology Used:
 - Html
@@ -61,9 +62,10 @@ Our motivation for creating this app is based on our desire to help people plan 
 - React
 - Node.js
 - MongoDB
-- thenounproject.com
 - semantic ui
 - github.com
+- React Semantic-Ui
+  
 
 ## References:
 // https://react.semantic-ui.com/
