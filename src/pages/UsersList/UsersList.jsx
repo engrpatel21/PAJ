@@ -18,29 +18,28 @@ class UserList extends Component {
     }
 
     render() { 
-        // Added searchField for search.
         const {users, searchField} = this.state
-        // Added for search.
         const filteredUsers = users.filter(user =>(
             user.name.toLowerCase().includes(searchField.toLowerCase())
         ))
         return ( 
-            <>
-                <h1>User List Page</h1>
+            
+            <body style={{
+                backgroundColor: '#1b1c1d' 
+            }}>
                 <Divider>
                 </Divider>
-                {/* Added for search function. */}
                     <SearchBar 
                     handleChange={(e) => this.setState({searchField: e.target.value})
                     }/>
                 <br></br>
                     <div className="UserList-grid">
-                    {/* Added filterUsers from users for search function. */}
                     {filteredUsers.map(user => 
                         <UserCard  key={user._id} user={user}/>
                     )}
                     </div>
-            </>
+            </body>
+            
          );
     }
 }

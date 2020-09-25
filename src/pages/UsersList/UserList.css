@@ -5,6 +5,10 @@
     grid-gap: 10px;
     justify-items: center;
   }
+
+  .backgroundBlack{
+    background: #1b1c1d;
+  }
   
   @media (max-width: 1500px) {
   .UserList-grid {

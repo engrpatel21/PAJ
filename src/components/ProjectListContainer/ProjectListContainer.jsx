@@ -24,7 +24,8 @@ class ProjectListContainer extends Component {
                 gridGap: '10px',
                 justifyItems: 'center',
                 margin:'10px 20px 200px',
-                padding: '-110px'
+                padding: '-110px',
+                left:'200px'
 
             }}>
             {this.state.userProjects.map((project)=>
@@ -44,7 +45,9 @@ class ProjectListContainer extends Component {
                         display:'flex',
                         flexFlow:'column nowrap',
                         justifyContent:'center',
-                        opacity:'.8'
+                        opacity:'.8',
+                        bottom: '100px',
+                        left:'200px'
                         }} 
                         as={Link}
                         to={{

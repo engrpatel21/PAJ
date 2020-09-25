@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 const UserCard = ({ user }) => { 
     return ( 
       <>
+      <body style={{
+        backgroundColor:'#1b1c1d'
+      }}>
           <Card as={Link} to={{pathname: `/profile/${user._id}`}} >
             <Image src={user.avatar? user.avatar : 'https://picsum.photos/200/300'} wrapped ui={false} />
             <Card.Content>
@@ -25,19 +28,10 @@ const UserCard = ({ user }) => {
             <Card.Content extra>
               <a>
                 <Icon name='user' />
-                22 Friends
               </a>
             </Card.Content>
           </Card>
-
-          {/* as={Link} to={{pathname: `/profile/${user._id}`}}
-            centered items style={{marginBottom: '2rem'}}
-            image={user.avatar? user.avatar : 'https://picsum.photos/200/300'}
-            header={user.name }<Icon = 'edit'/>
-            
-            meta={user.email}
-            description={user.bio ? user.bio : 'Bio goes here'} 
-          /> */} 
+          </body>
       </>
          );
     }

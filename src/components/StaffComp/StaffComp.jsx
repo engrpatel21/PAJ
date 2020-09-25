@@ -9,33 +9,27 @@ import J from './J.jpeg'
 
 
 const StaffComp = (props) => {
-    
-    
-    // {props.user.email.map((user)=>
-        
-    //     )}
         return ( 
-    <Container>
+            <body style={{
+                backgroundColor:'#1b1c1d'
+              }}>
+    <Container style={{
+        backgroundColor:'#1b1c1d'
+      }}> 
     <Segment>
         <Grid>
         <Item>
-        <Image src={props.user.email === 'j@j.com' ? J :  props.user.email === '12@12.com' ? P :  props.user.email === 'gundam@rx.com' ? A : ''} size='medium' avatar floated='left' verticalAlign='middle'/>
-        <div>{props.user.email}</div>
+        <Image src={props.user.email === 'j@j.com' ? J :  props.user.email === '12@12.com' ? P :  props.user.email === 'gundam@rx.com' ? A : ''} size='medium' avatar floated='left' verticalAlign='middle'
+        />
+        
         <Item.Content>
         <Item.Header><h1>{''}</h1></Item.Header>
         <Item.Meta>
-          <span>Purple Unicorn</span>
         </Item.Meta>
-        <Item.Description> <h3>
-      Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia
-      facete scriptorem, est autem aliquip detraxit at. </h3>
-      <h3>
-      Usu ocurreret
-      referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque
-      electram, eos choro alterum definiebas in. </h3>
-      
-      <h3>Vim dolorum definiebas an. Mei
-      ex natum rebum iisque.
+        <Item.Description style={{
+            
+        }}> <h3>
+        {props.user.email === 'j@j.com' ? props.user.bio :  props.user.email === '12@12.com' ? props.user.bio :  props.user.email === 'gundam@rx.com' ? props.user.bio : ''}
     </h3>
     </Item.Description>
     <Item.Extra>
@@ -60,6 +54,7 @@ const StaffComp = (props) => {
     </Divider>
     </Segment>
     </Container>
+    </body>
      );
     }
     

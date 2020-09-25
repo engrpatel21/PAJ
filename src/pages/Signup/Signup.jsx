@@ -13,7 +13,9 @@ class Signup extends Component {
 
   render() {
     return (
-      <main>
+      <main style={{
+        backgroundColor:'#1b1c1d'
+      }}>
         <SignupForm {...this.props} updateMessage={this.updateMessage} />
         <p>{this.state.message}</p>
       </main>
