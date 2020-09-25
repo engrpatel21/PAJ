@@ -1,0 +1,31 @@
+.UserList-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+  }
+
+  .backgroundBlack{
+    background: #1b1c1d;
+  }
+  
+  @media (max-width: 1500px) {
+  .UserList-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+  .UserList-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+    }
+  }

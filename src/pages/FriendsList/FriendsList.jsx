@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
 import SearchBar from '../../components/SearchBar/SearchBar'
-import { Divider } from 'semantic-ui-react'
-import './UserList.css'
+import { Divider,Button } from 'semantic-ui-react'
+import './FriendsList.css'
 
-class UserList extends Component {
+class FriendsList extends Component {
     state = { 
         users: [],
         // Added for search.
@@ -13,15 +13,15 @@ class UserList extends Component {
      }
 
     async componentDidMount(){
-        const users = await userApi.getAllUsers()
+        const users = await userApi.getOneUser()
         this.setState({users})
     }
 
     render() { 
         const {users, searchField} = this.state
-        const filteredUsers = users.filter(user =>(
-            user.name.toLowerCase().includes(searchField.toLowerCase())
-        ))
+        // const filteredUsers = users.friends.filter(user =>(
+        //     user.name.toLowerCase().includes(searchField.toLowerCase())
+        // ))
         return ( 
             
             <body style={{
@@ -29,14 +29,12 @@ class UserList extends Component {
             }}>
                 <Divider>
                 </Divider>
-                    <SearchBar 
-                    handleChange={(e) => this.setState({searchField: e.target.value})
-                    }/>
+                  
                 <br></br>
-                    <div className="UserList-grid">
-                    {filteredUsers.map(user => 
-                        <UserCard  key={user._id} user={user ? user : ''}/>
-                    )}
+                    <div className="FriendsList-grid">
+                    {users._id? users.friends.map(f=> <UserCard  key={users._id} user={f ? f : ''}/>)  : ''}
+                        
+                   
                     </div>
             </body>
             
@@ -44,4 +42,4 @@ class UserList extends Component {
     }
 }
  
-export default UserList;
+export default FriendsList;
