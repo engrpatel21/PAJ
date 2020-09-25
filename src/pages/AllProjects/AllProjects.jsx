@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 import { Grid, Card, Message, Divider} from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
+import SearchBar from '../../components/SearchBar/SearchBar'
 import { Link } from 'react-router-dom'
 import "./AllProjects.css";
 
 class AllUserProjects extends Component {
     state = {
       userProjects: [],
+      // Added for search.
+      searchField: ''
     };
     async componentDidMount(){
         const userProjects = await userApi.getAllUserProjects()
@@ -14,14 +17,23 @@ class AllUserProjects extends Component {
     }
 
     render() {
-        const {user} = this.props
+        // Added searchField for search.
+        const {userProjects, searchField} = this.state
+        // Added for search.
+        const filteredProjects = userProjects.filter(project =>(
+            project.name.toLowerCase().includes(searchField.toLowerCase())
+        ))
         return (
             <>
             <h1>All Projects Page</h1>
             <Divider>
-            </Divider>
+            </Divider>  
+            <SearchBar 
+                    handleChange={(e) => this.setState({searchField: e.target.value})
+                    }/>
+            <br></br>
             <div className='ProjectList-grid'>
-                {this.state.userProjects.map((project)=>
+                {filteredProjects.map((project)=>
                     <div key={project._id}>
                         <Card 
                             style={{
