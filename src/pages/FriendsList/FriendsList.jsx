@@ -29,9 +29,7 @@ class FriendsList extends Component {
             }}>
                 <Divider>
                 </Divider>
-                    <SearchBar 
-                    handleChange={(e) => this.setState({searchField: e.target.value})
-                    }/>
+                  
                 <br></br>
                     <div className="FriendsList-grid">
                     {users._id? users.friends.map(f=> <UserCard  key={users._id} user={f ? f : ''}/>)  : ''}
