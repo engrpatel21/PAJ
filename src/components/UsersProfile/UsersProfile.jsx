@@ -27,9 +27,6 @@ const UsersProfile = (props, mobile) => {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-             
-                  {/* <Icon name='userInfo' />
-                  22 Friends */}
       
               </Card.Content>
             </Card>
