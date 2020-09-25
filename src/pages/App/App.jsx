@@ -17,6 +17,7 @@ import MessageBoard from '../MessagePage/MessagePage'
 import Staff from '../Staff/Staff'
 import AllUserProjects from '../AllProjects/AllProjects'
 import "./App.css";
+import FriendsList from '../FriendsList/FriendsList'
 
 class App extends Component {
   state = {
@@ -54,6 +55,12 @@ class App extends Component {
     const updatedUser = await userApi.updateUserInfo(userData)
     this.setState({updatedUser})
   }
+
+  handleAddFriend = async friend => {
+    const updatedUser = await userApi.addFriend(friend)
+    this.setState({updatedUser})
+  }
+
   render() {
     
     const {user} = this.state
@@ -145,9 +152,11 @@ class App extends Component {
 
         <Route 
         exact path='/profile/:userId'
-        render={({match}) => (
+        render={({match, location}) => (
         user ? <FriendsProfile
         match={match}
+        location={location}
+        addFriend={this.handleAddFriend}
         />
         : 
         <Redirect to="/login" />
@@ -181,6 +190,18 @@ class App extends Component {
         <Redirect to="/login" />
         )}
         
+        />
+        <Route exact path='/friendlist' 
+        render={()=>(
+          user ? <FriendsList
+  
+          user={this.state.updatedUser._id ? this.state.updatedUser: ''}
+          
+  
+          />
+          : 
+          <Redirect to="/login" />
+          )}
         />
 
       </>

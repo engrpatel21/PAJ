@@ -4,6 +4,11 @@ import ProjectUsersCard from '../ProjectUsersCard/ProjectUsersCard'
 
 const UsersProfile = (props, mobile) => {
     const {usersInfo} = props
+    const handleAddFriend =(e) => {
+        e.preventDefault()
+        props.addFriend({friends: usersInfo._id})
+    }
+
     return ( 
     <>
         <Divider>
@@ -16,8 +21,8 @@ const UsersProfile = (props, mobile) => {
               <Card.Content>
                 <Card.Header>{usersInfo.name}
                 <Grid.Column floated='right' width={5}>
-                    <Button icon='user plus'/>
-                    <Icon name='user plus' />
+                    <Button onClick={handleAddFriend} icon='user plus'/>
+                   
                   </Grid.Column></Card.Header>
                 <Card.Meta>
                   <span className='date'>{usersInfo.bio}</span>

@@ -12,6 +12,8 @@ router.get('/user', checkAuth, usersCtrl.showOneUser)
 router.get('/:userId/projects', checkAuth, usersCtrl.showUserProject)
 router.get('/projects/:userId', checkAuth, usersCtrl.getAllUserProjects)
 router.put('/', checkAuth, usersCtrl.updateUser)
+router.get('/:userId/another', checkAuth, usersCtrl.differentUser)
+router.post('/friends', checkAuth, usersCtrl.addFriend)
 
 
 
