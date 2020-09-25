@@ -189,5 +189,3 @@ class App extends Component {
 }
 
 export default App;
-
-//5
