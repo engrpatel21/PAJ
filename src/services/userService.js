@@ -1,5 +1,5 @@
 import tokenService from "../services/tokenService";
-const BASE_URL = "/api/users/";
+const BASE_URL = "/api/users";
 
 export function getAllUsers() {
   return fetch(
@@ -9,6 +9,15 @@ export function getAllUsers() {
     },
     { mode: "cors" }
   ).then((res) => res.json());
+}
+
+export function addFriend(friend){
+  return fetch(`${BASE_URL}/friends`,{
+    method: 'POST',
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(friend)
+    }, {mode: "cors"})
+    .then(res => res.json())
 }
 
 export function getUserProjects(user_id){
@@ -31,6 +40,14 @@ export function getOneUser(user_id){
   })
   .then(res => res.json())
 }
+
+export function differentUser(user_id){
+  return fetch(`${BASE_URL}/${user_id}/another`, {
+    headers: { Authorization: "Bearer " + tokenService.getToken() },
+  })
+  .then(res => res.json())
+}
+
 
 export function getAllUserProjects(){
   return fetch('/api/projects', {

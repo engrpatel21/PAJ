@@ -35,7 +35,7 @@ app.use('/api/projects', projectRouter)
 app.use('/api/projects', commentRouter)
 app.use('/api/projects', featureRouter)
 app.use('/api/projects', taskRouter)
-app.use('/api/users/', messageRouter)
+app.use('/api/users', messageRouter)
 app.use('/api/projects', contributorRouter)
 
 app.get('/*', function(req, res) {
