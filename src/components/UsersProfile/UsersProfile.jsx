@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Grid, Icon, Image, Card, Message } from 'semantic-ui-react'
+import { Divider, Grid, Icon, Image, Card, Message, Button } from 'semantic-ui-react'
 import ProjectUsersCard from '../ProjectUsersCard/ProjectUsersCard'
 
 const UsersProfile = (props, mobile) => {
@@ -17,6 +17,7 @@ const UsersProfile = (props, mobile) => {
               <Card.Content>
                 <Card.Header>{usersInfo.name}
                 <Grid.Column floated='right' width={5}>
+                    <Button icon='user plus'/>
                     <Icon name='user plus' />
                   </Grid.Column></Card.Header>
                 <Card.Meta>

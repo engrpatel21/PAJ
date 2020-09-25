@@ -10,6 +10,7 @@ import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
 import ProjectDetails from '../../pages/ProjectDetails/ProjectDetails'
 import ProjectCreation from '../ProjectCreation/ProjectCreation'
 import * as projectApi from '../../services/projectService'
+import * as userApi from '../../services/userService'
 import Profile from '../Profile/Profile'
 import FriendsProfile from '../FriendsProfile/FriendsProfile'
 import MessageBoard from '../MessagePage/MessagePage'
@@ -19,6 +20,7 @@ import "./App.css";
 class App extends Component {
   state = {
     user: authService.getUser(),
+    updatedUser: {},
     projects: [],
 
   };
@@ -34,17 +36,23 @@ class App extends Component {
 
   async componentDidMount(){
     const projects = await projectApi.getAllProjects()
-    this.setState({projects})
-}
+    const user = await userApi.getOneUser()
+    this.setState({projects, updatedUser: user})
+  }
+
+  
 
   handleAddProject = async projectData =>{
-    console.log(projectData)
     const newProject = await projectApi.createProject(projectData)
     this.setState({projects: [...this.state.projects, newProject]},
      ()=> this.props.history.push(`/projectdetails/${newProject._id}`)
       )
-}
+  }
 
+  handleUpdateUser = async userData => {
+    const updatedUser = await userApi.updateUserInfo(userData)
+    this.setState({updatedUser})
+  }
   render() {
     const {user} = this.state
     return (
@@ -94,7 +102,7 @@ class App extends Component {
           user ? <ProjectDetails
           match={match}
           history={history}
-          user={this.state.user}
+          user={this.state.updatedUser._id ? this.state.updatedUser : ''}
         />
         : 
         <Redirect to="/login" />
@@ -125,7 +133,8 @@ class App extends Component {
         exact path='/profile'
         render={() => (
         user ? <Profile 
-        user={this.state.user}
+        user={this.state.updatedUser._id ? this.state.updatedUser : ''}
+        handleUpdateUser={this.handleUpdateUser}
         />
         : 
         <Redirect to="/login" />
@@ -151,7 +160,7 @@ class App extends Component {
         exact path='/staff'
         render={() => (
         user ? <Staff
-        user={this.state.user}
+        user={this.state.updatedUser._id ? this.state.updatedUser: ''}
         
         />
         : 

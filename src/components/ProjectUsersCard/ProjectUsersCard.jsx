@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
-import * as userApi from "../../services/userService";
+
 
 class ProjectUsersCard extends Component {
     state = {

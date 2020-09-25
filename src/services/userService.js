@@ -26,7 +26,7 @@ export function getUserMessages(user){
 }
 
 export function getOneUser(user_id){
-  return fetch(`${BASE_URL}/${user_id}/user`, {
+  return fetch(`${BASE_URL}/user`, {
     headers: { Authorization: "Bearer " + tokenService.getToken() },
   })
   .then(res => res.json())
@@ -36,5 +36,15 @@ export function getAllUserProjects(user_id){
   return fetch(`${BASE_URL}/projects/${user_id}`, {
     headers: { Authorization: "Bearer " + tokenService.getToken() },
   })
+  .then(res => res.json())
+}
+
+export function updateUserInfo(userData){
+  console.log(userData)
+  return fetch(`${BASE_URL}`,{
+      method: 'PUT',
+      headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+      body: JSON.stringify(userData)
+  }, {mode: "cors"})
   .then(res => res.json())
 }
