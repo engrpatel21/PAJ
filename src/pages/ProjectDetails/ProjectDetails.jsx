@@ -148,7 +148,7 @@ class ProjectDetails extends Component {
                 </Grid>
             </Segment>
 
-            <Message textalign='left' className='AddProject'>
+            <Message textalign='left' style={{paddingTop: '0px'}} className='AddProject'>
             <Divider horizontal><h3>Contributors</h3></Divider>
             <ContributorsList 
                 contributors={this.state.project._id ? this.state.project.contributors : ''} 
@@ -170,18 +170,7 @@ class ProjectDetails extends Component {
                         />    
                     </Grid.Column>
                 </Grid>
-            </div>
-            <Portal onClose={this.renderAddContributor} open={this.state.addContributor} >
-                    <AddContributorForm 
-                        renderAddContributor={this.renderAddContributor}
-                        handelAddContributor={this.handelAddContributor}
-                    />
-            </Portal>
-           
-            </Message>
-            
-            <Message textalign='left' className='AddProject'>
-            <Divider horizontal><h3>Feature List</h3></Divider>
+                <Divider horizontal><h3>Feature List</h3></Divider>
             {features ? 
             
                 <FeatureDetails 
@@ -219,8 +208,18 @@ class ProjectDetails extends Component {
                             owner={this.state.project._id ? this.state.project.owner : 'notloading'}
                         />
                     </Portal>
-                    
+                
+            </div>
+            <Portal onClose={this.renderAddContributor} open={this.state.addContributor} >
+                    <AddContributorForm 
+                        renderAddContributor={this.renderAddContributor}
+                        handelAddContributor={this.handelAddContributor}
+                    />
+            </Portal>
+           
             </Message>
+            
+           
 
             <Divider horizontal>Comments</Divider>
                 <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>

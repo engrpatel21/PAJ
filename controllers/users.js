@@ -9,9 +9,11 @@ module.exports = {
 };
 
 function showOneUser(req, res){
-  User.findById(req.params.userId)
+  User.findById(req.user._id)
+  .populate('projects')
   .then(user => 
-    res.json(user)
+    {console.log(user)
+    res.json(user)}
     )
 }
 
@@ -24,9 +26,10 @@ function showUserProject(req, res){
 }
 
 function updateUser(req, res){
-  User.findByIdAndUpdate(req.params.userId, req.body)
+  User.findByIdAndUpdate(req.user._id, req.body, {new: true})
   .then(user => 
-    res.json(user)
+    {  console.log(user)
+    res.json(user)}
     )
 }
 

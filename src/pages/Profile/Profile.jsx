@@ -1,22 +1,34 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-import { Grid, Image, Button, Icon, Divider, Card, Message } from 'semantic-ui-react'
+import { Grid, Image, Button, Icon, Divider, Card, Message, Form  } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import ProjectListContainer from '../../components/ProjectListContainer/ProjectListContainer'
 import './Profile'
 
 class Profile extends Component {
   state = {
-    userProjects: [],
+    editUser: false,
+    userFormData: this.props.user, 
+   
     
   };
 
-  async componentDidMount(){
-    const userProjects = await userApi.getUserProjects(this.props.user)
-    this.setState({userProjects})
-}
 
-handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+ 
+
+handleSubmit = (e) => {
+  e.preventDefault()
+  this.setState({editUser: !this.state.editUser})
+  this.props.handleUpdateUser(this.state.userFormData)
+}
+  
+handleChange = e => {
+  const userFormData = {...this.state.userFormData, [e.target.name]: e.target.value}
+  this.setState({
+    userFormData
+  })
+}
+formRef = React.createRef()
 
   render() {
     const {user} = this.props
@@ -55,23 +67,70 @@ handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
           <Grid>
             <Grid.Column width={5}>
+
+              
+
             <Card style={{
               bottom:'100px',
               left: '150px'
             }}>
               <Image src={user.avatar} wrapped ui={false} />
+
               <Card.Content>
+                
+              {this.state.editUser ? 
+               
+               <>
+               <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+               <Card.Header>
+                 <Form.Input
+                  name='name'
+                  onChange={this.handleChange}
+                  value={this.state.userFormData.name}
+                 ></Form.Input>
+               <Grid.Column floated='right' width={5}>
+               </Grid.Column>
+               </Card.Header>
+               <Card.Meta>
+                 <span className='date'></span>
+               </Card.Meta>
+               <Card.Description>
+                <Form.TextArea rows={6} 
+                placeholder='Enter Bio Info' 
+                name='bio'
+                onChange={this.handleChange}
+                value={this.state.userFormData.bio}></Form.TextArea>
+                
+               </Card.Description>
+               <Form.Button size='tiny' content='Submit' positive icon='check'/>
+               </Form>
+                </>
+
+              :
+              
+              <>
                 <Card.Header>{user.name}
                 <Grid.Column floated='right' width={5}>
-                    <Icon name='edit' />
+                    <Icon name='edit' onClick={()=>this.setState({editUser: !this.state.editUser})}/>
                 </Grid.Column>
                 </Card.Header>
                 <Card.Meta>
+
+               
+                  Bio
+
                 </Card.Meta>
                 <Card.Description>
                   <p>{user.bio}</p>
-                  
+
                 </Card.Description>
+              </>
+
+
+              } 
+            
+
+        
               </Card.Content>
               <Card.Content extra>
             
