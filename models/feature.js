@@ -14,6 +14,7 @@ const featureSchema = new Schema({
     description: String,
     featureStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
     tasks: [taskSchema],
+    project: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     lead: {type: Schema.Types.ObjectId, ref: 'User'}
 },{timestamps: true})
 

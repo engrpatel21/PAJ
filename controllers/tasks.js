@@ -1,4 +1,4 @@
-const Project = require('../models/project')
+const Feature= require('../models/feature')
 
 module.exports ={
     index,
@@ -9,55 +9,42 @@ module.exports ={
 }
 
 function updateTask(req, res){
-    Project.findById(req.params.projectId)
-    .then(project => {
-        const featureIdx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        const taskIdx = project.features[featureIdx].tasks.findIndex(task => task._id.equals(req.params.taskId))
-        project.features[featureIdx].tasks.splice(taskIdx, 1, req.body)
-        project.save().then(project => 
-            res.json(project.features[featureIdx].tasks[taskIdx])
-            )
+    Feature.findById(req.params.featureId)
+    .then(feature =>{
+        const idx = feature.tasks.findIndex(t => t._id.params.equals(req.params.taskId))
+        feature.tasks.splice(idx, 1, req.body)
     })
 }
 
 function deleteTask(req, res){
-    Project.findById(req.params.projectId)
-    .then(project =>{
-        const featureIdx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        const taskIdx = project.features[featureIdx].tasks.findIndex(task => task._id.equals(req.params.taskId))
-        project.features[featureIdx].tasks.splice(taskIdx, 1)
-        project.save().then(project =>
-            res.json(project.features[featureIdx].tasks)
-            )
+    Feature.findById(req.params.featureId)
+    .then(feature =>{
+        const idx = feature.tasks.findIndex(t => t._id.equals(req.params.taskId))
+        feature.tasks.splice(idx, 1)
+        feature.save().then(feature => res.status(200))
     })
 }
 
 function showTask(req, res){
-    Project.findById(req.params.projectId)
-    .then(project =>{
-        const featureIdx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        const taskIdx = project.features[featureIdx].tasks.findIndex(task => task._id.equals(req.params.taskId))
-        res.json(project.features[featureIdx].tasks[taskIdx])
-    })
+   Feature.findById(req.params.featureId)
+   .then(feature =>{
+       const idx = feature.tasks.findIndex(t => t._id.equals(req.params.taskId))
+       res.json(feature.tasks[idx])
+   })
 }
 
 function index(req, res){
-    Project.findById(req.params.projectId)
-    .then(project =>{
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        project.save().then(project =>
-            res.json(project.features[idx].tasks)
-            )
-    })
+    Feature.findById(req.params.featureid)
+    .then(feature => res.json(feature.tasks))
 }
 
+
 function createTask(req, res){
-    Project.findById(req.params.projectId)
-    .then(project =>{
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        project.features[idx].tasks.push(req.body)
-        project.save().then(project =>
-            res.json(project.features[idx].tasks[project.features[idx].tasks.length-1])
-            )
-    })
+    Feature.findById(req.params.featureId)
+    .then(feature => {    
+        feature.tasks.push(req.body)
+        feature.save().then(feature =>
+            res.json(feature.tasks[feature.tasks.length-1]))}
+        )
 }
+
