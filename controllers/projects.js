@@ -44,7 +44,6 @@ function deleteProject(req,res){
 }
 
 function showProject(req, res){
-    console.log(req.params.projectId)
     Project.findById(req.params.projectId)
     .populate('owner')
     .populate('comments.createdBy')
