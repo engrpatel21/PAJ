@@ -57,7 +57,7 @@ export function getAllUserProjects(){
 }
 
 export function updateUserInfo(userData){
-  console.log(userData)
+
   return fetch(`${BASE_URL}`,{
       method: 'PUT',
       headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},

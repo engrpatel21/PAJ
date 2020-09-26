@@ -40,7 +40,7 @@ class ProjectBoard extends Component {
         this.setState({
             tasks: this.state.tasks.filter(t => t._id !== task_id)
         }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-        console.log(this.state.tasks)
+    
     }
 
     handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{

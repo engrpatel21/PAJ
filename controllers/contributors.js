@@ -14,7 +14,6 @@ async function deleteContributor(req, res){
     .then(project => {
         const idx = project.contributors.findIndex(c => c._id.equals(req.params.contributorId))
         const featureIdx = project.features.findIndex(f => f.lead._id.equals(req.params.userId))
-        console.log(featureIdx)
         project.contributors.splice(idx,1)
         project.save().then(()=>
             User.findById(req.params.userId)
@@ -48,7 +47,6 @@ async function createContributor(req, res){
         .populate('contributors.contributor')
         .then(project =>{
             const idx = project.contributors.findIndex(c => c.contributor._id.equals(contributor._id))
-            console.log(idx)
             if(idx === -1){
                 project.contributors.push(req.body)
                 project.save().then(() =>{

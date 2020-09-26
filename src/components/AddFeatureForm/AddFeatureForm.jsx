@@ -50,9 +50,7 @@ class AddFeatureForm extends Component {
         }
       ]
       
-      console.log(this.props.contributors)
       if(this.props.contributors.length > 0){
-        (console.log('im here'))
         this.props.contributors.forEach(contributor =>
         
           options.push({
@@ -65,7 +63,7 @@ class AddFeatureForm extends Component {
 
       }
   
-        console.log(options)
+   
         return options
      }
     
