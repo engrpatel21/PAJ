@@ -6,7 +6,7 @@ router.use(require("../config/auth"));
 router.post('/:projectId', checkAuth, contributorCtrl.createContributor)
 router.get('/:projectId', checkAuth, contributorCtrl.index)
 router.delete('/:projectId/:contributorId/:userId', checkAuth, contributorCtrl.deleteContributor)
-router.put('/:projectId/:contributorId', checkAuth, contributorCtrl.updateContributor)
+router.put('/:contributorId', checkAuth, contributorCtrl.updateContributor)
 
 /*---------- Auth Checker ----------*/
 function checkAuth(req, res, next) {

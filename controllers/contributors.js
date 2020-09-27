@@ -1,4 +1,4 @@
-const { useParams } = require('react-router-dom')
+const contributor = require('../models/contributor')
 const Contributor = require('../models/contributor')
 const User = require('../models/user')
 
@@ -28,7 +28,9 @@ function deleteContributor(req, res){
 }
 
 function updateContributor(req, res){
-
+    Contributor.findByIdAndUpdate(req.params.contributorId, req.body, {new: true})
+    .populate('user')
+    .then( contributor => res.json(contributor))
 }
 
 // async function deleteContributor(req, res){

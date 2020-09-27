@@ -30,6 +30,13 @@ class ContributorsList extends Component {
          ()=> this.props.history.push(`/projectdetails/${this.props.projectId}`))
     }
 
+    handleUpdateAdminStatus = async (currentStatus, idx) => {
+        let contributor = this.state.contributors[idx]
+        contributor.isAdmin = !currentStatus
+        const updatedContributor = await contributorApi.updateContributor(contributor._id, contributor)
+        this.setState({contributors: this.state.contributors.map(c => c._id === updatedContributor._id ? updatedContributor : c)})
+    }
+
     render() { 
         const {contributors} = this.state
         return ( 
@@ -48,7 +55,7 @@ class ContributorsList extends Component {
                      <Table.Row key={idx} >
                      <Table.Cell >{contributor.user ? contributor.user.name : 'loading'}</Table.Cell>
                      <Table.Cell >{contributor.user ? contributor.user.email: 'notloading'}</Table.Cell>
-                     <Table.Cell><Checkbox toggle checked={contributor.isAdmin}/></Table.Cell>
+                     <Table.Cell><Checkbox toggle onChange={()=>this.handleUpdateAdminStatus(contributor.isAdmin, idx)} checked={contributor.isAdmin}/></Table.Cell>
                      <Table.Cell key={`delete-${idx}`}><Button onClick={()=>this.handleDeleteContributor(contributor._id, contributor.user._id)} icon='eraser'/></Table.Cell>
                  </Table.Row>
                     )  : <Table.Row></Table.Row>}

@@ -18,8 +18,8 @@ export function getContributors(project_id){
       ).then((res) => res.json());
 }
 
-export function updateContributor(project_id, contributor_id, contributor){
-    return fetch(`${BASE_URL}/${project_id}/${contributor_id}`,{
+export function updateContributor(contributor_id, contributor){
+    return fetch(`${BASE_URL}/${contributor_id}`,{
         method: "PUT",
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
         body: JSON.stringify(contributor)
