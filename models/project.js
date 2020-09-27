@@ -9,7 +9,7 @@ const commentSchema = new Schema({
 
 const projectSchema = new Schema({
     name: String,
-    owner:  [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    owner:  { type: Schema.Types.ObjectId, ref: 'User'},
     status:{type: Boolean, default: false},
     description: String,
     comments: [commentSchema],

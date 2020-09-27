@@ -4,7 +4,7 @@ import { Button, Form, Header, Segment} from 'semantic-ui-react'
 class AddFeatureForm extends Component {
     state = { 
         contributorFormData: {
-           contributor: ''
+           user: ''
         }
      }
      
@@ -37,8 +37,8 @@ class AddFeatureForm extends Component {
             <Form.Group>
                 <Form.Input
                 placeholder='Enter Email Address'
-                name='contributor'
-                value={this.state.contributorFormData.contributor}
+                name='user'
+                value={this.state.contributorFormData.user}
                 onChange={this.handleChangeContributor}
                 />
                 </Form.Group>

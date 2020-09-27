@@ -17,39 +17,7 @@ class ProjectBoard extends Component {
         featureId: this.props.match.params.featureId
      }
     
-    async componentDidMount(){
-        const tasks = await projectApi.getALlTasks(this.state.projectId,this.state.featureId)
-        const project = await projectApi.getOneProject(this.state.projectId)
-        this.setState({tasks,project})
-    }
-
-
-    renderAddTask = () => {
-        this.setState({addTask: !this.state.addTask})
-    }
-
-    handleAddTask = async (project_id, feature_id, taskData) => {
-        const newTask = await projectApi.addFeatureTask(project_id, feature_id, taskData)
-        this.setState({
-            tasks: [...this.state.tasks,newTask]
-        })
-    }
-
-    handleDeleteTask = async (project_id, feature_id, task_id) => {
-        await projectApi.deleteFeatureTask(project_id, feature_id, task_id)
-        this.setState({
-            tasks: this.state.tasks.filter(t => t._id !== task_id)
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-    
-    }
-
-    handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{
-        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
-        this.setState({
-            tasks: this.state.tasks.map(t => t._id === task._id ? task : t)
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-    }
-
+   
 
 
     render() { 

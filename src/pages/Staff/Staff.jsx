@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+
 import { Divider } from 'semantic-ui-react'
 import StaffComp from '../../components/StaffComp/StaffComp'
 import * as userApi from '../../services/userService'

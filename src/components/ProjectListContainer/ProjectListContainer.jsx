@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid, Card, Message, Icon } from 'semantic-ui-react'
+import { Grid, Card, Icon } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import { Link } from 'react-router-dom'
 import './ProjectListContainer'
@@ -14,7 +14,7 @@ class ProjectListContainer extends Component {
     }
 
     render() {
-        const {user} = this.props
+
         return (
             <>
             <Grid.Column width={3} style={{

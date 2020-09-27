@@ -21,18 +21,19 @@ function deleteProject(req, res){
 
 function showProject(req,res){
     Project.findById(req.params.projectId)
-    .populate('features')
-    .populate('owner')
+    // .populate('features')
+    // .populate('owner')
     .then(project => res.json(project))
 }
 
 function createProject(req, res){
+    req.body.owner = req.user._id
     Project.create(req.body)
     .then(project =>
         User.findById(req.user._id)
         .then(user => {
             user.projects.push(project._id)
-            user.save().then(()=> res.json(project))
+            user.save().then(()=> res.json(project._id))
         }))
 }
 

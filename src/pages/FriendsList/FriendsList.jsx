@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as userApi from "../../services/userService";
 import UserCard from '../../components/UserCard/UserCard'
-import SearchBar from '../../components/SearchBar/SearchBar'
-import { Divider,Button } from 'semantic-ui-react'
+
+import { Divider,} from 'semantic-ui-react'
 import './FriendsList.css'
 
 class FriendsList extends Component {
@@ -18,7 +18,7 @@ class FriendsList extends Component {
     }
 
     render() { 
-        const {users, searchField} = this.state
+        const {users } = this.state
         // const filteredUsers = users.friends.filter(user =>(
         //     user.name.toLowerCase().includes(searchField.toLowerCase())
         // ))

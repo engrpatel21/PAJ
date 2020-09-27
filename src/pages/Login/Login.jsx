@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import "./Login.css";
 import authService from "../../services/authService"
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 
 class LoginPage extends Component {
   state = {
@@ -52,7 +52,7 @@ class LoginPage extends Component {
           fluid icon='user' 
           iconPosition='left'
           placeholder='E-mail address' 
-          fluid label='User Email' 
+          label='User Email' 
           type="text"
           autoComplete="off"
           id="email"
@@ -67,7 +67,7 @@ class LoginPage extends Component {
             iconPosition='left'
             placeholder='Password'
             type='password'
-            fluid label='password' 
+            label='password' 
             autoComplete="off"
             id="password"
             value={pw}

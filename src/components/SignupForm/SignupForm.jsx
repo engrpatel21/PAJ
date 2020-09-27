@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import authService from "../../services/authService";
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 
 class SignupForm extends Component {
   state = {
