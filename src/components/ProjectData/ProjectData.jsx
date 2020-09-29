@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Table, Grid, Popup, Portal, Checkbox} from 'semantic-ui-react'
+import { Button, Table, Grid, Popup, Portal, Checkbox, Divider, Container} from 'semantic-ui-react'
 import AddContributorForm from '../AddContributorForm/AddContributorForm'
 import * as contributorApi from '../../services/contributorService'
+import FeatureDetails from '../FeatureDetails/FeatureDetails'
+import ContributorData from '../ContributorData/ContributorData'
 
 class ContributorsList extends Component {
     state = { 
@@ -39,28 +41,41 @@ class ContributorsList extends Component {
 
     render() { 
         const {contributors} = this.state
+        const {projectId} = this.props
         return ( 
             <>
-            <Table striped selectable collapsing>
+            {/* <ContributorData 
+                contributors={contributors.length ? contributors : 'loading'}
+                handleDeleteContributor={this.handleDeleteContributor}
+                handleUpdateAdminStatus={this.handleUpdateAdminStatus}
+                /> */}
+            <Grid centered>
+                <Grid.Column >
+                    <Container text fluid style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <Table striped selectable collapsing  >
                  <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>User</Table.HeaderCell>
                         <Table.HeaderCell>Email</Table.HeaderCell>
-                        <Table.HeaderCell>Admin</Table.HeaderCell>
+                        <Table.HeaderCell >Admin</Table.HeaderCell>
                         <Table.HeaderCell>Remove</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
             <Table.Body>
                 {contributors.length ? contributors.map((contributor,idx) =>
-                     <Table.Row key={idx} >
-                     <Table.Cell >{contributor.user ? contributor.user.name : 'loading'}</Table.Cell>
-                     <Table.Cell >{contributor.user ? contributor.user.email: 'notloading'}</Table.Cell>
-                     <Table.Cell><Checkbox toggle onChange={()=>this.handleUpdateAdminStatus(contributor.isAdmin, idx)} checked={contributor.isAdmin}/></Table.Cell>
-                     <Table.Cell key={`delete-${idx}`}><Button onClick={()=>this.handleDeleteContributor(contributor._id, contributor.user._id)} icon='eraser'/></Table.Cell>
+                     <Table.Row key={idx}  >
+                     <Table.Cell collapsing>{contributor.user ? contributor.user.name : 'loading'}</Table.Cell>
+                     <Table.Cell collapsing>{contributor.user ? contributor.user.email: 'notloading'}</Table.Cell>
+                     <Table.Cell collapsing><Checkbox toggle onChange={()=>this.handleUpdateAdminStatus(contributor.isAdmin, idx)} checked={contributor.isAdmin}/></Table.Cell>
+                     <Table.Cell collapsing key={`delete-${idx}`}><Button onClick={()=>this.handleDeleteContributor(contributor._id, contributor.user._id)} icon='eraser'/></Table.Cell>
                  </Table.Row>
                     )  : <Table.Row></Table.Row>}
             </Table.Body>
             </Table>
+                    </Container>
+                </Grid.Column>
+            </Grid>
+            
             <div>
                 <Grid>
                     <Grid.Column textAlign="center">
@@ -82,6 +97,8 @@ class ContributorsList extends Component {
                             handelAddContributor={this.handelAddContributor}
                         />
                 </Portal>
+            <Divider horizontal><h3>Feature List</h3></Divider>
+            <FeatureDetails projectId={projectId}/>
            </>
          );
     }

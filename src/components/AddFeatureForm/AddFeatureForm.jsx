@@ -4,33 +4,33 @@ import { Button, Form, Header, Segment} from 'semantic-ui-react'
 
 
 class AddFeatureForm extends Component {
-    state = { 
-        featureFormData: this.props.editFeature? this.props.feature : {
-            feature: '',
-            description: '',
-            lead: ''
-        }
-     }
+  state = { 
+      featureFormData: this.props.feature ? this.props.feature : {
+          feature: '',
+          description: '',
+      },
+      featureId: ''
+  }
      
-     handleSubmitFeature = e => {
-         e.preventDefault()
-         this.props.renderAddFeature()
-         this.props.handleAddFeature(this.state.featureFormData)
-     }
+  handleSubmitFeature = e =>{
+    e.preventDefault()
+    this.props.renderAddFeature()
+    this.props.handleAddFeature(this.state.featureFormData)
+  } 
+     
 
-     handleUpdateFeature = e => {
-        e.preventDefault()
-        this.props.renderEditFeature()
-        this.props.handleUpdateFeature(this.props.feature._id, this.state.featureFormData)
-    }
+  handleChangeFeatures = e => {
+      const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
+      this.setState({
+        featureFormData,
+      });
+    };
 
-     handleChangeFeatures = e => {
-        const featureFormData = {...this.state.featureFormData, [e.target.name]: e.target.value};
-        this.setState({
-         featureFormData
-        });
-     };
-
+  handleUpdateFeature = e =>{
+    e.preventDefault()
+    this.props.renderEditFeature()
+    this.props.updateFeature(this.state.featureFormData._id, this.state.featureFormData)
+  }
   handleSelectChange=(e,{value})=>{
     const featureFormData = {...this.state.featureFormData }
     featureFormData.lead = value
@@ -40,35 +40,35 @@ class AddFeatureForm extends Component {
     
 
      
-     pushOptions = () => {
-      const options = [
-        {
-          key: this.props.owner._id,
-          text: this.props.owner.name,
-          value: this.props.owner._id,
-          image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
-        }
-      ]
+    //  pushOptions = () => {
+    //   const options = [
+    //     {
+    //       key: this.props.owner._id,
+    //       text: this.props.owner.name,
+    //       value: this.props.owner._id,
+    //       image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
+    //     }
+    //   ]
       
-      if(this.props.contributors.length > 0){
-        this.props.contributors.forEach(contributor =>
+    //   if(this.props.contributors.length > 0){
+    //     this.props.contributors.forEach(contributor =>
         
-          options.push({
-            key: contributor.contributor._id,
-            text: contributor.contributor.name,
-            value: contributor.contributor._id,
-            image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
-          })
-        )
+    //       options.push({
+    //         key: contributor.contributor._id,
+    //         text: contributor.contributor.name,
+    //         value: contributor.contributor._id,
+    //         image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
+    //       })
+    //     )
 
-      }
+    //   }
   
    
-        return options
-     }
+    //     return options
+    //  }
     
     render() { 
-        this.pushOptions()
+        const {renderAddFeature, renderEditFeature, editFeature} = this.props
       
         return ( 
             <Segment
@@ -92,15 +92,15 @@ class AddFeatureForm extends Component {
               onChange={this.handleChangeFeatures}
             />
             </Form.Group>
-            <Form.Dropdown
+            {/* <Form.Dropdown
                placeholder='Select Friend'
                fluid
                selection
                onChange={this.handleSelectChange}
                value={this.state.featureFormData.lead}
-               options={this.pushOptions()}
+              
             
-            />
+            /> */}
             <Form.Group> 
             <Form.TextArea
               id='form-textarea-control-opinion'
@@ -121,7 +121,7 @@ class AddFeatureForm extends Component {
               content='Close'
               icon='x'
               negative
-              onClick={ this.props.editFeature ? this.props.renderEditFeature : this.props.renderAddFeature}
+              onClick={editFeature? renderEditFeature :renderAddFeature}
               floated='right'
             />
           </Segment>

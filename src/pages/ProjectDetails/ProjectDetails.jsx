@@ -4,7 +4,7 @@ import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
 import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
-import ContributorsList from '../../components/ContributorsList/ContributorsList'
+import ContributorsList from '../../components/ProjectData/ProjectData'
 import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
 import AddFeatureForm from '../../components/AddFeatureForm/AddFeatureForm'
 import AddContributorForm from '../../components/AddContributorForm/AddContributorForm'
@@ -66,11 +66,15 @@ class ProjectDetails extends Component {
                 </Grid>
             </Segment>
 
-            <Message textalign='left' style={{paddingTop: '0px'}} className='AddProject'>
             <Divider horizontal><h3>Contributors</h3></Divider>
-            <ContributorsList projectId={projectId} history={this.props.history}/>
-            <Divider horizontal><h3>Feature List</h3></Divider>
-            </Message>
+           
+                <ContributorsList projectId={projectId} history={this.props.history}/>
+         
+             
+            
+            
+       
+     
             
            
             <Divider horizontal>Comments</Divider>

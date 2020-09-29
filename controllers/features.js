@@ -17,7 +17,7 @@ function updateFeature(req, res){
 
 function deleteFeature(req, res){
     Feature.findByIdAndDelete(req.params.featureId)
-    .then(()=> res.status(200))
+    .then((feature)=> res.status(200).json(feature))
 }
 
 function showFeature(req, res){
@@ -27,7 +27,7 @@ function showFeature(req, res){
 
 function index(req,res){
     Feature.find({project: req.params.projectId})
-    .then(feature => res.json(feature))
+    .then(features => res.json(features))
 }
 
 function createFeature(req, res){
