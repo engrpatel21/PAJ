@@ -40,36 +40,29 @@ class AddFeatureForm extends Component {
     
 
      
-    //  pushOptions = () => {
-    //   const options = [
-    //     {
-    //       key: this.props.owner._id,
-    //       text: this.props.owner.name,
-    //       value: this.props.owner._id,
-    //       image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
-    //     }
-    //   ]
-      
-    //   if(this.props.contributors.length > 0){
-    //     this.props.contributors.forEach(contributor =>
-        
-    //       options.push({
-    //         key: contributor.contributor._id,
-    //         text: contributor.contributor.name,
-    //         value: contributor.contributor._id,
-    //         image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
-    //       })
-    //     )
-
-    //   }
-  
-   
-    //     return options
-    //  }
+  pushOptions = () => {
+    const options = [
+          {
+            key: this.props.user._id,
+            text: this.props.user.name,
+            value: this.props.user._id,
+            image: { avatar: true, src: 'https://picsum.photos/200.jpg' }
+          }
+        ]
+        this.props.contributors.forEach(contributor =>
+            options.push({
+                key: contributor._id,
+                text: contributor.user.name,
+                value: contributor.user._id,
+                image: { avatar: true, src: 'https://picsum.photos/200.jpg' },
+            })
+        )
+        return options
+       }
     
     render() { 
         const {renderAddFeature, renderEditFeature, editFeature} = this.props
-      
+   
         return ( 
             <Segment
             style={{
@@ -92,15 +85,16 @@ class AddFeatureForm extends Component {
               onChange={this.handleChangeFeatures}
             />
             </Form.Group>
-            {/* <Form.Dropdown
+            <Form.Dropdown
                placeholder='Select Friend'
-               fluid
+                 fluid
                selection
+               name='lead'
                onChange={this.handleSelectChange}
                value={this.state.featureFormData.lead}
-              
+               options={this.pushOptions()}
             
-            /> */}
+            />
             <Form.Group> 
             <Form.TextArea
               id='form-textarea-control-opinion'

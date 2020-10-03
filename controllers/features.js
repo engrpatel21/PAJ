@@ -12,6 +12,7 @@ module.exports = {
 
 function updateFeature(req, res){
     Feature.findByIdAndUpdate(req.params.featureId, req.body, {new: true})
+    .populate('lead')
     .then(feature => res.json(feature))
 }
 
@@ -27,13 +28,15 @@ function showFeature(req, res){
 
 function index(req,res){
     Feature.find({project: req.params.projectId})
+    .populate('lead')
     .then(features => res.json(features))
 }
 
-function createFeature(req, res){
+async function createFeature(req, res){
     req.body.project = req.params.projectId
-    Feature.create(req.body)
-    .then(feature => res.json(feature))
+    let feature = await Feature.create(req.body)
+    feature = await feature.populate('lead').execPopulate().then(feature => feature)
+    res.json(feature)
 }
 
 

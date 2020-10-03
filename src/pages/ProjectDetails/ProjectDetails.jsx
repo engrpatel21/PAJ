@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Message, Form, Button, Divider, Segment, Grid, Comment, Item, Container,Popup, Portal} from 'semantic-ui-react'
+import { Form, Button, Divider, Segment, Grid, Comment, Item, Container, Loader} from 'semantic-ui-react'
 import * as projectApi from '../../services/projectService'
 import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
-import FeatureDetails from '../../components/FeatureDetails/FeatureDetails'
-import ContributorsList from '../../components/ProjectData/ProjectData'
+import ProjectData from '../../components/ProjectData/ProjectData'
 import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
-import AddFeatureForm from '../../components/AddFeatureForm/AddFeatureForm'
-import AddContributorForm from '../../components/AddContributorForm/AddContributorForm'
 import ToggleProject from '../../components/ToggleProject/ToggleProject'
 //this is working
 
@@ -38,12 +35,10 @@ class ProjectDetails extends Component {
         this.setState({editFeature: !this.state.editFeature})
     }
 
-   
-
     formRef = React.createRef()
     render() { 
        const {project} = this.state
-       const {user} = this.props
+       const {user, history} = this.props
        const {projectId} = this.props.match.params
         return ( 
             <> 
@@ -52,7 +47,7 @@ class ProjectDetails extends Component {
             
             <ToggleProject project={this.state.project._id ? this.state.project : 'notloading'} handleUpdateProject={this.handleUpdateProject}/>
         
-            : '': '' : ''}
+            : <Loader active inline='centered' />: <Loader active inline='centered' /> : <Loader active inline='centered' />}
             <Segment style={{height: 'auto'}} >
             <Divider horizontal><h1>Project</h1></Divider>
                 <Grid>
@@ -67,16 +62,11 @@ class ProjectDetails extends Component {
             </Segment>
 
             <Divider horizontal><h3>Contributors</h3></Divider>
-           
-                <ContributorsList projectId={projectId} history={this.props.history}/>
-         
-             
-            
-            
-       
-     
-            
-           
+            { project.owner && user._id ? 
+                <ProjectData projectId={projectId} history={history} user={user} />
+                :
+                <Loader active inline='centered' />
+            }
             <Divider horizontal>Comments</Divider>
                 <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
                     {this.state.project.comments? this.state.project.comments.map(comment => 
@@ -97,9 +87,7 @@ class ProjectDetails extends Component {
                         />
                         <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
                     </Form>
-                </Comment.Group>
-        
-            
+                </Comment.Group>           
         </>
         );
     }

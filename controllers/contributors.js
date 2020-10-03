@@ -1,6 +1,7 @@
-const contributor = require('../models/contributor')
+const Feature = require('../models/feature')
 const Contributor = require('../models/contributor')
 const User = require('../models/user')
+const feature = require('../models/feature')
 
 module.exports ={
     createContributor,
@@ -18,12 +19,17 @@ function index(req, res){
 function deleteContributor(req, res){
     Contributor.findByIdAndDelete(req.params.contributorId)
     .then((contributor)=>{
-        User.findById(req.params.userId)
-        .then(user=>{
-            const idx = user.projects.findIndex(p => p._id.equals(req.params.projectId))
-            user.projects.splice(idx,1)
-            user.save().then(()=> res.json(contributor))
+        Feature.updateMany({lead: req.params.userId, project: req.params.projectId},{lead: req.user._id})
+        .then( feature => {
+            User.findById(req.params.userId)
+            .then(user=>{
+                const idx = user.projects.findIndex(p => p._id.equals(req.params.projectId))
+                user.projects.splice(idx,1)
+                user.save().then(()=> res.json(contributor))
+            })
+
         })
+      
     })
 }
 

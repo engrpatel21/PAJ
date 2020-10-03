@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Portal, Divider, Segment,Popup, Grid, Container} from 'semantic-ui-react'
+import { Table, Button, Portal, Popup, Grid, Container} from 'semantic-ui-react'
 import AddFeatureForm from '../../components/AddFeatureForm/AddFeatureForm'
 import * as featureApi from '../../services/featureService'
 
@@ -43,8 +43,14 @@ class FeatureDetails extends Component {
         this.setState({ features: this.state.features.filter( f => f._id !== featureId)})
     }
 
+    async componentDidUpdate(){
+        // const features = await featureApi.getAllFeatures(this.props.projectId)
+        // this.setState({features})
+    }
+
     render() { 
         const {addFeature, features, editFeature, editFeatureForm} = this.state 
+        const {contributors, user, history, projectId} = this.props
         return ( 
             <>
             <Grid>
@@ -64,9 +70,9 @@ class FeatureDetails extends Component {
                             {features.length ? features.map((feature,idx) =>
                         
                                     <Table.Row key={idx} >
-                                    <Table.Cell >{feature.feature}</Table.Cell>
-                                    <Table.Cell >{feature.description}</Table.Cell>
-                                    <Table.Cell></Table.Cell>
+                                    <Table.Cell onClick={()=>history.push(`/projectboard/${projectId}/${feature._id}`)} >{feature.feature}</Table.Cell>
+                                    <Table.Cell onClick={()=>history.push(`/projectboard/${projectId}/${feature._id}`)} >{feature.description}</Table.Cell>
+                                    <Table.Cell >{feature.lead ? feature.lead.name : ''}</Table.Cell>
                                     <Table.Cell ><Button onClick={()=>this.renderEditFeature(feature)} icon='edit'/></Table.Cell>
                                     <Table.Cell  key={`delete-${idx}`}><Button onClick={()=>this.handleDeleteFeature(feature._id)} icon='eraser'/></Table.Cell>
                                
@@ -84,6 +90,8 @@ class FeatureDetails extends Component {
                         renderEditFeature={this.renderEditFeature}
                         feature={editFeatureForm}
                         updateFeature={this.handleUpdateFeature}
+                        user={user}
+                        contributors={contributors}
                     />
                 </>
             </Portal>
@@ -107,6 +115,8 @@ class FeatureDetails extends Component {
                     addFeature={addFeature}
                     renderAddFeature={this.renderAddFeature}
                     handleAddFeature={this.handleAddFeature}
+                    contributors={contributors}
+                    user={user}
                 />
             </Portal>
                 

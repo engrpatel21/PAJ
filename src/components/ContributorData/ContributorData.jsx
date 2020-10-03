@@ -3,7 +3,7 @@ import {Grid, Table, Container, Portal, Popup, Checkbox, Button, Divider} from '
 import AddContributorForm from '../AddContributorForm/AddContributorForm'
 
 
-const ContributorData = ({contributors, handleDeleteContributor, handleUpdateAdminStatus}) => {
+const ContributorData = ({contributors, handleDeleteContributor, handleUpdateAdminStatus, renderAddContributor, addContributor, handelAddContributor}) => {
     return ( 
         <>
             <Grid centered>
@@ -14,47 +14,46 @@ const ContributorData = ({contributors, handleDeleteContributor, handleUpdateAdm
                     <Table.Row>
                         <Table.HeaderCell>User</Table.HeaderCell>
                         <Table.HeaderCell>Email</Table.HeaderCell>
-                        <Table.HeaderCell collapsing>Admin</Table.HeaderCell>
+                        <Table.HeaderCell >Admin</Table.HeaderCell>
                         <Table.HeaderCell>Remove</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
             <Table.Body>
-                {/* {contributors.map((contributor,idx) =>
+                {contributors.map((contributor,idx) =>
                      <Table.Row key={idx}  >
                      <Table.Cell collapsing>{contributor.user ? contributor.user.name : 'loading'}</Table.Cell>
                      <Table.Cell collapsing>{contributor.user ? contributor.user.email: 'notloading'}</Table.Cell>
                      <Table.Cell collapsing><Checkbox toggle onChange={()=>handleUpdateAdminStatus(contributor.isAdmin, idx)} checked={contributor.isAdmin}/></Table.Cell>
                      <Table.Cell collapsing key={`delete-${idx}`}><Button onClick={()=>handleDeleteContributor(contributor._id, contributor.user._id)} icon='eraser'/></Table.Cell>
                  </Table.Row>
-                    )  } */}
+                    ) }
             </Table.Body>
             </Table>
                     </Container>
                 </Grid.Column>
             </Grid>
             
-            {/* <div>
+            <div>
                 <Grid>
                     <Grid.Column textAlign="center">
                             <Popup content="Click to add a Contributors" 
-                            trigger={<Button onClick={this.renderAddContributor} 
+                            trigger={<Button onClick={renderAddContributor} 
                                 size='tiny' 
                                 color='blue' 
                                 icon='plus'
                                 content='Contributor'
-                                disabled={this.state.addContributor}
+                                disabled={addContributor}
                                 />} 
                             />
                     </Grid.Column>
                 </Grid>       
             </div>
-                <Portal onClose={this.renderAddContributor} open={this.state.addContributor} >
+                <Portal onClose={renderAddContributor} open={addContributor} >
                         <AddContributorForm 
-                            renderAddContributor={this.renderAddContributor}
-                            handelAddContributor={this.handelAddContributor}
+                            renderAddContributor={renderAddContributor}
+                            handelAddContributor={handelAddContributor}
                         />
-                </Portal> */}
-            {/* <Divider horizontal><h3>Feature List</h3></Divider> */}
+                </Portal>
         </>
         
      );

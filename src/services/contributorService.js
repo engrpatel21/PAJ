@@ -2,7 +2,6 @@ import tokenService from './tokenService'
 const BASE_URL = '/api/contributors'
 
 export function addContributor(project_id, contributor){
-    console.log(contributor)
     return fetch(`${BASE_URL}/${project_id}`,{
         method: "POST",
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},

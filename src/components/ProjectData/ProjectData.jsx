@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Table, Grid, Popup, Portal, Checkbox, Divider, Container} from 'semantic-ui-react'
-import AddContributorForm from '../AddContributorForm/AddContributorForm'
+import {  Divider, Loader} from 'semantic-ui-react'
 import * as contributorApi from '../../services/contributorService'
 import FeatureDetails from '../FeatureDetails/FeatureDetails'
 import ContributorData from '../ContributorData/ContributorData'
 
 class ContributorsList extends Component {
     state = { 
-        contributors: [],
+        contributors: null,
         addContributor: false
     }
 
@@ -41,15 +40,36 @@ class ContributorsList extends Component {
 
     render() { 
         const {contributors} = this.state
-        const {projectId} = this.props
+        const {projectId, user, history} = this.props
         return ( 
             <>
-            {/* <ContributorData 
-                contributors={contributors.length ? contributors : 'loading'}
-                handleDeleteContributor={this.handleDeleteContributor}
-                handleUpdateAdminStatus={this.handleUpdateAdminStatus}
-                /> */}
-            <Grid centered>
+            { contributors ? 
+                <>
+                    <ContributorData 
+                        contributors={contributors}
+                        handleDeleteContributor={this.handleDeleteContributor}
+                        handleUpdateAdminStatus={this.handleUpdateAdminStatus}
+                        handelAddContributor={this.handelAddContributor}
+                        renderAddContributor={this.renderAddContributor}
+                        addContributor={this.state.addContributor}
+                        />
+                    <Divider horizontal><h3>Feature List</h3></Divider>
+                    <FeatureDetails projectId={projectId} user={user} contributors={contributors} history={history}/>
+                </>        
+                :
+                <Loader active inline='centered' />
+            }
+            
+           </>
+         );
+    }
+}
+ 
+export default ContributorsList;
+
+
+/* just in case
+  {/* <Grid centered>
                 <Grid.Column >
                     <Container text fluid style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                     <Table striped selectable collapsing  >
@@ -96,15 +116,5 @@ class ContributorsList extends Component {
                             renderAddContributor={this.renderAddContributor}
                             handelAddContributor={this.handelAddContributor}
                         />
-                </Portal>
-            <Divider horizontal><h3>Feature List</h3></Divider>
-            <FeatureDetails projectId={projectId}/>
-           </>
-         );
-    }
-}
- 
-export default ContributorsList;
-
-
-
+                </Portal> */
+            
