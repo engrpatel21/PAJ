@@ -5,7 +5,7 @@ const taskSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User'},
     name: String,
     content: String,
-    taskStatus:{type: String, enum: ['in progress', 'completed', 'backlog'], default: 'backlog'},
+    taskStatus:{type: String, enum: ['inProgress', 'completed', 'backlog'], default: 'backlog'},
 },{timestamps: true})
 
 const boardSchema = new Schema({
@@ -15,7 +15,7 @@ const boardSchema = new Schema({
         items: [taskSchema]
     },
     inProgress:{
-          name: {type: String, default: 'in progress'},
+          name: {type: String, default: 'inProgress'},
           items: Array
     },
     completed:{

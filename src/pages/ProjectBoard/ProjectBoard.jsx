@@ -30,6 +30,11 @@ class ProjectBoard extends Component {
         this.setState({taskBoard: newBoard})
     }
 
+    handleUpdateStatus = async (taskId, status, destination, task) => {
+        const newBoard = await taskApi.updateTaskStatus(this.props.match.params.featureId, taskId, status, destination, task)
+        this.setState({taskBoard: newBoard})
+    }
+
     render() { 
         const {taskBoard, addTask} = this.state
         return ( 
@@ -37,7 +42,12 @@ class ProjectBoard extends Component {
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Button content='Add Task' onClick={()=>this.renderAddTask()}/>
             </div>
-            {taskBoard ? <Kanbaan taskBoard={taskBoard} deleteTask={this.handleDeleteTask}/> : ''}
+            {taskBoard ? <Kanbaan 
+                            taskBoard={taskBoard} 
+                            deleteTask={this.handleDeleteTask} 
+                            featureId={this.props.match.params.featureId}
+                            updateStatus = {this.handleUpdateStatus}
+                        /> : ''}
             <Portal onClose={this.renderAddTask} open={addTask} >
                         <AddTaskForm
                             handleAddTasks={this.handleAddTasks}

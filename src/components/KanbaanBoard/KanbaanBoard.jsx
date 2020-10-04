@@ -12,42 +12,6 @@ const BASE_URL = '/api/tasks'
 
 
 
-const onDragEnd = (result, columns, setColums) => {
-    if(!result.destination) return;
-    const {source, destination} = result
-    if( source.droppableId !== destination.droppableId){
-        const sourceCol = columns[source.droppableId]
-        const destCol = columns[destination.droppableId]
-        const sourceItems = [...sourceCol.items]
-        const destItems = [...destCol.items]
-        const [removed] = sourceItems.splice(source.index, 1)
-        destItems.splice(destination.index, 0, removed)
-        setColums({
-            ...columns,
-            [source.droppableId]: {
-                ...sourceCol,
-                items: sourceItems
-            },
-            [destination.droppableId]: {
-                ...destCol,
-                items: destItems
-            }
-        })
-    }else{
-        const column = columns[source.droppableId]
-        const copiedItems = [...column.items]
-        const [removed] = copiedItems.splice(source.index, 1)
-        copiedItems.splice(destination.index, 0, removed)
-        setColums({
-            ...columns,
-            [source.droppableId] : {
-                ...column,
-                items: copiedItems
-            }
-        })
-    }
-}
-
 
 
 const KanbanBoard = (props) => {
@@ -73,16 +37,48 @@ const KanbanBoard = (props) => {
 
     useEffect(()=> setColums(props.taskBoard), [props.taskBoard])
 
-    const handleAddTasks = async (taskData) => {
-        const newTask = await taskApi.addTask(props.match.params.projectId, taskData)
-        setTasks([...tasks, newTask])
-        setColums(columnsFromBackend)
-    }
 
-    // const handleGetTask = useCallback(async () => {
-    //     const tasks = await taskApi.getTasks(match.params.featureId)
-    //     return tasks
-    // },[match.params.featureId])
+    const onDragEnd = (result, columns, setColums) => {
+        if(!result.destination) return;
+        const {source, destination} = result
+        if( source.droppableId !== destination.droppableId){
+            const idx = columns[source.droppableId].items.findIndex(i => i._id === result.draggableId)
+            columns[source.droppableId].items[idx].taskStatus = destination.droppableId
+            const sourceCol = columns[source.droppableId]
+            const destCol = columns[destination.droppableId]
+            const sourceItems = [...sourceCol.items]
+            const destItems = [...destCol.items]
+            const [removed] = sourceItems.splice(source.index, 1)
+            console.log(removed)
+            destItems.splice(destination.index, 0, removed)
+            console.log(columns)
+            setColums({
+                ...columns,
+                [source.droppableId]: {
+                    ...sourceCol,
+                    items: sourceItems
+                },
+                [destination.droppableId]: {
+                    ...destCol,
+                    items: destItems
+                }
+            })
+            props.updateStatus(removed._id, source.droppableId, destination.droppableId, removed)
+        }else{
+            const column = columns[source.droppableId]
+            const copiedItems = [...column.items]
+            const [removed] = copiedItems.splice(source.index, 1)
+            copiedItems.splice(destination.index, 0, removed)
+            setColums({
+                ...columns,
+                [source.droppableId] : {
+                    ...column,
+                    items: copiedItems
+                }
+            })
+        }
+    }
+    
 
 
 
