@@ -34,7 +34,7 @@ app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter)
 app.use('/api/projects', commentRouter)
 app.use('/api/features', featureRouter)
-app.use('/api/projects', taskRouter)
+app.use('/api/tasks', taskRouter)
 app.use('/api/users', messageRouter)
 app.use('/api/contributors', contributorRouter)
 

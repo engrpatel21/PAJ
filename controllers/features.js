@@ -1,4 +1,5 @@
 const Feature = require('../models/feature')
+const Board = require('../models/board')
 
 module.exports = {
     index,
@@ -18,7 +19,12 @@ function updateFeature(req, res){
 
 function deleteFeature(req, res){
     Feature.findByIdAndDelete(req.params.featureId)
-    .then((feature)=> res.status(200).json(feature))
+    .then((feature)=> {
+        Board.findOneAndDelete({featureId: req.params.featureId})
+        .then(() =>
+            res.status(200).json(feature))
+    })
+        
 }
 
 function showFeature(req, res){
@@ -36,6 +42,7 @@ async function createFeature(req, res){
     req.body.project = req.params.projectId
     let feature = await Feature.create(req.body)
     feature = await feature.populate('lead').execPopulate().then(feature => feature)
+    await Board.create({projectId: req.params.projectId, featureId: feature._id})
     res.json(feature)
 }
 

@@ -3,11 +3,9 @@ const taskCtrl = require('../controllers/tasks')
 
 /*---------- Protected Routes ----------*/
 router.use(require("../config/auth"));
-router.get('/:projectId/features/:featureId/tasks', checkAuth, taskCtrl.index)
-router.get('/:projectId/features/:featureId/tasks/:taskId', checkAuth, taskCtrl.showTask)
-router.post('/:projectId/features/:featureId/tasks', checkAuth, taskCtrl.createTask)
-router.delete('/:projectId/features/:featureId/tasks/:taskId', checkAuth, taskCtrl.deleteTask)
-router.put('/:projectId/features/:featureId/tasks/:taskId', checkAuth, taskCtrl.updateTask)
+router.get('/:featureId', checkAuth, taskCtrl.index)
+router.post('/:featureId', checkAuth, taskCtrl.createTask)
+router.delete('/:featureId/:taskId/:status', checkAuth, taskCtrl.deleteTask)
 
 /*---------- Auth Checker ----------*/
 function checkAuth(req, res, next) {

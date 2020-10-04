@@ -6,7 +6,6 @@ const taskSchema = new Schema({
     name: String,
     content: String,
     taskStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
-    isEdit: {type: Boolean, default: false},
 },{timestamps: true})
 
 const featureSchema = new Schema({
@@ -15,7 +14,7 @@ const featureSchema = new Schema({
     featureStatus:{type: String, enum: ['In Progress', 'Completed', 'Backlog'], default: 'Backlog'},
     tasks: [taskSchema],
     project: {type: Schema.Types.ObjectId, ref: 'Project'},
-    lead: {type: Schema.Types.ObjectId, ref: 'User'}
+    lead: {type: Schema.Types.ObjectId, ref: 'User'},
 },{timestamps: true})
 
 module.exports = mongoose.model('Feature', featureSchema)
