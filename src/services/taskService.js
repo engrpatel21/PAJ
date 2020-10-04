@@ -26,6 +26,15 @@ export function updateTaskStatus(board_id, board){
     .then(res => res.json())
 }
 
+export function updateTask(board_id, task){
+    return fetch(`${BASE_URL}/edit/${board_id}`,{
+        method: "PUT",
+        headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
+        body: JSON.stringify(task)
+    }, {mode: "cors"})
+    .then(res => res.json())
+}
+
 export function addTask(feature_id,task){
     return fetch(`${BASE_URL}/${feature_id}`, {
         method: "POST",

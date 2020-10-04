@@ -7,6 +7,7 @@ router.get('/:featureId', checkAuth, taskCtrl.index)
 router.post('/:featureId', checkAuth, taskCtrl.createTask)
 router.delete('/:featureId/:taskId/:status', checkAuth, taskCtrl.deleteTask)
 router.put('/:boardId', checkAuth, taskCtrl.updateStatus)
+router.put('/edit/:boardId', checkAuth, taskCtrl.updateTask)
 
 /*---------- Auth Checker ----------*/
 function checkAuth(req, res, next) {

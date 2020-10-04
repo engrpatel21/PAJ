@@ -3,7 +3,7 @@ const Board = require('../models/board')
 module.exports ={
     index,
     createTask,
-    // showTask,
+    updateTask,
     deleteTask,
     updateStatus
 }
@@ -14,6 +14,15 @@ function deleteTask(req, res){
         const idx = board[req.params.status].items.findIndex(i => i._id === req.params.taskId)
         board[req.params.status].items.splice(idx, 1)
         board.save().then(board => res.json(board))
+    })
+}
+
+function updateTask(req, res){
+    Board.findById(req.params.boardId)
+    .then(board =>{
+        const idx = board[req.body.task.taskStatus].items.findIndex( i => i._id === req.body.task._id)
+        board[req.body.task.taskStatus].items.splice(idx, 1, req.body)
+        board.save().then(() => res.json(board[req.body.task.taskStatus].items[idx]))
     })
 }
 

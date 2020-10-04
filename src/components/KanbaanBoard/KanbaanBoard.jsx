@@ -1,37 +1,10 @@
 import React, { useState } from 'react';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
-import AddTaskForm from '../../components/AddTaskForm/AddTaskForm'
 import CardComp from '../../components/Card/Card'
-import { Button, Popup, Portal } from 'semantic-ui-react'
-import * as taskApi from '../../services/taskService'
 import { useEffect } from 'react';
-import tokenService from '../../services/tokenService'
-const BASE_URL = '/api/tasks'
-
-
-
-
-
-
 
 const KanbanBoard = (props) => {
 
-    const [tasks, setTasks] = useState([])
-    const columnsFromBackend = {
-        'Backlog': {
-          name: "Backlog",
-          items: []
-        },
-        'In Progress':{
-            name: 'In Progress',
-            items: []
-        },
-        'Completed':{
-            name: 'Completed',
-            items: []
-        }
-    
-      };
     const [columns, setColums] = useState(null)
   
 
@@ -44,8 +17,6 @@ const KanbanBoard = (props) => {
         if(!result.destination) return;
         const {source, destination} = result
         if( source.droppableId !== destination.droppableId){
-            const idx = columns[source.droppableId].items.findIndex(i => i._id === result.draggableId)
-            columns[source.droppableId].items[idx].taskStatus = destination.droppableId
             const sourceCol = columns[source.droppableId]
             const destCol = columns[destination.droppableId]
             const sourceItems = [...sourceCol.items]
@@ -63,8 +34,8 @@ const KanbanBoard = (props) => {
                     items: destItems
                 }
             }
-            props.updateStatus(newCol._id, newCol)
-            setColums(newCol)
+            
+            setColums(newCol, props.updateStatus(newCol._id, newCol))
             
         }else{
             const column = columns[source.droppableId]
@@ -80,11 +51,6 @@ const KanbanBoard = (props) => {
             })
         }
     }
-    
-
-
-
-   
     
     return ( 
         <> 
@@ -103,7 +69,7 @@ const KanbanBoard = (props) => {
                                     flexDirection: "column",
                                     alignItems: "center"
                               }} >
-                            <h2>{col.name}</h2>
+                            <h2>{col.name === 'backlog' ? 'Backlog' : col.name === 'inProgress' ? 'In Progress' : col.name === 'completed' ? 'Completed' : '' }</h2>
                             <div style={{margin: 8}}>
                             <Droppable droppableId={id} >
                                 {(provided, snapshot) =>{
@@ -138,7 +104,7 @@ const KanbanBoard = (props) => {
                                                                         cursor: 'default'
                                                                     }}
                                                                 >
-                                                                     <CardComp task={item} deleteTask={props.deleteTask}/>
+                                                                     <CardComp task={item} deleteTask={props.deleteTask} editTask={props.editTask}/>
                                                                         {item.taskStatus === 'backlog' && columns.backlog.items.length -1 === index ? 'show me' : 'dont'}
                                                                </div>
                                                            )

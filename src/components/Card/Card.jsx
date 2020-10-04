@@ -1,18 +1,20 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import {Card, Image, Button} from 'semantic-ui-react'
 
 const CardComp = ({task, deleteTask}) => {
+    const [editForm, setEditFrom] = useState({name: '', content: ''})
+    
     return ( 
 
         <Card>
         <Image  wrapped ui={false} />
         <Card.Content>
-          <Card.Header>{task.content}</Card.Header>
+          <Card.Header>{task.name}</Card.Header>
           <Card.Meta>
             <span className='date'>Joined in 2015</span>
           </Card.Meta>
           <Card.Description>
-            Matthew is a musician living in Nashville.
+            {task.content}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>

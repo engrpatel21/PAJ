@@ -34,6 +34,13 @@ class ProjectBoard extends Component {
         this.setState({taskBoard: newBoard})
     }
 
+    handleEditTask = async (boardId, task) => {
+        const updatedTask = await taskApi.updateTask(boardId, task)
+        const taskBoard = {...this.state.taskBoard}
+        taskBoard[updatedTask.taskStatus].items = taskBoard[updatedTask.taskStatus].items.map(i=> i._id === updatedTask._id ? updatedTask : i)
+        this.setState({taskBoard})
+    }
+
     render() { 
         const {taskBoard, addTask} = this.state
         return ( 
@@ -46,6 +53,7 @@ class ProjectBoard extends Component {
                             deleteTask={this.handleDeleteTask} 
                             featureId={this.props.match.params.featureId}
                             updateStatus = {this.handleUpdateStatus}
+                            editTask={this.handleEditTask}
                         /> : ''}
             <Portal onClose={this.renderAddTask} open={addTask} >
                         <AddTaskForm
