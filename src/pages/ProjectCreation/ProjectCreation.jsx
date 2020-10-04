@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ProjectCreation.css'
+import {createProject} from '../../services/projectService'
 import { Form, Segment, TextArea, Divider } from 'semantic-ui-react'
 
 class ProjectCreation extends Component {
@@ -12,10 +13,18 @@ class ProjectCreation extends Component {
         }
      }
 
-     handleSubmit = e =>{
+
+    
+    handleSubmit = e =>{
         e.preventDefault();
-        this.props.handleAddProject(this.state.formData)
+        this.handleAddProject(this.state.formData)
     }
+    
+  handleAddProject = async projectData => {
+    const project = await createProject(projectData) 
+    this.props.history.push(`/projectdetails/${project}`)
+  }
+  
 
     handleChange = e => {
        const formData = {...this.state.formData, [e.target.name]: e.target.value};

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Grid, Icon, Image, Card, Message, Button } from 'semantic-ui-react'
+import { Grid,  Image, Card,Button } from 'semantic-ui-react'
 import ProjectUsersCard from '../ProjectUsersCard/ProjectUsersCard'
 
 const UsersProfile = (props, mobile) => {

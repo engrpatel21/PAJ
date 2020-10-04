@@ -27,9 +27,9 @@ const UserCard = ({ user }) => {
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <a>
+            
                 <Icon name='user' />
-              </a>
+            
             </Card.Content>
           </Card>
           </body>

@@ -1,180 +1,68 @@
 import React, { Component } from 'react';
-// import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
-import TaskCard from '../../components/TaskCard/TaskCard'
-import TaskCardEM from '../../components/TaskCard(EMode)/TaskCard(EMode)'
-
-import { Grid, Divider,  Button, Popup } from 'semantic-ui-react'
-import "./ProjectBoard.css";
-import * as projectApi from '../../services/projectService'
-
+import Kanbaan from '../../components/KanbaanBoard/KanbaanBoard'
+import * as taskApi from '../../services/taskService'
+import AddTaskForm from '../../components/AddTaskForm/AddTaskForm'
+import {Portal, Button} from 'semantic-ui-react'
 
 class ProjectBoard extends Component {
     state = { 
-        tasks: [],
-        addTask: true,
-        project: {},
-        projectId: this.props.match.params.projectId,
-        featureId: this.props.match.params.featureId
-     }
-    
-    async componentDidMount(){
-        const tasks = await projectApi.getALlTasks(this.state.projectId,this.state.featureId)
-        const project = await projectApi.getOneProject(this.state.projectId)
-        this.setState({tasks,project})
+        taskBoard: null,
+        addTask: false
     }
-
 
     renderAddTask = () => {
         this.setState({addTask: !this.state.addTask})
     }
 
-    handleAddTask = async (project_id, feature_id, taskData) => {
-        const newTask = await projectApi.addFeatureTask(project_id, feature_id, taskData)
-        this.setState({
-            tasks: [...this.state.tasks,newTask]
-        })
+    async componentDidMount(){
+        const taskBoard = await taskApi.getTasks(this.props.match.params.featureId)
+        this.setState({ taskBoard})
+    }
+    handleAddTasks = async (taskData) => {
+        const newBoard = await taskApi.addTask(this.props.match.params.featureId, taskData)
+        this.setState({taskBoard: newBoard})
+     
     }
 
-    handleDeleteTask = async (project_id, feature_id, task_id) => {
-        await projectApi.deleteFeatureTask(project_id, feature_id, task_id)
-        this.setState({
-            tasks: this.state.tasks.filter(t => t._id !== task_id)
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
-    
+    handleDeleteTask = async (taskId, status) => {
+        const newBoard = await taskApi.deleteTask(this.props.match.params.featureId, taskId, status)
+        this.setState({taskBoard: newBoard})
     }
 
-    handleUpdateTask = async (project_id, feature_id, task_id, taskData) =>{
-        const task = await projectApi.updateFeatureTask(project_id, feature_id, task_id, taskData)
-        this.setState({
-            tasks: this.state.tasks.map(t => t._id === task._id ? task : t)
-        }, ()=> this.props.history.push(`/projectboard/${this.state.projectId}/${this.state.featureId}`))
+    handleUpdateStatus = async (boardId, board) => {
+        const newBoard = await taskApi.updateTaskStatus(boardId, board)
+        this.setState({taskBoard: newBoard})
     }
 
-
+    handleEditTask = async (boardId, task) => {
+        const updatedTask = await taskApi.updateTask(boardId, task)
+        const taskBoard = {...this.state.taskBoard}
+        taskBoard[updatedTask.taskStatus].items = taskBoard[updatedTask.taskStatus].items.map(i=> i._id === updatedTask._id ? updatedTask : i)
+        this.setState({taskBoard})
+    }
 
     render() { 
-        const {featureId, projectId} = this.state
+        const {taskBoard, addTask} = this.state
         return ( 
-            <>
-            <h1>Project Board Page</h1>
-            <Divider>
-            </Divider>
-            <Grid columns={3} divided>
-                <Grid.Row>
-                    <Grid.Column>
-                        <h1>Backlog:</h1>
-                            {this.state.tasks? this.state.tasks.map( task => 
-                                
-                                <>
-                                    {task.taskStatus === 'Backlog' ? 
-
-                                        <TaskCard 
-                                        key={task._id}
-                                        task={task}
-                                        projectId={projectId}
-                                        featureId={featureId}
-                                        handleDeleteTask={this.handleDeleteTask}
-                                        handleUpdateTask={this.handleUpdateTask} 
-                                        renderAddTask={this.renderAddTask}
-                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
-                                        owner = {this.state.project.owner._id ? this.state.project.owner : 'not loading'}
-                                        contributors = {this.state.project.contributors.length? this.state.project.contributors : ''}
-                                        />
-                                        :
-                                        ''                                  
-                                    }
-                                </>
-
-                            
-                            ):
-                            ''
-                            }
-                            {this.state.addTask ?  
-                            <>
-                                 <div>
-                                    <Grid>
-                                    <Grid.Column textAlign="center">
-                                        <Popup content="Click to add a Task" trigger={<Button 
-                                        onClick={this.renderAddTask} 
-                                        size='tiny'
-                                        content='Add Task' 
-                                        color='blue' 
-                                        icon="plus"/>} />
-                                    </Grid.Column>
-                                    </Grid>
-                                </div>
-                            </>
-                            : 
-                            <>  
-                                <TaskCardEM 
-                                handleAddTask={this.handleAddTask} 
-                                renderAddTask={this.renderAddTask}
-                                owner = {this.state.project.owner._id ? this.state.project.owner : 'not loading'}
-                                contributors = {this.state.project.contributors.length? this.state.project.contributors : ''}
-                                projectId={projectId} 
-                                featureId={featureId}/>
-                            
-                            </>    
-                            }
-                            </Grid.Column>
-                            <Grid.Column>
-                        <h1>In Progress:</h1>
-                        {this.state.tasks? this.state.tasks.map( task => 
-                                
-                                <>
-                                    {task.taskStatus === 'In Progress' ? 
-
-                                        <TaskCard 
-                                        key={task._id}
-                                        task={task}
-                                        projectId={projectId}
-                                        featureId={featureId}
-                                        handleDeleteTask={this.handleDeleteTask}
-                                        handleUpdateTask={this.handleUpdateTask} 
-                                        renderAddTask={this.renderAddTask}
-                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
-                                        />
-                                        :
-                                       ''                                  
-                                    }
-                                </>
-
-                            
-                            ):
-                            ''
-                            }
-                    </Grid.Column>
-                    <Grid.Column>
-                        <h1>Completed:</h1>
-                        {this.state.tasks? this.state.tasks.map( task => 
-                                
-                                <>
-                                    {task.taskStatus === 'Completed' ? 
-
-                                        <TaskCard 
-                                        key={task._id}
-                                        task={task}
-                                        projectId={projectId}
-                                        featureId={featureId}
-                                        handleDeleteTask={this.handleDeleteTask}
-                                        handleUpdateTask={this.handleUpdateTask} 
-                                        renderAddTask={this.renderAddTask}
-                                        handleUpdateTaskStatus={this.handleUpdateTaskStatus}
-                                        />
-                                        :
-                                       ''                                  
-                                    }
-                                </>
-
-                            
-                            ):
-                            ''
-                            }
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-            </>
-         );
+          <>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Button content='Add Task' onClick={()=>this.renderAddTask()}/>
+            </div>
+            {taskBoard ? <Kanbaan 
+                            taskBoard={taskBoard} 
+                            deleteTask={this.handleDeleteTask} 
+                            featureId={this.props.match.params.featureId}
+                            updateStatus = {this.handleUpdateStatus}
+                            editTask={this.handleEditTask}
+                        /> : ''}
+            <Portal onClose={this.renderAddTask} open={addTask} >
+                        <AddTaskForm
+                            handleAddTasks={this.handleAddTasks}
+                            renderAddTask={this.renderAddTask}
+                        />
+                </Portal> 
+          </>
+        );
     }
 }
  

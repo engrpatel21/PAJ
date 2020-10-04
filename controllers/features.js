@@ -1,4 +1,5 @@
-const Project = require('../models/project')
+const Feature = require('../models/feature')
+const Board = require('../models/board')
 
 module.exports = {
     index,
@@ -8,50 +9,41 @@ module.exports = {
     updateFeature
 }
 
+
+
 function updateFeature(req, res){
-    Project.findById(req.params.projectId)
-    .then(project =>{
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        project.features.splice(idx,1,req.body)
-        project.save().then(project => 
-            res.json(project.features)
-            )
-    })
+    Feature.findByIdAndUpdate(req.params.featureId, req.body, {new: true})
+    .populate('lead')
+    .then(feature => res.json(feature))
 }
 
 function deleteFeature(req, res){
-    Project.findById(req.params.projectId)
-    .then(project => {
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        project.features.splice(idx,1)
-        project.save().then(project =>
-            res.json(project.features)
-            )
+    Feature.findByIdAndDelete(req.params.featureId)
+    .then((feature)=> {
+        Board.findOneAndDelete({featureId: req.params.featureId})
+        .then(() =>
+            res.status(200).json(feature))
     })
+        
 }
 
 function showFeature(req, res){
-    Project.findById(req.params.projectId)
-    .then(project => {
-        const idx = project.features.findIndex(feature => feature._id.equals(req.params.featureId))
-        res.json(project.features[idx])
-    })
+   Feature.findById(req.params.featureId)
+   .then(feature => res.json(feature))
 }
 
 function index(req,res){
-    Project.findById(req.params.projectId)
-    .then(project =>
-        res.json(project.features)
-        )
+    Feature.find({project: req.params.projectId})
+    .populate('lead')
+    .then(features => res.json(features))
 }
 
-function createFeature(req, res){
-    Project.findById(req.params.projectId)
-    .then(project => {
-        project.features.push(req.body)
-        project.save().then(project => 
-            res.json(project)
-        )
-    })
+async function createFeature(req, res){
+    req.body.project = req.params.projectId
+    let feature = await Feature.create(req.body)
+    feature = await feature.populate('lead').execPopulate().then(feature => feature)
+    await Board.create({projectId: req.params.projectId, featureId: feature._id})
+    res.json(feature)
 }
+
 

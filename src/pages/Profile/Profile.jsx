@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-import { Grid, Image, Button, Icon, Divider, Card, Message, Form  } from 'semantic-ui-react'
+import { Grid, Image, Button, Icon,  Card, Form  } from 'semantic-ui-react'
 import * as userApi from "../../services/userService";
 import ProjectListContainer from '../../components/ProjectListContainer/ProjectListContainer'
 import './Profile'
+
+
+
+
+
+
+
+
+
 
 class Profile extends Component {
   state = {
@@ -33,23 +42,26 @@ handleChange = e => {
   })
 }
 formRef = React.createRef()
-
+ 
   render() {
     const {user} = this.state
     return (
+    
       <>
-      <body style={{
-        backgroundColor:'#1b1c1d'
+        <div style={{
+        backgroundColor:'#1b1c1d',
+        border: 'black'
       }}>
-        <Grid celled style={{
+        <Grid style={{
           height:'910px',
+          marginTop: '5px'
         }}>
           <Grid.Row style={{left:'500px', bottom:'40px'}}>
           <Grid.Column width={3}>
             <br></br>
             <br></br>
             <Link to='/createproject'>
-            <Button style={{
+            <Button as={Link} to={{pathname: '/createproject'}} style={{
               width:'200px',
               color:'white',
               textShadow:'#1b1c1d 2px 2px',
@@ -179,8 +191,9 @@ formRef = React.createRef()
             />
           </Grid>
         </Grid>
-        </body>
+        </div>
       </>
+     
     );
   }
 }

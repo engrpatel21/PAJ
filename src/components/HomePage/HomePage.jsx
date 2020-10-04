@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
@@ -17,10 +16,6 @@ import {
   Item
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-
-
-
-
 
 
 const HomepageHeading = ({ mobile }) => (
@@ -61,7 +56,7 @@ const HomepageHeading = ({ mobile }) => (
     </Button>
     <Divider hidden/>
     <Container>
-    <Item.Header as={Link} to='/login' style={{color:'white'}} hover>Log in</Item.Header>
+    <Item.Header as={Link} to='/login' style={{color:'white'}} hover='true'>Log in</Item.Header>
     </Container>
   </Container>
 )
@@ -84,8 +79,8 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
     
     return (
-      <body>
-      <Segment greaterThan='mobile'>
+     <div>
+      <Segment greaterthan='mobile'>
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
@@ -119,7 +114,7 @@ class DesktopContainer extends Component {
 
         {children}
       </Segment>
-      </body>
+      </div>
     )
   }
 }
@@ -155,13 +150,15 @@ class MobileContainer extends Component {
   
   const ResponsiveContainer = ({ children }) => (
     
-    <Segment>
-    {DesktopContainer === DesktopContainer ?
+    <>
+ 
+    {DesktopContainer ?
     <DesktopContainer>{children}</DesktopContainer>
     :
     <MobileContainer>{children}</MobileContainer>
   }
-  </Segment>
+
+  </>
 )
 
 ResponsiveContainer.propTypes = {
@@ -169,6 +166,7 @@ ResponsiveContainer.propTypes = {
 }
 
 const HomepageLayout = () => (
+
   <ResponsiveContainer>
     
     <Segment style={{ padding: '8em 0em' }} vertical>
@@ -282,6 +280,7 @@ const HomepageLayout = () => (
       </Container>
     </Segment>
   </ResponsiveContainer>
+
 )
 
 export default HomepageLayout

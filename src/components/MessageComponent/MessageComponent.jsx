@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Comment, Form, Header, Divider, Grid} from 'semantic-ui-react'
+import {Comment} from 'semantic-ui-react'
 
 const MessageComponent = (props) => (
 <>

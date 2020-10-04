@@ -25,7 +25,7 @@ class ProjectNameCard extends Component {
               <Item.Header style={{fontSize: '2.4rem', height: '4rem', margin: '0 0'}}>
            
                   <Form.Input
-                    value={this.state.projectFromData.name}
+                    value={project.name}
                   />
 
              
@@ -35,9 +35,9 @@ class ProjectNameCard extends Component {
               <Item.Meta>Description</Item.Meta>
               <Item.Description style={{fontSize: '1.5rem', margin: '0 0'}}>
                 <Form.Input 
-                  value={this.state.projectFromData.description}
+                  value={project.description}
                 />
-                {project.description}
+                
                 <Button icon='check' content='Submit' floated='right' size='tiny' onClick={this.renderEdit}/>
               </Item.Description>
             </Item.Content>
