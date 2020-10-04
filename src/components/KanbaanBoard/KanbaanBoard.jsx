@@ -35,8 +35,10 @@ const KanbanBoard = (props) => {
     const [columns, setColums] = useState(null)
   
 
-    useEffect(()=> setColums(props.taskBoard), [props.taskBoard])
-
+    useEffect(()=> {
+        setColums(props.taskBoard)
+    }, [props.taskBoard])
+    
 
     const onDragEnd = (result, columns, setColums) => {
         if(!result.destination) return;
@@ -49,10 +51,8 @@ const KanbanBoard = (props) => {
             const sourceItems = [...sourceCol.items]
             const destItems = [...destCol.items]
             const [removed] = sourceItems.splice(source.index, 1)
-            console.log(removed)
             destItems.splice(destination.index, 0, removed)
-            console.log(columns)
-            setColums({
+            const newCol = {
                 ...columns,
                 [source.droppableId]: {
                     ...sourceCol,
@@ -62,8 +62,10 @@ const KanbanBoard = (props) => {
                     ...destCol,
                     items: destItems
                 }
-            })
-            props.updateStatus(removed._id, source.droppableId, destination.droppableId, removed)
+            }
+            props.updateStatus(newCol._id, newCol)
+            setColums(newCol)
+            
         }else{
             const column = columns[source.droppableId]
             const copiedItems = [...column.items]

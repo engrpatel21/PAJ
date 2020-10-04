@@ -17,15 +17,21 @@ function deleteTask(req, res){
     })
 }
 
+// function updateStatus(req, res){
+//     console.log(req.body)
+//     Board.findOne({featureId: req.params.featureId})
+//     .then(board =>{
+//         const idx = board[req.params.status].items.findIndex(i => i._id === req.body._id)
+//         board[req.params.status].items.splice(idx,1)
+//         board[req.params.destination].items.push(req.body)
+//         board.save().then(board => res.json(board))
+//     })
+// }
+
 function updateStatus(req, res){
-    console.log(req.body)
-    Board.findOne({featureId: req.params.featureId})
-    .then(board =>{
-        const idx = board[req.params.status].items.findIndex(i => i._id === req.body._id)
-        board[req.params.status].items.splice(idx,1)
-        board[req.params.destination].items.splice(idx, 0, req.body)
-        board.save().then(board => res.json(board))
-    })
+    Board.findByIdAndUpdate(req.params.boardId, req.body, {new: true})
+    .then(board =>{ 
+        res.json(board)})
 }
 
 // function updateTask(req, res){

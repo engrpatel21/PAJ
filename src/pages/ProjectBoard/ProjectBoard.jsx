@@ -16,7 +16,6 @@ class ProjectBoard extends Component {
 
     async componentDidMount(){
         const taskBoard = await taskApi.getTasks(this.props.match.params.featureId)
-        console.log(taskBoard)
         this.setState({ taskBoard})
     }
     handleAddTasks = async (taskData) => {
@@ -30,8 +29,8 @@ class ProjectBoard extends Component {
         this.setState({taskBoard: newBoard})
     }
 
-    handleUpdateStatus = async (taskId, status, destination, task) => {
-        const newBoard = await taskApi.updateTaskStatus(this.props.match.params.featureId, taskId, status, destination, task)
+    handleUpdateStatus = async (boardId, board) => {
+        const newBoard = await taskApi.updateTaskStatus(boardId, board)
         this.setState({taskBoard: newBoard})
     }
 

@@ -17,11 +17,11 @@ export function deleteTask(feature_id, task_id, status){
     .then(res => res.json())
 }
 
-export function updateTaskStatus(feature_id, task_id, status, destination, task){
-    return fetch(`${BASE_URL}/${feature_id}/${task_id}/${status}/${destination}`,{
+export function updateTaskStatus(board_id, board){
+    return fetch(`${BASE_URL}/${board_id}`,{
         method: "PUT",
         headers: {'content-type': 'application/json','Authorization': 'Bearer ' + tokenService.getToken()},
-        body: JSON.stringify(task)
+        body: JSON.stringify(board)
     }, {mode: "cors"})
     .then(res => res.json())
 }
