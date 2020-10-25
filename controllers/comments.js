@@ -8,12 +8,13 @@ module.exports = {
 }
 
 function updateComment(req, res){
+    req.body.createdBy = req.user._id
     Project.findById(req.params.projectId)
     .then(project => {
-        const idx = project.comments.findIndex(comment => comment._id.equals(req.params.commentsId))
+        const idx = project.comments.findIndex(comment => comment._id.equals(req.params.commentId))
         project.comments.splice(idx,1,req.body)
         project.save().then(project =>
-            res.json(project.comments)
+            res.json(project)
             )
     })
 }
@@ -21,10 +22,10 @@ function updateComment(req, res){
 function deleteComment(req, res){
     Project.findById(req.params.projectId)
     .then(project => {
-        const idx = project.comments.findIndex(comment => comment._id.equals(req.params.commentsId))
+        const idx = project.comments.findIndex(comment => comment._id.equals(req.params.commentId))
         project.comments.splice(idx,1)
         project.save().then(project =>
-            res.json(project.comments)
+            res.json(project)
             )
     })
 }
@@ -33,14 +34,14 @@ function index(req,res){
     Project.findById(req.params.projectId)
     .populate('comments.createdBy')
     .then(project =>
-        res.json(project.comments)
+        res.json(project)
         )
 }
 
 function createComment(req, res){
+    req.body.createdBy = req.user._id
     Project.findById(req.params.projectId)
     .then(project =>{
-        console.log(project)
         project.comments.push(req.body)
         project.save().then( project =>
             res.json(project)

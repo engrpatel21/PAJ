@@ -1,113 +1,69 @@
-import React from 'react';
-import { Link } from "react-router-dom"
-// import ProjectBoard from '../../pages/ProjectBoard/ProjectBoard'
-import { Grid, Image, Card, Button, Divider } from 'semantic-ui-react'
-import "./ProjectBoard.css";
+import React, { Component } from 'react';
+import Kanbaan from '../../components/KanbaanBoard/KanbaanBoard'
+import * as taskApi from '../../services/taskService'
+import AddTaskForm from '../../components/AddTaskForm/AddTaskForm'
+import {Portal, Button} from 'semantic-ui-react'
 
-const ProjectBoard = () => (
-    <>
-    <h1>Project Board Page</h1>
-    <Divider>
-    </Divider>
-    <Grid columns={3} divided>
-        <Grid.Row>
-            <Grid.Column>
-                <h1>To-Do:</h1>
-                <Card.Group centered items>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>Placeholder Project</Card.Header>
-                            <Card.Meta>Head of Project Here</Card.Meta>
-                            <Card.Description>
-                            Specific project objectives will go <strong>IN THIS AREA</strong>
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <div className='ui two buttons'>
-                            <Button basic color='green'>
-                                DETAILS
-                            </Button>
-                            <Button basic color='red'>
-                                DELETE
-                            </Button>
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </Card.Group>
-                    </Grid.Column>
-                    <Grid.Column>
-                <h1>Completed:</h1>
-                <Card.Group centered items>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>Placeholder Project</Card.Header>
-                            <Card.Meta>Head of Project Here</Card.Meta>
-                            <Card.Description>
-                            Specific project objectives will go <strong>IN THIS AREA</strong>
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <div className='ui two buttons'>
-                            <Button basic color='green'>
-                                DETAILS
-                            </Button>
-                            <Button basic color='red'>
-                                DELETE
-                            </Button>
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </Card.Group>
-            </Grid.Column>
-            <Grid.Column>
-                <h1>Backlog:</h1>
-                <Card.Group centered items>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>Placeholder Project</Card.Header>
-                            <Card.Meta>Head of Project Here</Card.Meta>
-                            <Card.Description>
-                            Specific project objectives will go <strong>IN THIS AREA</strong>
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <div className='ui two buttons'>
-                            <Button basic color='green'>
-                                DETAILS
-                            </Button>
-                            <Button basic color='red'>
-                                DELETE
-                            </Button>
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </Card.Group>
-                <Card.Group centered items>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>Placeholder Project</Card.Header>
-                            <Card.Meta>Head of Project Here</Card.Meta>
-                            <Card.Description>
-                            Specific project objectives will go <strong>IN THIS AREA</strong>
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <div className='ui two buttons'>
-                            <Button basic color='green'>
-                                DETAILS
-                            </Button>
-                            <Button basic color='red'>
-                                DELETE
-                            </Button>
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </Card.Group>
-            </Grid.Column>
-        </Grid.Row>
-    </Grid>
-    </>
-)
+class ProjectBoard extends Component {
+    state = { 
+        taskBoard: null,
+        addTask: false
+    }
 
+    renderAddTask = () => {
+        this.setState({addTask: !this.state.addTask})
+    }
 
+    async componentDidMount(){
+        const taskBoard = await taskApi.getTasks(this.props.match.params.featureId)
+        this.setState({ taskBoard})
+    }
+    handleAddTasks = async (taskData) => {
+        const newBoard = await taskApi.addTask(this.props.match.params.featureId, taskData)
+        this.setState({taskBoard: newBoard})
+     
+    }
+
+    handleDeleteTask = async (taskId, status) => {
+        const newBoard = await taskApi.deleteTask(this.props.match.params.featureId, taskId, status)
+        this.setState({taskBoard: newBoard})
+    }
+
+    handleUpdateStatus = async (boardId, board) => {
+        const newBoard = await taskApi.updateTaskStatus(boardId, board)
+        this.setState({taskBoard: newBoard})
+    }
+
+    handleEditTask = async (boardId, task) => {
+        const updatedTask = await taskApi.updateTask(boardId, task)
+        const taskBoard = {...this.state.taskBoard}
+        taskBoard[updatedTask.taskStatus].items = taskBoard[updatedTask.taskStatus].items.map(i=> i._id === updatedTask._id ? updatedTask : i)
+        this.setState({taskBoard})
+    }
+
+    render() { 
+        const {taskBoard, addTask} = this.state
+        return ( 
+          <>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Button content='Add Task' onClick={()=>this.renderAddTask()}/>
+            </div>
+            {taskBoard ? <Kanbaan 
+                            taskBoard={taskBoard} 
+                            deleteTask={this.handleDeleteTask} 
+                            featureId={this.props.match.params.featureId}
+                            updateStatus = {this.handleUpdateStatus}
+                            editTask={this.handleEditTask}
+                        /> : ''}
+            <Portal onClose={this.renderAddTask} open={addTask} >
+                        <AddTaskForm
+                            handleAddTasks={this.handleAddTasks}
+                            renderAddTask={this.renderAddTask}
+                        />
+                </Portal> 
+          </>
+        );
+    }
+}
+ 
 export default ProjectBoard;

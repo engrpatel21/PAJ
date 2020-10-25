@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import authService from "../../services/authService";
+import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 
 class SignupForm extends Component {
   state = {
@@ -39,48 +40,72 @@ class SignupForm extends Component {
     const { name, email, password, passwordConf } = this.state;
     return (
       <div>
-        <h3>Sign Up</h3>
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            autoComplete="off"
-            id="name"
-            value={name}
-            name="name"
-            onChange={this.handleChange}
+       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h3' color='teal' textAlign='center'>
+      <Icon.Group size='large'>
+      <Icon loading size='big' name='circle notch' />
+      <Icon name='user' />
+    </Icon.Group> 
+    Sign-Up with a New Account!
+      </Header>
+      <Form size='large' onSubmit={this.handleSubmit}>
+        <Segment stacked>
+          <Form.Input 
+           fluid label='User Name' 
+           placeholder='User Name' 
+           type="text"
+           autoComplete="off"
+           id="name"
+           value={name}
+           name="name"
+           onChange={this.handleChange}
+          
           />
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            autoComplete="off"
-            id="email"
-            value={email}
-            name="email"
-            onChange={this.handleChange}
+          <Form.Input
+             fluid label='Email' 
+             placeholder='Email' 
+             type="text"
+             autoComplete="off"
+             id="email"
+             value={email}
+             name="email"
+             onChange={this.handleChange}
           />
-          <label htmlFor="email">Email</label>
-          <input
-            type="password"
-            autoComplete="off"
-            id="password"
-            value={password}
-            name="password"
-            onChange={this.handleChange}
+
+            <Form.Input 
+              fluid label='Create Password' 
+              placeholder='Password' 
+              type="password"
+              autoComplete="off"
+              id="password"
+              value={password}
+              name="password"
+              onChange={this.handleChange}
           />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            autoComplete="off"
-            id="confirm"
-            value={passwordConf}
-            name="passwordConf"
-            onChange={this.handleChange}
+
+            <Form.Input 
+              fluid label='Confirm Password' 
+              placeholder='Password' 
+              type="password"
+              autoComplete="off"
+              id="confirm"
+              value={passwordConf}
+              name="passwordConf"
+              onChange={this.handleChange}
           />
-          <label htmlFor="confirm">Confirm Password</label>
-          <button disabled={this.isFormInvalid()}>Sign Up</button>
-          &nbsp;&nbsp;
-          <Link to="/">Cancel</Link>
-        </form>
+
+          <Button color='teal' fluid size='large' type='submit' disabled={this.isFormInvalid()}>
+            Sign Up
+          </Button>
+        </Segment>
+      </Form>
+      <Message>
+        Already have an account? <a href='/login'>Log in</a>
+      </Message>
+    </Grid.Column>
+  </Grid>
+        
       </div>
     );
   }

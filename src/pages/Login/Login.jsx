@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import "./Login.css";
 import authService from "../../services/authService"
+import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 
 class LoginPage extends Component {
   state = {
@@ -32,33 +33,62 @@ class LoginPage extends Component {
   render() {
     const {email, pw} = this.state
     return (
+      <body style={{
+        backgroundColor: '#1b1c1d' 
+    }}>
       <main className="Login">
-        <h3>Log In</h3>
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            autoComplete="off"
-            id="email"
-            value={email}
-            name="email"
-            onChange={this.handleChange}
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h3' color='teal' textAlign='center'>
+      <Icon.Group size='large'>
+      <Icon loading size='big' name='circle notch' />
+      <Icon name='user' />
+    </Icon.Group> 
+      Log in to your account
+      </Header>
+      <Form size='large' onSubmit={this.handleSubmit}>
+        <Segment stacked>
+          <Form.Input 
+          fluid icon='user' 
+          iconPosition='left'
+          placeholder='E-mail address' 
+          label='User Email' 
+          type="text"
+          autoComplete="off"
+          id="email"
+          value={email}
+          name="email"
+          onChange={this.handleChange}
+          
           />
-          <label htmlFor="email">Email</label>
-          <input
-            type="password"
+          <Form.Input
+            fluid
+            icon='lock'
+            iconPosition='left'
+            placeholder='Password'
+            type='password'
+            label='password' 
             autoComplete="off"
             id="password"
             value={pw}
             name="pw"
             onChange={this.handleChange}
           />
-          <label htmlFor="password">Password</label>
-          <button className="btn green">Log In</button>&nbsp;&nbsp;&nbsp;
-          <Link className="btn red" to="/">
-            Cancel
-          </Link>
-        </form>
+
+          <Button color='teal' fluid size='large' type='submit'>
+            Login
+          </Button>
+        </Segment>
+      </Form>
+      <Message>
+        Don't have an account? <a href='/signup'>Sign Up</a>
+      </Message>
+    </Grid.Column>
+  </Grid>
+
+    
       </main>
+      </body>
     );
   }
 }

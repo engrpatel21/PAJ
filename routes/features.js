@@ -1,10 +1,18 @@
 const router = require('express').Router()
 const featureCtrl = require('../controllers/features')
 
-router.get('/:projectId/features', featureCtrl.index)
-router.get('/:projectId/features/:featureId', featureCtrl.showFeature)
-router.post('/:projectId/features', featureCtrl.createFeature)
-router.delete('/:projectId/features/:featureId', featureCtrl.deleteFeature)
-router.put('/:projectId/features/:featureId', featureCtrl.updateFeature)
+/*---------- Protected Routes ----------*/
+router.use(require("../config/auth"));
+router.get('/:projectId', checkAuth, featureCtrl.index)
+router.get('/:projectId/features/:featureId', checkAuth, featureCtrl.showFeature)
+router.post('/:projectId', checkAuth,  featureCtrl.createFeature)
+router.delete('/:featureId', checkAuth,    featureCtrl.deleteFeature)
+router.put('/:featureId', checkAuth,  featureCtrl.updateFeature)
+
+/*---------- Auth Checker ----------*/
+function checkAuth(req, res, next) {
+    if (req.user) return next();
+    return res.status(401).json({msg: 'Not Authorized'});
+}
 
 module.exports = router

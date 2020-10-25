@@ -14,6 +14,8 @@ const commentRouter = require('./routes/comments')
 const featureRouter = require('./routes/features')
 const taskRouter = require('./routes/tasks')
 const messageRouter = require('./routes/messages')
+const contributorRouter = require('./routes/contributors.js')
+const fileRoutes = require('./routes/file-upload')
 
 const cors = require('cors')
 
@@ -25,13 +27,16 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
+app.use('/api/image', fileRoutes);
+
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/projects', projectRouter)
 app.use('/api/projects', commentRouter)
-app.use('/api/projects', featureRouter)
-app.use('/api/projects', taskRouter)
-app.use('/api/users/', messageRouter)
+app.use('/api/features', featureRouter)
+app.use('/api/tasks', taskRouter)
+app.use('/api/users', messageRouter)
+app.use('/api/contributors', contributorRouter)
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

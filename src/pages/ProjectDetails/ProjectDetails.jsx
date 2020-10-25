@@ -1,86 +1,94 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom"
-import { Message, Form, Button, Divider } from 'semantic-ui-react'
+import { Form, Button, Divider, Segment, Grid, Comment, Item, Container, Loader} from 'semantic-ui-react'
+import * as projectApi from '../../services/projectService'
+import CommentCard from '../../components/CommentCard/CommentCard'
 import "./ProjectDetails.css";
+import ProjectData from '../../components/ProjectData/ProjectData'
+import ProjectNameCard from '../../components/ProjectNameCard/ProjectNameCard'
+import ToggleProject from '../../components/ToggleProject/ToggleProject'
+//this is working
+
 
 class ProjectDetails extends Component {
     state = {
-        projectInfo: {
-            pSummary: '',
-            featureSets: 'Links will populate in this area',
-            comments: ''
-        }
+        project: {},
+        commentsFormData: {
+            comment: ''
+            
+        },
+
+        addFeature: false,
+     
     }
 
-    // handleSubmit = e =>{
-    //     e.preventDefault();
-    //     this.props.handleAddSummary(this.state.projectInfo)
-    // }
+    async componentDidMount() {
+        const project = await projectApi.getOneProject(this.props.match.params.projectId)
+        this.setState({project})
+    }
 
-    handleChange = e => {
-       const projectInfo = {...this.state.projectInfo, [e.target.name]: e.target.value};
-       this.setState({
-        projectInfo
-       });
+    renderAddFeature = () => {
+        this.setState({addFeature: !this.state.addFeature})
+    }
+
+
+    renderEditFeature =() => {
+        this.setState({editFeature: !this.state.editFeature})
     }
 
     formRef = React.createRef()
     render() { 
+       const {project} = this.state
+       const {user, history} = this.props
+       const {projectId} = this.props.match.params
         return ( 
-    <>
-    <h1>Project Details Page</h1>
-    <Divider>
-    </Divider>
-    <Message>
-        <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
-            <Form.Field>
-                <label>Project Information:</label>
-                <Form.Input
-                    placeholder='Add Info about the project here.'
-                    name='pSummary'
-                    value={this.state.projectInfo.pSummary}
-                    onChange={this.handleChange}
-                />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-            <Divider horizontal>Project Information</Divider>
-        </Form>
-    </Message>
-    <Message>
-        <Form>
-            <Form.Field>
-                <label>Links to Feature Sets:</label>
-                <Divider horizontal>Links</Divider>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-                <br></br>
-                {this.state.projectInfo.featureSets}
-            </Form.Field>
-        </Form>
-    </Message>
-    <Message>
-        <Form>
-        {/* <Form inverted ref={this.formRef} onSubmit={this.handleSubmit}> */}
-            <Form.Field>
-                <label>Comments:</label>
-                <Form.Input
-                    placeholder='Add Info about the project here.'
-                    name='pSummary'
-                    value={this.state.projectInfo.comments}
-                    onChange={this.handleChange}
-                />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
+            <> 
+            
+            {project.owner ? user._id ? project.owner === user._id ? 
+            
+            <ToggleProject project={this.state.project._id ? this.state.project : 'notloading'} handleUpdateProject={this.handleUpdateProject}/>
+        
+            : <Loader active inline='centered' />: <Loader active inline='centered' /> : <Loader active inline='centered' />}
+            <Segment style={{height: 'auto'}} >
+            <Divider horizontal><h1>Project</h1></Divider>
+                <Grid>
+                    <Grid.Column>
+                <Container>
+                    <Item.Group>
+                    <ProjectNameCard project={this.state.project}/> 
+                </Item.Group>
+                </Container>
+                </Grid.Column>
+                </Grid>
+            </Segment>
+
+            <Divider horizontal><h3>Contributors</h3></Divider>
+            { project.owner && user._id ? 
+                <ProjectData projectId={projectId} history={history} user={user} />
+                :
+                <Loader active inline='centered' />
+            }
             <Divider horizontal>Comments</Divider>
-        </Form>
-    </Message>
-    </>
+                <Comment.Group style={{ display: "block", margin:' auto'}} size='large'>
+                    {this.state.project.comments? this.state.project.comments.map(comment => 
+                        <CommentCard 
+                            key={comment._id}
+                            comment={comment} 
+                            user={this.props.user}
+                            handleUpdateComment={this.handleUpdateComment}
+                            handleDeleteComment={this.handleDeleteComment}
+                            />
+                    ): ''}
+                
+                    <Form ref={this.formRef} onSubmit={this.handleSubmitComment} reply>
+                        <Form.TextArea 
+                            name='comment' 
+                            value={this.state.commentsFormData.comment} 
+                            onChange={this.handleChangeComment}    
+                        />
+                        <Button content='Add Comment' labelPosition='left' icon='comment alternate outline' primary />
+                    </Form>
+                </Comment.Group>           
+        </>
         );
     }
 }
